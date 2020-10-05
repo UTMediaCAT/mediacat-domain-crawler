@@ -9,6 +9,8 @@
 */
 const Apify = require('apify');
 const path = require('path');
+var { Readability } = require('@mozilla/readability');
+var JSDOM = require('jsdom').JSDOM;
 
 var fs = require('fs');
 var util = require('util');
@@ -19,6 +21,15 @@ console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
+
+function getParsedArticle(url, html) {
+    var doc = new JSDOM(html, {
+        url: url
+      });
+    let reader = new Readability(doc.window.document);
+    let article = reader.parse();
+    return article
+}
 
 Apify.main(async () => {
     // Get the urls from the command line arguments.
@@ -58,7 +69,17 @@ Apify.main(async () => {
         handlePageFunction: async ({ request, page }) => {
             const title = await page.title();   // Get the title of the page.
             console.log(`Title of "${request.url}" is "${title}"`);
-            // let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
+            // Get the HTML of the page and write it to a file.
+            let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
+
+            // Use readability.js to read information about the article.
+            parsedArticle = getParsedArticle(request.url, bodyHTML);
+            console.log("Article Title: " + parsedArticle.title);
+            console.log("Article Byline: " + parsedArticle.byline);
+            console.log("Article Text Content: " + parsedArticle.textContent);
+            console.log("Article Length: " + parsedArticle.length);
+            console.log("Article Excerpt: " + parsedArticle.excerpt);
+
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
