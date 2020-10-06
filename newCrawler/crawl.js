@@ -38,7 +38,7 @@ Apify.main(async () => {
 
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
-
+    var incorrect_dict = {};
     const requestQueue = await Apify.openRequestQueue();
     // Add the links to the queue of websites to crawl.
     for (var i = 0; i < url_list.length; i++) {
@@ -57,6 +57,9 @@ Apify.main(async () => {
         },
         handlePageFunction: async ({ request, page }) => {
             const title = await page.title();   // Get the title of the page.
+            let general_regex = /:\/\/(www\.)?([^.]+)((\.[a-zA-Z]+)+)/;
+            let match = request.url.match(general_regex);
+            domainName = match[2];
             console.log(`Title of "${request.url}" is "${title}"`);
             // let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
@@ -66,26 +69,25 @@ Apify.main(async () => {
             // Create the list of tuples for this url.
             var tuple_list = [];
             // Set the title of the link to be the text content if the title is not present.
-            // Test for the demo
-            if (hrefs.length < 20) {
-                length = hrefs.length
-            }
-            else {
-                length = 20
-            }
-            // Remove after demo
-            for (let i = 0; i < length; i++) {
+            var failed_links = [];
+            for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
-                if (titles[i].length === 0) {
-                    hrefTitle = texts[i].replace(/ +(?= )/g,'');
-                } else {
-                    hrefTitle = titles[i];
+                // Checks that the link is a part of the domain.
+                if (hrefLink.includes(domainName)) {
+                    if (titles[i].length === 0) {
+                        hrefTitle = texts[i].replace(/ +(?= )/g,'');
+                    } else {
+                        hrefTitle = titles[i];
+                    }
+                    // Add the tuple to the list.
+                    tuple_list.push([hrefLink, hrefTitle]);
                 }
-                // Add the tuple to the list.
-                tuple_list.push([hrefLink, hrefTitle]);
+                else {
+                    failed_links.push(hrefLink);
+                }
             }
-
             // Add this list to the dict.
+            incorrect_dict[request.url] = failed_links;
             output_dict[request.url] = tuple_list;
 
             // Enqueue the deeper URLs to crawl.
@@ -128,6 +130,10 @@ Apify.main(async () => {
     // Create a JSON file from the tuples in the output list.
     // Overwrites if it already exists.
     fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
+        if (err) throw err;
+        console.log('complete');
+        });
+    fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
         if (err) throw err;
         console.log('complete');
         });
