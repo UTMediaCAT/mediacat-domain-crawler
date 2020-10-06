@@ -59,7 +59,7 @@ Apify.main(async () => {
             const title = await page.title();   // Get the title of the page.
             let general_regex = /:\/\/(www\.)?([^.]+)((\.[a-zA-Z]+)+)/;
             let match = request.url.match(general_regex);
-            domainName = match[2];
+            domainName = match[2]+ ".";
             console.log(`Title of "${request.url}" is "${title}"`);
             // let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
@@ -73,7 +73,7 @@ Apify.main(async () => {
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
                 // Checks that the link is a part of the domain.
-                if (hrefLink.includes(domainName)) {
+                if (hrefLink.includes(domainName) && !tuple_list.includes(hrefLink)) {
                     if (titles[i].length === 0) {
                         hrefTitle = texts[i].replace(/ +(?= )/g,'');
                     } else {
