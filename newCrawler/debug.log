@@ -15,14 +15,14 @@ WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is
 INFO: AutoscaledPool: Setting max memory of this run to 2014 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
 INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
 INFO: Launching Puppeteer {"headless":true,"stealth":false,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.algemeiner.com" is "Jewish & Israel News | Algemeiner.com Breaking Alerts, Commentary, Insights Analysis and Blogs"
-Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, World News & Multimedia"
-Title of "https://www.jewishjournal.com" is "Jewish Journal"
 Title of "https://www.christianitytoday.com" is "Christianity Today | Theology, Church, Culture"
 Title of "https://www.washingtonpost.com" is "Washington Post: Breaking News, World, US, DC News & Analysis - The Washington Post"
 Title of "https://www.electronicintifada.net" is "The Electronic Intifada"
 Title of "https://www.cjr.org" is "Columbia Journalism Review - The voice of journalism"
 Title of "https://www.mondoweiss.net" is "Mondoweiss – News & Opinion About Palestine, Israel & the U.S."
 Title of "https://www.al-monitor.com" is "Al-Monitor: The Pulse of the Middle East"
+Title of "https://www.algemeiner.com" is "Jewish & Israel News | Algemeiner.com Breaking Alerts, Commentary, Insights Analysis and Blogs"
 Title of "https://www.foxnews.com" is "Fox News - Breaking News Updates | Latest News Headlines | Photos & News Videos"
+Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, World News & Multimedia"
+Title of "https://www.jewishjournal.com" is "Jewish Journal"
 INFO: BasicCrawler: All the requests from request list and/or request queue have been processed, the crawler will shut down.
