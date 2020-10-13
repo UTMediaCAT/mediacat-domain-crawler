@@ -74,11 +74,15 @@ Apify.main(async () => {
 
             // Use readability.js to read information about the article.
             parsedArticle = getParsedArticle(request.url, bodyHTML);
+            console.log("");
+            console.log("URL: " + request.url);
             console.log("Article Title: " + parsedArticle.title);
             console.log("Article Byline: " + parsedArticle.byline);
             console.log("Article Text Content: " + parsedArticle.textContent);
             console.log("Article Length: " + parsedArticle.length);
             console.log("Article Excerpt: " + parsedArticle.excerpt);
+            console.log("Article HTML Content: " + parsedArticle.content);
+            console.log("");
 
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
@@ -110,10 +114,10 @@ Apify.main(async () => {
             output_dict[request.url] = tuple_list;
 
             // Enqueue the deeper URLs to crawl.
-            // await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
+            await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 100,
+        maxRequestsPerCrawl: 5,
         maxConcurrency: 10,
     });
     // Run the crawler.
