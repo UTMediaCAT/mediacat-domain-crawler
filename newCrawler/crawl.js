@@ -36,6 +36,7 @@ function Filter(url, domain_url, valid_links) {
         }
     }*/
     return result
+}
 
 function getParsedArticle(url, html) {
     var doc = new JSDOM(html, {
