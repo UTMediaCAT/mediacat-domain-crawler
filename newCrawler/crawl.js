@@ -149,7 +149,7 @@ Apify.main(async () => {
             output_dict[request.url] = tuple_list;
 
             // Enqueue the deeper URLs to crawl.
-            await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
+            // await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: 5,
