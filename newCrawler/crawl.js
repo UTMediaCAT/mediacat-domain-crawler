@@ -11,6 +11,7 @@ const Apify = require('apify');
 const path = require('path');
 let { Readability } = require('@mozilla/readability');
 let JSDOM = require('jsdom').JSDOM;
+const { v5: uuidv5 } = require('uuid');
 
 let fs = require('fs');
 let util = require('util');
@@ -149,6 +150,13 @@ Apify.main(async () => {
 
                 }
             }
+            // Save a PDF of the page.
+            console.log("Saving PDF of " + request.url);
+            const pdfBuffer = await page.pdf({ format: 'A4' });
+            let pdfName = uuidv5(request.url, uuidv5.URL);
+            await Apify.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
+            
+            // Create the article information dictionary.
             let elem = {
                 title: parsedArticle.title,
                 author_metadata: parsedArticle.byline,
@@ -157,6 +165,7 @@ Apify.main(async () => {
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
                 url: request.url,
+                pdf_filename: pdfName + '.pdf',
                 found_urls: tuple_list
             }
             // Add this list to the dict.
@@ -166,7 +175,7 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 20,
+        maxRequestsPerCrawl: 1,
         maxConcurrency: 10,
     });
     // Run the crawler.
@@ -196,7 +205,7 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    rmDir('./apify_storage/', true);
+    rmDir('./apify_storage/request_queues', true);
 
     // Create a JSON file from the tuples in the output list.
     // Overwrites if it already exists.
