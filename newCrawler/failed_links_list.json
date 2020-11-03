@@ -252,15 +252,15 @@
         "https://facebook.com/CNN",
         "https://facebook.com/cnnbusiness",
         "https://facebook.com/cnnbusiness",
+        "https://facebook.com/cnnpolitics",
+        "https://facebook.com/cnnpolitics",
+        "https://facebook.com/CNN",
+        "https://facebook.com/CNN",
         "https://facebook.com/CNNent",
         "https://facebook.com/CNNent",
         "https://facebook.com/CNN",
         "https://facebook.com/CNN",
         "https://facebook.com/cnnstyle",
-        "https://facebook.com/CNN",
-        "https://facebook.com/CNN",
-        "https://facebook.com/CNN",
-        "https://facebook.com/CNN",
         "https://facebook.com/cnntravel",
         "https://facebook.com/CNN",
         "https://facebook.com/CNN",
@@ -289,15 +289,15 @@
         "https://twitter.com/CNN",
         "https://twitter.com/CNNbusiness",
         "https://twitter.com/CNNbusiness",
+        "https://twitter.com/cnnpolitics",
+        "https://twitter.com/cnnpolitics",
+        "https://twitter.com/CNN",
+        "https://twitter.com/CNN",
         "https://twitter.com/CNNent",
         "https://twitter.com/CNNent",
         "https://twitter.com/CNN",
         "https://twitter.com/CNN",
         "https://twitter.com/CNNStyle",
-        "https://twitter.com/CNN",
-        "https://twitter.com/CNN",
-        "https://twitter.com/CNN",
-        "https://twitter.com/CNN",
         "https://twitter.com/CNNTravel",
         "https://twitter.com/CNN",
         "https://twitter.com/CNN",
@@ -308,9 +308,9 @@
         "https://twitter.com/CNN",
         "https://twitter.com/CNN",
         "https://twitter.com/CNN",
+        "https://twitter.com/CNN",
+        "https://twitter.com/CNN",
         "https://twitter.com/CNNAfrica?ref_src=twsrc%5Etfw",
-        "https://twitter.com/CNN",
-        "https://twitter.com/CNN",
         "https://twitter.com/CNN"
     ],
     "instagram":[
@@ -327,15 +327,15 @@
         "https://instagram.com/cnn",
         "https://instagram.com/cnnbusiness",
         "https://instagram.com/cnnbusiness",
+        "https://instagram.com/cnn",
+        "https://instagram.com/cnn",
+        "https://instagram.com/cnn",
+        "https://instagram.com/cnn",
         "https://instagram.com/cnnentertainment",
         "https://instagram.com/cnnentertainment",
         "https://instagram.com/cnn",
         "https://instagram.com/cnn",
         "https://instagram.com/cnnstyle",
-        "https://instagram.com/cnn",
-        "https://instagram.com/cnn",
-        "https://instagram.com/cnn",
-        "https://instagram.com/cnn",
         "https://instagram.com/cnntravel",
         "https://instagram.com/cnn",
         "https://instagram.com/cnn",
@@ -459,7 +459,22 @@
     ],
     "youtube":[
         "https://www.youtube.com/aljazeeraenglish",
+        "https://youtube.com/user/CNN",
+        "https://youtube.com/user/CNN",
         "https://www.youtube.com/watch?v=8EvFQLhqWPQ"
+    ],
+    "nyt":[
+        "http://nyt.qualtrics.com/jfe/form/SV_eFJmKj9v0krSE0l"
+    ],
+    "nytco":[
+        "https://www.nytco.com/",
+        "https://www.nytco.com/careers/"
+    ],
+    "nytmediakit":[
+        "https://nytmediakit.com/"
+    ],
+    "tbrandstudio":[
+        "http://www.tbrandstudio.com/"
     ],
     "networkadvertising":[
         "https://www.networkadvertising.org/understanding-online-advertising/what-are-my-options"
@@ -482,134 +497,6 @@
     "nielsen":[
         "https://www.nielsen.com/us/en/legal/privacy-statement/digital-measurement/"
     ],
-    "nytimes":[
-        "https://www.nytimes.com/#after-dfp-ad-top",
-        "https://www.nytimes.com/#site-content",
-        "https://www.nytimes.com/#site-index",
-        "https://www.nytimes.com/",
-        "https://www.nytimes.com/",
-        "https://www.nytimes.com/international/?action=click&region=Editions&pgtype=Homepage",
-        "https://www.nytimes.com/ca/?action=click&region=Editions&pgtype=Homepage",
-        "https://www.nytimes.com/es/",
-        "https://www.nytimes.com/subscription?campaignId=797YR",
-        "https://www.nytimes.com/section/todayspaper",
-        "https://www.nytimes.com/",
-        "https://www.nytimes.com/",
-        "https://www.nytimes.com/section/world",
-        "https://www.nytimes.com/section/us",
-        "https://www.nytimes.com/section/politics",
-        "https://www.nytimes.com/section/nyregion",
-        "https://www.nytimes.com/section/business",
-        "https://www.nytimes.com/section/opinion",
-        "https://www.nytimes.com/section/technology",
-        "https://www.nytimes.com/section/science",
-        "https://www.nytimes.com/section/health",
-        "https://www.nytimes.com/section/sports",
-        "https://www.nytimes.com/section/arts",
-        "https://www.nytimes.com/section/books",
-        "https://www.nytimes.com/section/style",
-        "https://www.nytimes.com/section/food",
-        "https://www.nytimes.com/section/travel",
-        "https://www.nytimes.com/section/magazine",
-        "https://www.nytimes.com/section/t-magazine",
-        "https://www.nytimes.com/section/realestate",
-        "https://www.nytimes.com/video",
-        "https://www.nytimes.com/section/world",
-        "https://www.nytimes.com/section/us",
-        "https://www.nytimes.com/section/politics",
-        "https://www.nytimes.com/section/nyregion",
-        "https://www.nytimes.com/section/business",
-        "https://www.nytimes.com/section/opinion",
-        "https://www.nytimes.com/section/technology",
-        "https://www.nytimes.com/section/science",
-        "https://www.nytimes.com/section/health",
-        "https://www.nytimes.com/section/sports",
-        "https://www.nytimes.com/section/arts",
-        "https://www.nytimes.com/section/books",
-        "https://www.nytimes.com/section/style",
-        "https://www.nytimes.com/section/food",
-        "https://www.nytimes.com/section/travel",
-        "https://www.nytimes.com/section/magazine",
-        "https://www.nytimes.com/section/t-magazine",
-        "https://www.nytimes.com/section/realestate",
-        "https://www.nytimes.com/video",
-        "https://www.nytimes.com/live/2020/11/02/us/trump-vs-biden?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/interactive/2020/10/27/upshot/election-results-timing.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/upshot/needle-election-forecast.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/interactive/2020/11/02/magazine/vote-mail-postal-service.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/interactive/2020/11/02/magazine/vote-mail-postal-service.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/us/election-ballots-rejections.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/live/2020/2020-election-misinformation-distortions?action=click&module=Top%20Stories&pgtype=Homepage#battleground-states-see-the-most-voting-misinformation",
-        "https://www.nytimes.com/2020/11/02/us/politics/trump-campaign.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/us/statehouses-election-day.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/nyregion/nyc-election-unrest.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/live/2020/11/02/world/covid-19-coronavirus-updates?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/01/us/politics/coronavirus-nursing-homes.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/nyregion/nyc-schools-reopening.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/world/europe/vienna-austria-attack-shooter.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/world/europe/vienna-austria-attack-shooter.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/magazine/covid-business-atlanta.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/magazine/covid-business-atlanta.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/spotlight/at-home?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/spotlight/at-home?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/well/mind/the-double-whammy-of-seasonal-affective-disorder-in-a-season-of-covid.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/business/work-from-home-career-management.html?action=click&module=Top%20Stories&pgtype=Homepage",
-        "https://www.nytimes.com/section/opinion?pagetype=Homepage&action=click&module=Opinion",
-        "https://www.nytimes.com/2020/11/02/opinion/election-day-biden-trump.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/hillary-clinton-biden-trump.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/hillary-clinton-biden-trump.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/election-supreme-court.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/iowa-trump-biden-2020.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/emile-bruneau-dead.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/vote-2020-election-democracy.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/patriotism-america-2020.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/west-wing-election-2020-politics.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/elections-foreign-voter-reaction.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/opinion/election-day-stress-2020.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/01/opinion/trump-election-night-violence.html?action=click&module=Opinion&pgtype=Homepage",
-        "https://www.nytimes.com/interactive/2020/obituaries/people-died-coronavirus-obituaries.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/interactive/2020/obituaries/people-died-coronavirus-obituaries.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/style/what-should-i-do-on-election-night.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/02/style/what-should-i-do-on-election-night.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/01/nyregion/metropolitan-diary.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/2020/11/01/nyregion/metropolitan-diary.html?action=click&module=Editors%20Picks&pgtype=Homepage",
-        "https://www.nytimes.com/#after-dfp-ad-mid1-large",
-        "https://www.nytimes.com/privacy/cookie-policy#how-do-i-manage-trackers",
-        "https://www.nytimes.com/privacy/privacy-policy",
-        "https://www.nytimes.com/ca/?action=click&region=Footer&pgtype=Homepage",
-        "https://www.nytimes.com/international/?action=click&region=Footer&pgtype=Homepage",
-        "https://www.nytimes.com/subscription?campaignId=37WXW"
-    ],
-    "cn":[
-        "https://cn.nytimes.com/"
-    ],
-    "myaccount":[
-        "https://myaccount.nytimes.com/auth/login?response_type=cookie&client_id=vi&redirect_uri=https%3A%2F%2Fwww.nytimes.com%2Fsubscription%2Fmultiproduct%2Flp8KQUS.html%3FcampaignId%3D7JFJX%26EXIT_URI%3Dhttps%253A%252F%252Fwww.nytimes.com%252F&asset=masthead",
-        "https://myaccount.nytimes.com/auth/login?response_type=cookie&client_id=vi"
-    ],
-    "nyt":[
-        "http://nyt.qualtrics.com/jfe/form/SV_eFJmKj9v0krSE0l"
-    ],
-    "help":[
-        "https://help.nytimes.com/hc/en-us/articles/115014792127-Copyright-notice",
-        "https://help.nytimes.com/hc/en-us/articles/115015385887-Contact-Us",
-        "https://help.nytimes.com/hc/en-us/articles/115014893428-Terms-of-service",
-        "https://help.nytimes.com/hc/en-us/articles/115014893968-Terms-of-sale",
-        "https://help.nytimes.com/hc/en-us"
-    ],
-    "nytco":[
-        "https://www.nytco.com/",
-        "https://www.nytco.com/careers/"
-    ],
-    "nytmediakit":[
-        "https://nytmediakit.com/"
-    ],
-    "tbrandstudio":[
-        "http://www.tbrandstudio.com/"
-    ],
-    "spiderbites":[
-        "https://spiderbites.nytimes.com/"
-    ],
     "gwinnettdailypost":[
         "https://www.gwinnettdailypost.com/entertainment/sole-latina-art-studio-owner-in-gwinnett-gets-creative-after-losing-80-of-business-during/article_f0348dd8-0848-11eb-8792-f74750807ac3.html",
         "https://www.gwinnettdailypost.com/entertainment/sole-latina-art-studio-owner-in-gwinnett-gets-creative-after-losing-80-of-business-during/article_f0348dd8-0848-11eb-8792-f74750807ac3.html"
@@ -617,23 +504,23 @@
     "boston":[
         "https://boston.cbslocal.com/2020/10/30/cape-cod-man-connor-o-reilly-celebrates-sobriety-cross-country-bike-ride-wellstrong-fitness-and-wellness-center/"
     ],
+    "hartfordbusiness":[
+        "https://www.hartfordbusiness.com/article/more-ct-residents-are-launching-startups-during-the-pandemic-heres-why"
+    ],
     "turnto10":[
         "https://turnto10.com/news/local/family-friends-remember-nurse-killed-trying-to-help-crash-victim"
     ],
     "wptv":[
         "https://www.wptv.com/news/region-n-palm-beach-county/jupiter-farms-familys-home-vandalized-for-sixth-time"
     ],
-    "hartfordbusiness":[
-        "https://www.hartfordbusiness.com/article/more-ct-residents-are-launching-startups-during-the-pandemic-heres-why"
-    ],
     "greensboro":[
         "https://greensboro.com/news/crime/death-of-greensboro-man-being-investigated-as-a-homicide-police-say/article_f7c9d208-1d22-11eb-9b3a-1b5b0025b79b.html#tracking-source=home-the-latest"
     ],
-    "auburnpub":[
-        "https://auburnpub.com/news/local/auburn-castle-sells-for-368-500-at-auction/article_042fe540-419b-5be9-88f2-634652c75a05.html#tracking-source=home-top-story"
-    ],
     "cbs46":[
         "https://www.cbs46.com/news/president-obama-to-visit-georgia-monday-one-day-ahead-of-election/article_fada6044-1d12-11eb-b514-f3251ebe24af.html?block_id=994626"
+    ],
+    "auburnpub":[
+        "https://auburnpub.com/news/local/auburn-castle-sells-for-368-500-at-auction/article_042fe540-419b-5be9-88f2-634652c75a05.html#tracking-source=home-top-story"
     ],
     "wnep":[
         "https://www.wnep.com/article/news/national/presidential-candidates-stump-pennsylvania/523-e3496d8a-4368-4ea1-9890-f83025fc8802"
@@ -641,21 +528,21 @@
     "wsbtv":[
         "https://www.wsbtv.com/news/local/atlanta/black-couple-refused-entry-umi-sushi-buckhead-over-their-sneakers/KQBP7TMLAZA25IGU2HVVNXWCUQ/"
     ],
-    "toledoblade":[
-        "https://www.toledoblade.com/local/politics/2020/11/01/toledo-advocates-work-to-register-lucas-county-jail-inmates-to-vote/stories/20201028083",
-        "https://www.toledoblade.com/local/politics/2020/11/01/toledo-advocates-work-to-register-lucas-county-jail-inmates-to-vote/stories/20201028083"
+    "wifr":[
+        "https://www.wifr.com/2020/11/01/15-year-old-from-winnebago-to-receive-life-changing-transplant/",
+        "https://www.wifr.com/2020/11/01/15-year-old-from-winnebago-to-receive-life-changing-transplant/"
     ],
-    "wishtv":[
-        "https://www.wishtv.com/news/local-news/police-body-found-in-white-river-near-indianapolis-zoo/"
+    "katc":[
+        "https://www.katc.com/news/st-landry-parish/matthews-sentenced-to-25-years-in-prison-for-church-fires"
     ],
-    "abc13":[
-        "https://abc13.com/2-injured-as-people-rushed-out-during-target-parking-lot-shooting/7554525/"
+    "wowt":[
+        "https://www.wowt.com/2020/11/02/west-omaha-homeowner-neighbors-grab-hoses-to-quench-housefire/"
     ],
-    "wndu":[
-        "https://www.wndu.com/2020/11/01/farmers-harvest-600-acres-of-soybean-crop-to-help-out-friend-who-passed-away/"
+    "wibw":[
+        "https://www.wibw.com/2020/11/01/3-people-shot-in-north-topeka/"
     ],
-    "click2houston":[
-        "https://www.click2houston.com/news/local/2020/11/02/father-shot-by-ex-wifes-husband-while-dropping-off-child-in-northeast-harris-county-deputies-say/"
+    "fremonttribune":[
+        "https://fremonttribune.com/news/local/gown-gals-women-sew-gowns-for-hospital/article_badc0212-79cf-5429-83b6-b278802ed812.html#tracking-source=home-top-story-1"
     ],
     "wxyz":[
         "https://www.wxyz.com/news/couple-who-took-in-5-grandchildren-after-daughters-death-looking-to-expand-home"
@@ -672,21 +559,21 @@
     "wcpo":[
         "https://www.wcpo.com/news/coronavirus/acts-of-kindness/bethesda-north-nurses-get-thank-you-packages-for-extra-long-daylight-saving-shift"
     ],
+    "katu":[
+        "https://katu.com/news/local/severed-deer-heads-found-near-black-lives-matter-signs-bidenharris-political-sign",
+        "https://katu.com/news/local/severed-deer-heads-found-near-black-lives-matter-signs-bidenharris-political-sign"
+    ],
     "azdailysun":[
-        "https://azdailysun.com/news/local/two-potential-exposure-deaths-in-flagstaff-lead-to-shelter-policy-complaints-volunteer-search-for-unsheltered/article_0d8a08a0-4920-58c8-9006-aeaa0fc8d9b7.html#tracking-source=home-top-story",
         "https://azdailysun.com/news/local/two-potential-exposure-deaths-in-flagstaff-lead-to-shelter-policy-complaints-volunteer-search-for-unsheltered/article_0d8a08a0-4920-58c8-9006-aeaa0fc8d9b7.html#tracking-source=home-top-story"
     ],
-    "kcra":[
-        "https://www.kcra.com/article/yolo-county-district-attorney-investigates-case-voter-intimidation/34550518"
+    "news3lv":[
+        "https://news3lv.com/news/local/man-threatens-to-blow-up-las-vegas-business-over-bidenharris-lgbtq-pride-flag"
     ],
-    "eastidahonews":[
-        "https://www.eastidahonews.com/2020/11/man-charged-with-death-of-wife-after-alleged-dui-crash/"
+    "hanfordsentinel":[
+        "https://hanfordsentinel.com/community/tcso-mother-daughter-deputy-duo-gives-back/article_4ef6664a-d9c4-5699-8ff1-1f6b3fb1b846.html#tracking-source=home-top-story-1"
     ],
-    "kivitv":[
-        "https://www.kivitv.com/news/blaine-county-sheriffs-suspends-search-for-missing-hiker"
-    ],
-    "napavalleyregister":[
-        "https://napavalleyregister.com/news/local/napa-food-bank-looking-for-a-new-distribution-site-as-demand-swamps-neighborhood/article_1b0556d3-c910-511b-aadb-f6adef7ceaae.html#tracking-source=home-top-story-1"
+    "losangeles":[
+        "https://losangeles.cbslocal.com/2020/11/01/6-injured-in-huntington-beach-boat-explosion/"
     ],
     "lebanon-express":[
         "https://lebanon-express.com/news/local/landscaping-group-brings-new-planting-vision-to-life-at-corvallis-park/article_48057030-a814-57d9-9e9e-b88551718fd6.html#tracking-source=home-top-story"

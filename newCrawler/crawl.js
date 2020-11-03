@@ -175,7 +175,7 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 1,
+        maxRequestsPerCrawl: 20,
         maxConcurrency: 10,
     });
     // Run the crawler.
