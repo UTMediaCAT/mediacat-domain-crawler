@@ -1,17 +1,22 @@
 INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Darwin","nodeVersion":"v12.18.3"}
 WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/apify_storage"
-[
-  'https://www.aljazeera.com/news/2020/10/13/white-house-moving-forward-on-arms-sales-to-taiwan'
-]
 INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
 INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
 INFO: Launching Puppeteer {"headless":true,"stealth":false,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.aljazeera.com/news/2020/10/13/white-house-moving-forward-on-arms-sales-to-taiwan" is "White House moving forward on arms sales to Taiwan: Report | China | Al Jazeera"
-Title of "https://www.aljazeera.com/news/" is "News | Today's latest from Al Jazeera"
-Title of "https://www.aljazeera.com/middle-east/" is "Middle East News | Today's latest from Al Jazeera"
-Title of "https://www.aljazeera.com/live" is "LIVE - Al Jazeera English News | Today's latest from Al Jazeera"
-Title of "https://www.aljazeera.com/africa/" is "Africa News | Today's latest from Al Jazeera"
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 5 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-Title of "https://www.aljazeera.com/asia/" is "Asia News | Today's latest from Al Jazeera"
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 6 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":2255,"perMinute":34,"finished":6,"failed":0,"retryHistogram":[6]}
+INFO: Crawler request statistics: {"avgDurationMillis":11201,"perMinute":12,"finished":12,"failed":0,"retryHistogram":[12]}
+INFO: AutoscaledPool state {"currentConcurrency":3,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.68},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.138},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/politics","retryCount":1,"id":"dI0IU0HYw3Gcx95"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+    at async /Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 20 requests and will shut down.

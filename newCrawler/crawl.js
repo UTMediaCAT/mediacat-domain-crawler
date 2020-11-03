@@ -9,13 +9,13 @@
 */
 const Apify = require('apify');
 const path = require('path');
-var { Readability } = require('@mozilla/readability');
-var JSDOM = require('jsdom').JSDOM;
+let { Readability } = require('@mozilla/readability');
+let JSDOM = require('jsdom').JSDOM;
 
-var fs = require('fs');
-var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
+let fs = require('fs');
+let util = require('util');
+let log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+let log_stdout = process.stdout;
 
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
@@ -41,7 +41,7 @@ function Filter(url, domain_url, valid_links) {
 };
 
 function getParsedArticle(url, html) {
-    var doc = new JSDOM(html, {
+    let doc = new JSDOM(html, {
         url: url
       });
     let reader = new Readability(doc.window.document);
@@ -51,8 +51,8 @@ function getParsedArticle(url, html) {
 
 Apify.main(async () => {
     // Get the urls from the command line arguments.
-    var url_list = [];
-    var is_url = false;
+    let url_list = [];
+    let is_url = false;
     process.argv.forEach(function (val, index, array) {
         // Add the links.
         if(is_url) {
@@ -65,16 +65,24 @@ Apify.main(async () => {
       });
 
     // Create the JSON object to store the tuples of links and titles for each url.
-    var output_dict = {};
-    var incorrect_dict = {};
+    let output_dict = {};
+    let incorrect_dict = {};
 
     const requestQueue = await Apify.openRequestQueue();
-    // Add the links to the queue of websites to crawl.
-    for (var i = 0; i < url_list.length; i++) {
-        await requestQueue.addRequest({ url: url_list[i] });
-    }
     // Crawl the deeper URLs recursively.
-    const pseudoUrls = [new Apify.PseudoUrl('https://www.aljazeera.com/[.*]')];
+    const pseudoUrls = [];
+    // Add the links to the queue of websites to crawl.
+    for (let i = 0; i < url_list.length; i++) {
+        await requestQueue.addRequest({ url: url_list[i] });
+        // Add the domain to the pseudoURLs.
+        let pseudoDomain = url_list[i];
+        if (url_list[i][url_list[i].length - 1] !== "/") {
+            pseudoDomain += "/[.*]";
+        } else {
+            pseudoDomain += "[.*]";
+        }
+        pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
+    }
 
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
@@ -106,12 +114,10 @@ Apify.main(async () => {
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
             
-            // Create the list of tuples for this url.
-            var tuple_list = [];
             // Set the title of the link to be the text content if the title is not present.
             // Create the list of tuples for this url.
-            var valid_links = [];
-            var tuple_list = [];
+            let valid_links = [];
+            let tuple_list = [];
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
@@ -143,7 +149,7 @@ Apify.main(async () => {
 
                 }
             }
-            var elem = {
+            let elem = {
                 title: parsedArticle.title,
                 author_metadata: parsedArticle.byline,
                 date: '',
@@ -160,7 +166,7 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 5,
+        maxRequestsPerCrawl: 20,
         maxConcurrency: 10,
     });
     // Run the crawler.
