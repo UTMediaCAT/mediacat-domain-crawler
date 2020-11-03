@@ -10,17 +10,19 @@ const { info } = require('console')
 fs.readFile('link_title_list.json', function (err, data) {
 
     var json = JSON.parse(data)
-    dateloop({},json, 0)
-    //promiseloop(json);
+    //dateloop({},json, 0)
+    promiseloop(json);
 });
 function promiseloop(json) {
     newJson={}
     newCount = 0;
+    count = 0
     for (key in json) {
         newJson[key] = {}
         articles = json[key]
         console.log(key, articles.length);
         promises = [];
+        count++;
         for(i=0; i < articles.length; i++) {
             articleLink = articles[i][0]
             promises.push(promiseStuff(articleLink));
@@ -28,59 +30,34 @@ function promiseloop(json) {
     }
     Promise.all(promises).then((link, metadata) => {
         newJson[key][link] = metadata
+        newCount++;
+        if (newCount == count) {
+            fs.writeFileSync("full_link_title_list.json", JSON.stringify(newJson), function(err) {
+                if (err) throw err;
+                    console.log('complete');
+                });
+        }
     }).catch((link)=> {
         newJson[key][link] = null
-    }).finally(()=>{
-        fs.writeFileSync("full_link_title_list.json", JSON.stringify(newJson), function(err) {
-            if (err) throw err;
-                console.log('complete');
-            });
-    })
-}
-function promiseStuffDeprecated(articleLink) {
-    return new Promise((resolve, reject) => {
-        try{
-            new Promise(async(resolve,reject)=> {
-                const { body: html, url } = await got(articleLink)
-                promise = metascraper({ html, url });
-                promise.then((metadata)=> {
-                    resolve(metadata); 
-                }).catch((e) => {
-                    console.log("Fail: "+articleLink);
-                    reject(articleLink);
-                })
-            }).then((metadata)=>{
-                console.log("Pass: "+articleLink+ " "+metadata["date"]);
-                resolve(articleLink, metadata);
-            }).catch((link) => {
-                console.log("fail")
-                reject(link);
-            } );
-        } catch (err) {
-            console.log("Fail: "+articleLink);
-            console.log(err);
-            reject(articleLink);
-        }
+    })}
 
-    })
-}
 function promiseStuff(articleLink) {
         return new Promise(async(resolve,reject)=> {
-                const { body: html, url } = await got(articleLink)
-                promise = metascraper({ html, url });
-                promise.then((metadata)=> {
-                    resolve(metadata); 
-                }).catch((e) => {
-                    console.log("Fail: "+articleLink);
+                gotPromise = got(articleLink)
+                gotPromise.then(({ body: html, url }) => {
+                    promise = metascraper({ html, url });
+                    promise.then((metadata)=> {
+                        console.log("Pass: "+articleLink+ " "+metadata["date"]);
+                        resolve(articleLink, metadata); 
+                    }).catch((e) => {
+                        console.log("Fail: "+articleLink);
+                        reject(articleLink);
+                    });
+                }).catch((e)=> {
+                    console.log("Fail at get request: "+articleLink)
                     reject(articleLink);
                 })
-            }).then((metadata)=>{
-                console.log("Pass: "+articleLink+ " "+metadata["date"]);
-                resolve(articleLink, metadata);
-            }).catch((link) => {
-                console.log("Fail: "+link)
-                reject(link);
-            } );
+            });
 }
 function dateloop(newJson, json, currDomainIndex) {
     length = Object.keys(json).length;
