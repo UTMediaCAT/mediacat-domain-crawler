@@ -3,11 +3,20 @@ const metascraper = require('metascraper')([
   require('metascraper-url')()
 ])
 
+/**
+ * 
+ * Fail at get request: https://www.washingtonpost.com/subscribe/signin/?case=ereplica
+(node:76938) UnhandledPromiseRejectionWarning: https://www.washingtonpost.com/subscribe/signin/?case=ereplica
+(node:76938) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 10)
+ */
+
+const linkFile = './test.json'
+
 const got = require('got')
 var fs = require('fs')
 const { info } = require('console')
 
-fs.readFile('link_title_list.json', function (err, data) {
+fs.readFile(linkFile, function (err, data) {
 
     var json = JSON.parse(data)
     //dateloop({},json, 0)
