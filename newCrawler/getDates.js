@@ -19,18 +19,38 @@ function readFile(linkFile, callback){
     fs.readFile(linkFile, function (err, data) {
         // json 
         let json = JSON.parse(data);
-        console.log(json)
+        // console.log(json);
 
         callback(json);
     });
 
 }
 
-function promiseLoop(json) {
-    // let newJson = {};
+async function promiseLoop(json) {
+    let newJson = await promiseLoopAsync(json);
+    console.log(newJson);
+
+    console.log("we are done! :)");
+
+    fs.writeFile("metadata_modified_list.json", JSON.stringify(newJson), function(err) {
+        // console.log(newJson)
+        if (err) {
+            console.log("The date json has been processed with an error")
+            console.log(err)
+        } else {
+            console.log("complete!")
+        }
+    });
+}
+
+
+async function promiseLoopAsync (json) {
+
+    let newJson = {};
     // let newCount = 0;
     let count = 0;
     let key;
+
     for (key in json) {
         let articlesList = json[key];
         let promises = [];
@@ -38,45 +58,63 @@ function promiseLoop(json) {
         let i;
         for (i = 0; i < articlesList.length; i++) {
             let article = articlesList[i]
-            let link = article[0]
-            promises.push(promiseDate(link))
+            promises.push(promiseDate(article))
         }
-        Promise.allSettled(promises).then( (promiseResults) => {
+        await Promise.allSettled(promises).then( (promiseResults) => {
+            let articleListMetadata = []
             promiseResults.forEach(
                 (result) => {
                     if (result.status === "fulfilled") {
-                        console.log('Valid link ' + result.value["url"] + "with date " + result.value["date"]);
+                        let link = result.value[0]
+                        let date = result.value[result.value.length - 1]
+                        // console.log("result : ", result)
+                        console.log('Valid link ' + link  + "with date " + date);
+                        articleListMetadata.push(result.value);
                     } else {
+                        // console.log("result : ", result)
                         console.log('Failed link ' + result.reason);
+                        articleListMetadata.push(result.reason);
                     }
                 }
             )
+
+            newJson[key] = articleListMetadata
             
         }).catch ((e) =>
             console.log(e)
         )
 
-        console.log("is this non blocking?")
-
     }
+
+    return newJson
 
 }
 
-function promiseDate (link) {
+
+// article is an array
+function promiseDate (article) {
+    
     let promise = new Promise ((resolve, reject) => {
+        let link = article[0];
         got(link)
         .on('request', request => setTimeout(() => request.destroy(), 20000))
         .then(({ body: html, url }) => {
             metascraper({ html, url }).then((metadata) => {
+                console.log("metadata : ", metadata);
                 console.log("Pass: "+link+ " "+metadata["date"]);
-                resolve(metadata); 
+                article.push(metadata["date"])
+                resolve(article); 
             }).catch ((e) => {
+                console.log("error : ", e.hostname);
                 console.log("Fail: "+link);
-                reject(link);
+                article.push("")
+                reject(article);
             }); 
         }).catch((e) => {
+            console.log("error : ", e.hostname);
             console.log("Fail: at get request: " + link)
-            reject(link);
+            article.push("")
+            reject(article);
         });
     });
     return promise
