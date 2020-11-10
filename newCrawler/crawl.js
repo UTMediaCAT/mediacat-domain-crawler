@@ -5,24 +5,22 @@
    dynamically rendered webpages and returns the JSON file containing lists
    of tuples of links and titles for each url.
    Use: "node crawl.js -l <url1> ..."
-   Output: link_title_list.json, failed_link_list.json
+   Output: link_title_list.json
 */
 const Apify = require('apify');
 const path = require('path');
-let { Readability } = require('@mozilla/readability');
-let JSDOM = require('jsdom').JSDOM;
-const { v5: uuidv5 } = require('uuid');
+var { Readability } = require('@mozilla/readability');
+var JSDOM = require('jsdom').JSDOM;
 
-let fs = require('fs');
-let util = require('util');
-let log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-let log_stdout = process.stdout;
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
 
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
-
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     result = !valid_links.includes(url) && (url != domain_url)
@@ -38,11 +36,19 @@ function Filter(url, domain_url, valid_links) {
         }
     }*/
     return result
-
-};
+}
 
 function getParsedArticle(url, html) {
-    let doc = new JSDOM(html, {
+    var doc = new JSDOM(html, {
+        url: url
+      });
+    let reader = new Readability(doc.window.document);
+    let article = reader.parse();
+    return article
+}
+
+function getParsedArticle(url, html) {
+    var doc = new JSDOM(html, {
         url: url
       });
     let reader = new Readability(doc.window.document);
@@ -52,8 +58,8 @@ function getParsedArticle(url, html) {
 
 Apify.main(async () => {
     // Get the urls from the command line arguments.
-    let url_list = [];
-    let is_url = false;
+    var url_list = [];
+    var is_url = false;
     process.argv.forEach(function (val, index, array) {
         // Add the links.
         if(is_url) {
@@ -64,16 +70,16 @@ Apify.main(async () => {
             is_url = true;
         }
       });
+    console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
-    let output_dict = {};
-    let incorrect_dict = {};
-
+    var output_dict = {};
+    var incorrect_dict = {};
     const requestQueue = await Apify.openRequestQueue();
     // Crawl the deeper URLs recursively.
     const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
-    for (let i = 0; i < url_list.length; i++) {
+    for (var i = 0; i < url_list.length; i++) {
         await requestQueue.addRequest({ url: url_list[i] });
         // Add the domain to the pseudoURLs.
         let pseudoDomain = url_list[i];
@@ -94,7 +100,7 @@ Apify.main(async () => {
             useChrome: false,
         },
         handlePageFunction: async ({ request, page }) => {
-
+            const title = await page.title();   // Get the title of the page.
             let general_regex = /(http(s)?:\/\/(www\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
             let match = request.url.match(general_regex);
             let link_start = "";
@@ -102,9 +108,7 @@ Apify.main(async () => {
             // anything before the domain name.
             //link_start = match[1];
             domainName = link_start+match[4]+ ".";
-
-
-            const title = await page.title();   // Get the title of the page.
+            console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
@@ -115,10 +119,9 @@ Apify.main(async () => {
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
             
-            // Set the title of the link to be the text content if the title is not present.
             // Create the list of tuples for this url.
-            let valid_links = [];
-            let tuple_list = [];
+            var valid_links = [];
+            var tuple_list = [];
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
@@ -150,13 +153,15 @@ Apify.main(async () => {
 
                 }
             }
-            // Save a PDF of the page.
-            console.log("Saving PDF of " + request.url);
-            const pdfBuffer = await page.pdf({ format: 'A4' });
-            let pdfName = uuidv5(request.url, uuidv5.URL);
-            await Apify.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
-            
-            // Create the article information dictionary.
+            // Get the domain.
+            let domain_url = ''
+            for (var i = 0; i < url_list.length; i++) {
+                if (request.url.includes(url_list[i])) {
+                    // Updae the domain.
+                    domain_url = url_list[i];
+                }
+            }
+
             let elem = {
                 title: parsedArticle.title,
                 author_metadata: parsedArticle.byline,
@@ -164,12 +169,11 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                url: request.url,
-                pdf_filename: pdfName + '.pdf',
+                domain: domain_url,
                 found_urls: tuple_list
             }
             // Add this list to the dict.
-            output_dict[request.url] = elem;
+            output_dict[request.url] = elem; 
 
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
@@ -185,6 +189,7 @@ Apify.main(async () => {
     // Note: If the apify_storage file is not removed, it doesn't crawl
     // during subsequent runs.
     // Implementation of rmdir.
+    console.log(JSON.stringify(output_dict));
     const rmDir = function (dirPath, removeSelf) {
     if (removeSelf === undefined)
         removeSelf = true;
@@ -205,7 +210,7 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    rmDir('./apify_storage/request_queues', true);
+    rmDir('./apify_storage/', true);
 
     // Create a JSON file from the tuples in the output list.
     // Overwrites if it already exists.
