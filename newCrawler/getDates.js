@@ -1,6 +1,10 @@
 const metascraper = require('metascraper')([
+    require('metascraper-author')(),
     require('metascraper-date')(),
-    require('metascraper-url')()
+    require('metascraper-description')(),
+    require('metascraper-publisher')(),
+    require('metascraper-title')(),
+    require('metascraper-url')(),
 ]);
  
 const linkFile = './link_title_list.json';
@@ -62,8 +66,10 @@ async function promiseLoopAsync (json) {
             promiseResults.forEach(
                 (result) => {
                     if (result.status === 'fulfilled') {
+                        // change from list to object here TODO: Raiyan
                         let link = result.value[0];
-                        let date = result.value[result.value.length - 1];
+                        let metascraper = result.value[result.value.length - 1];
+                        let date = metascraper.date
                         // console.log("result : ", result)
                         console.log('Valid link ' + link  + 'with date ' + date);
                         articleListMetadata.push(result.value);
@@ -99,18 +105,18 @@ function promiseDate (article) {
                 metascraper({ html, url }).then((metadata) => {
                     console.log('metadata : ', metadata);
                     console.log('Pass: '+link+ ' '+metadata['date']);
-                    article.push(metadata['date']);
+                    article.push(metadata);
                     resolve(article); 
                 }).catch ((e) => {
                     console.log('error : ', e.hostname);
                     console.log('Fail: '+link);
-                    article.push('');
+                    article.push(null);
                     reject(article);
                 }); 
             }).catch((e) => {
                 console.log('error : ', e.hostname);
                 console.log('Fail: at get request: ' + link);
-                article.push('');
+                article.push(null);
                 reject(article);
             });
     });
