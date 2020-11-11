@@ -1,6 +1,6 @@
 # Prerequisite
 
-npm install
+- `npm install`
 
 Note that the input file is dependent on the output that the crawler spits out.
 
@@ -9,10 +9,10 @@ It will take the input file named `link_title_list.json`
 
 change the constant `linkFile` in `getDates.js` if you want it to read from a different file
 
-run `node getDates.js`
+- run `node getDates.js`
 
 
-The output will be in a file named metadata_modified_list.json
+The output will be in a file named `metadata_modified_list.json`
 
 ```
 {
