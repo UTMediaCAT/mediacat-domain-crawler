@@ -14,7 +14,7 @@ run `node getDates.js`
 
 The output will be in a file named metadata_modified_list.json
 
-
+```
 {
     "https://www.christianitytoday.com": [
         [
@@ -69,3 +69,4 @@ The output will be in a file named metadata_modified_list.json
         ]
     ]
 }
+```
