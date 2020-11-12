@@ -103,10 +103,12 @@ Apify.main(async () => {
             const title = await page.title();   // Get the title of the page.
             let general_regex = /(http(s)?:\/\/(www\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
             let match = request.url.match(general_regex);
+            let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
             let link_start = "";
             // Uncomment the line below if you want for the script to not include any links that have
             // anything before the domain name.
             //link_start = match[1];
+            console.log("Link:",match)
             domainName = link_start+match[4]+ ".";
             console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
@@ -129,11 +131,8 @@ Apify.main(async () => {
                 let inscope = false;
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
                     dom_orig = url_list[l_i];
-                    dom_without_www = url_list[l_i].replace("www.", "");
-                    hrefLink_without_www = hrefLink.replace("www.", "");
-                    if (hrefLink.includes(dom_orig)) {
-                        inscope = true;
-                    } else if (hrefLink_without_www.includes(dom_without_www)) {
+                    domainName = dom_orig.match(general_regex);
+                    if (hrefLink.includes(domainName) || twitter_url.test(hrefLink)) {
                         inscope = true;
                     }
                 }
