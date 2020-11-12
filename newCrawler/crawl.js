@@ -103,7 +103,11 @@ Apify.main(async () => {
             const title = await page.title();   // Get the title of the page.
             let domainNameIndex = 5;
             let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
+            let match = request.url.match(general_regex);
+            domainName = match[4]+ "";
             let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
+            var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+
             console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
