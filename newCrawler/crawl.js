@@ -101,13 +101,9 @@ Apify.main(async () => {
         },
         handlePageFunction: async ({ request, page }) => {
             const title = await page.title();   // Get the title of the page.
-            let general_regex = /(http(s)?:\/\/(www\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
-            let match = request.url.match(general_regex);
-            domainName = match[4]+ "";
+            let domainNameIndex = 5;
+            let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
             let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
-            var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
-            console.log(domainRegex.test("https://www.cn.nytimes.com")+" "+" "+domainName);
-
             console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
@@ -127,10 +123,15 @@ Apify.main(async () => {
                 hrefLink = hrefs[i];
                 // Checks that the link is a part of domain.
                 let inscope = false;
+                
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
                     dom_orig = url_list[l_i];
-                    domainName = dom_orig.match(general_regex);
-                    if (hrefLink.includes(domainName) || twitter_url.test(hrefLink)) {
+                    domainName = dom_orig.match(general_regex)[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    //if(hrefLink.includes("www.")) {
+                    //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
+                    //}
+                    if (domainRegex.test(hrefLink) || twitter_url.test(hrefLink)) {
                         inscope = true;
                     }
                 }
@@ -153,7 +154,7 @@ Apify.main(async () => {
                 else {
                     out_of_scope_match = hrefLink.match(general_regex)
                     if (out_of_scope_match != null) {
-                        out_of_scope_domain = out_of_scope_match[4];
+                        out_of_scope_domain = out_of_scope_match[domainNameIndex];
                     
                         if (out_of_scope_domain in incorrect_dict) {
                             incorrect_dict[out_of_scope_domain].push(hrefLink);
@@ -169,7 +170,7 @@ Apify.main(async () => {
             let domain_url = ''
             for (var i = 0; i < url_list.length; i++) {
                 if (request.url.includes(url_list[i])) {
-                    // Updae the domain.
+                    // Update the domain.
                     domain_url = url_list[i];
                 }
             }
