@@ -128,7 +128,11 @@ Apify.main(async () => {
                 // Checks that the link is a part of domain.
                 let inscope = false;
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
-                    if (hrefLink.includes(url_list[l_i])) {
+                    dom_orig = url_list[l_i];
+                    dom_without_www = url_list[l_i].replace("www.", "");
+                    if (hrefLink.includes(dom_orig)) {
+                        inscope = true;
+                    } else if (hrefLink.includes(dom_without_www)) {
                         inscope = true;
                     }
                 }
