@@ -134,7 +134,11 @@ Apify.main(async () => {
                             hrefTitle = titles[i];
                         }
                         // Add the tuple to the list.
-                        tuple_list.push([hrefLink, hrefTitle]);
+                        let found_elem = {
+                            title: hrefTitle,
+                            url: hrefLink
+                        }
+                        tuple_list.push(found_elem);
                         valid_links.push(hrefLink);
                     }
                 }
