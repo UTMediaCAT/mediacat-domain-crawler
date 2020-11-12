@@ -2,33 +2,32 @@ INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType
 WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/apify_storage"
 [
   'https://www.cnn.com/',
-  'https://www.nytimes.com/',
-  'https://www.aljazeera.com/'
+  'https://www.aljazeera.com/',
+  'https://www.nytimes.com/'
 ]
 INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
 INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
 INFO: Launching Puppeteer {"headless":true,"stealth":false,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, US News, World News and Videos"
-Title of "https://www.nytimes.com/international/?action=click&region=Editions&pgtype=Homepage" is "The New York Times International - Breaking News, US News, World News, Videos"
-Title of "https://www.nytimes.com/ca/?action=click&region=Editions&pgtype=Homepage" is "The New York Times Canada - Breaking News, US News, World News, Videos"
-Title of "https://www.aljazeera.com/" is "Breaking News, World News and Video from Al Jazeera"
-Title of "https://www.nytimes.com/subscription?campaignId=9YU8R" is "The New York Times: Digital and Home Delivery Subscriptions"
 Title of "https://www.cnn.com/" is "CNN - Breaking News, Latest News and Videos"
-Title of "https://www.nytimes.com/section/todayspaper" is "The New York Times in Print for Tuesday, Nov. 10, 2020 - The New York Times"
-Title of "https://www.nytimes.com/section/world" is "World News - The New York Times"
-Title of "https://www.nytimes.com/es/" is "The New York Times en Español - The New York Times"
-Title of "https://www.nytimes.com/section/us" is "U.S. News - The New York Times"
-Title of "https://www.nytimes.com/section/politics" is "Politics - The New York Times"
-Title of "https://www.nytimes.com/section/nyregion" is "New York - The New York Times"
-INFO: Crawler request statistics: {"avgDurationMillis":13118,"perMinute":12,"finished":12,"failed":0,"retryHistogram":[12]}
-Title of "https://www.nytimes.com/section/business" is "Business - The New York Times"
-INFO: AutoscaledPool state {"currentConcurrency":1,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.615},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.378},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
-Title of "https://www.nytimes.com/section/opinion" is "Opinion - The New York Times"
-Title of "https://www.nytimes.com/section/technology" is "Technology - The New York Times"
-Title of "https://www.nytimes.com/section/science" is "Science - The New York Times"
-Title of "https://www.nytimes.com/section/sports" is "Sports - The New York Times"
-Title of "https://www.nytimes.com/section/health" is "Health - The New York Times"
-Title of "https://www.nytimes.com/section/arts" is "Arts - The New York Times"
-Title of "https://www.nytimes.com/section/books" is "Books - The New York Times"
+Title of "https://www.aljazeera.com/" is "Breaking News, World News and Video from Al Jazeera"
+Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, US News, World News and Videos"
+Title of "https://www.cnn.com/privacy" is "CNN Privacy Statement - CNN"
+Title of "https://www.cnn.com/terms" is "CNN Terms of Use - CNN"
+Title of "https://www.cnn.com/us" is "US News – Top national stories and latest headlines - CNN"
+Title of "https://www.cnn.com/world" is "World news – breaking news, videos and headlines - CNN"
+Title of "https://www.cnn.com/politics" is "CNNPolitics - Political News, Analysis and Opinion"
+Title of "https://www.cnn.com/business" is "Business News - Latest Headlines on CNN Business - CNN"
+Title of "https://www.cnn.com/health" is "Health News - CNN"
+Title of "https://www.cnn.com/opinions" is "Opinion - CNN"
+Title of "https://www.cnn.com/entertainment" is "Entertainment News - Celebrities, Movies, TV, Music - CNN"
+Title of "https://www.cnn.com/travel" is "CNN Travel | Global Destinations, Tips & Video"
+Title of "https://www.cnn.com/style" is "CNN Style - Fashion, beauty, design, art, architecture and luxury"
+Title of "https://www.cnn.com/videos" is "Video News - CNN"
+Title of "https://www.cnn.com/specials/us/crime-and-justice" is "Crime + Justice - CNN"
+Title of "https://www.cnn.com/specials/us/energy-and-environment" is "Energy and Environment - CNN"
+Title of "https://www.cnn.com/specials/us/extreme-weather" is "Weather news and local forecast - CNN"
+Title of "https://www.cnn.com/specials/space-science" is "Space + Science News - CNN"
+Title of "https://www.cnn.com/africa" is "Africa news - breaking news, video, headlines and opinion - CNN"
+INFO: Crawler request statistics: {"avgDurationMillis":4485,"perMinute":19,"finished":19,"failed":0,"retryHistogram":[19]}
 INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
 INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 20 requests and will shut down.

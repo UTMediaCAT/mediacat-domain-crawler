@@ -125,8 +125,14 @@ Apify.main(async () => {
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
-                // Checks that the link is a part of the domain.
-                if (hrefLink.includes(domainName)) {
+                // Checks that the link is a part of domain.
+                let inscope = false;
+                for (let l_i = 0; l_i < url_list.length; l_i++) {
+                    if (hrefLink.includes(url_list[l_i])) {
+                        inscope = true;
+                    }
+                }
+                if (inscope) {
                     if (Filter(hrefLink, request.url, valid_links)) {
                         if (titles[i].length === 0) {
                             hrefTitle = texts[i].replace(/ +(?= )/g,'');
