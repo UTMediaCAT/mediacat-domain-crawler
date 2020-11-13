@@ -47,6 +47,15 @@ function getParsedArticle(url, html) {
     return article
 }
 
+function getParsedArticle(url, html) {
+    var doc = new JSDOM(html, {
+        url: url
+      });
+    let reader = new Readability(doc.window.document);
+    let article = reader.parse();
+    return article
+}
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var url_list = [];
@@ -67,12 +76,20 @@ Apify.main(async () => {
     var output_dict = {};
     var incorrect_dict = {};
     const requestQueue = await Apify.openRequestQueue();
+    // Crawl the deeper URLs recursively.
+    const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
     for (var i = 0; i < url_list.length; i++) {
         await requestQueue.addRequest({ url: url_list[i] });
+        // Add the domain to the pseudoURLs.
+        let pseudoDomain = url_list[i];
+        if (url_list[i][url_list[i].length - 1] !== "/") {
+            pseudoDomain += "/[.*]";
+        } else {
+            pseudoDomain += "[.*]";
+        }
+        pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
-    // Crawl the deeper URLs recursively.
-    // const pseudoUrls = [new Apify.PseudoUrl('https://www.idf.il/en/[.*]')];
 
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
@@ -84,28 +101,19 @@ Apify.main(async () => {
         },
         handlePageFunction: async ({ request, page }) => {
             const title = await page.title();   // Get the title of the page.
-            let general_regex = /(http(s)?:\/\/(www\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
+            let domainNameIndex = 5;
+            let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
             let match = request.url.match(general_regex);
-            let link_start = "";
-            // Uncomment the line below if you want for the script to not include any links that have
-            // anything before the domain name.
-            //link_start = match[1];
-            domainName = link_start+match[4]+ ".";
+            domainName = match[4]+ "";
+            let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
+            var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+
             console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
             // Use readability.js to read information about the article.
             parsedArticle = getParsedArticle(request.url, bodyHTML);
-            console.log("");
-            console.log("URL: " + request.url);
-            console.log("Article Title: " + parsedArticle.title);
-            console.log("Article Byline: " + parsedArticle.byline);
-            console.log("Article Text Content: " + parsedArticle.textContent);
-            console.log("Article Length: " + parsedArticle.length);
-            console.log("Article Excerpt: " + parsedArticle.excerpt);
-            console.log("Article HTML Content: " + parsedArticle.content);
-            console.log("");
 
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
@@ -117,8 +125,21 @@ Apify.main(async () => {
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
-                // Checks that the link is a part of the domain.
-                if (hrefLink.includes(domainName)) {
+                // Checks that the link is a part of domain.
+                let inscope = false;
+                
+                for (let l_i = 0; l_i < url_list.length; l_i++) {
+                    dom_orig = url_list[l_i];
+                    domainName = dom_orig.match(general_regex)[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    //if(hrefLink.includes("www.")) {
+                    //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
+                    //}
+                    if (domainRegex.test(hrefLink) || twitter_url.test(hrefLink)) {
+                        inscope = true;
+                    }
+                }
+                if (inscope) {
                     if (Filter(hrefLink, request.url, valid_links)) {
                         if (titles[i].length === 0) {
                             hrefTitle = texts[i].replace(/ +(?= )/g,'');
@@ -126,14 +147,18 @@ Apify.main(async () => {
                             hrefTitle = titles[i];
                         }
                         // Add the tuple to the list.
-                        tuple_list.push([hrefLink, hrefTitle]);
+                        let found_elem = {
+                            title: hrefTitle,
+                            url: hrefLink
+                        }
+                        tuple_list.push(found_elem);
                         valid_links.push(hrefLink);
                     }
                 }
                 else {
                     out_of_scope_match = hrefLink.match(general_regex)
                     if (out_of_scope_match != null) {
-                        out_of_scope_domain = out_of_scope_match[4];
+                        out_of_scope_domain = out_of_scope_match[domainNameIndex];
                     
                         if (out_of_scope_domain in incorrect_dict) {
                             incorrect_dict[out_of_scope_domain].push(hrefLink);
@@ -145,14 +170,33 @@ Apify.main(async () => {
 
                 }
             }
+            // Get the domain.
+            let domain_url = ''
+            for (var i = 0; i < url_list.length; i++) {
+                if (request.url.includes(url_list[i])) {
+                    // Update the domain.
+                    domain_url = url_list[i];
+                }
+            }
+
+            let elem = {
+                title: parsedArticle.title,
+                author_metadata: parsedArticle.byline,
+                date: '',
+                html_content: parsedArticle.content,
+                article_text: parsedArticle.textContent,
+                article_len: parsedArticle.length,
+                domain: domain_url,
+                found_urls: tuple_list
+            }
             // Add this list to the dict.
-            output_dict[request.url] = tuple_list;
+            output_dict[request.url] = elem; 
 
             // Enqueue the deeper URLs to crawl.
-            // await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
+            await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 5,
+        maxRequestsPerCrawl: 20,
         maxConcurrency: 10,
     });
     // Run the crawler.

@@ -1,28 +1,33 @@
-INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Windows_NT","nodeVersion":"v12.16.2"}
-WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="E:\mediacat-domain-crawler\newCrawler\apify_storage"
+INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Darwin","nodeVersion":"v12.18.3"}
+WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Volumes/Raiyan-External-HDD/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/apify_storage"
 [
-  'https://www.nytimes.com/',
-  'https://www.algemeiner.com',
-  'https://www.jewishjournal.com',
-  'https://www.christianitytoday.com',
-  'https://www.washingtonpost.com',
-  'https://www.electronicintifada.net',
-  'https://www.cjr.org',
-  'https://www.foxnews.com',
-  'https://www.mondoweiss.net',
-  'https://www.al-monitor.com'
+  'https://www.cnn.com/',
+  'https://www.aljazeera.com/',
+  'https://www.nytimes.com/'
 ]
-INFO: AutoscaledPool: Setting max memory of this run to 2014 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
 INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
 INFO: Launching Puppeteer {"headless":true,"stealth":false,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.christianitytoday.com" is "Christianity Today | Theology, Church, Culture"
-Title of "https://www.washingtonpost.com" is "Washington Post: Breaking News, World, US, DC News & Analysis - The Washington Post"
-Title of "https://www.electronicintifada.net" is "The Electronic Intifada"
-Title of "https://www.cjr.org" is "Columbia Journalism Review - The voice of journalism"
-Title of "https://www.mondoweiss.net" is "Mondoweiss – News & Opinion About Palestine, Israel & the U.S."
-Title of "https://www.al-monitor.com" is "Al-Monitor: The Pulse of the Middle East"
-Title of "https://www.algemeiner.com" is "Jewish & Israel News | Algemeiner.com Breaking Alerts, Commentary, Insights Analysis and Blogs"
-Title of "https://www.foxnews.com" is "Fox News - Breaking News Updates | Latest News Headlines | Photos & News Videos"
-Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, World News & Multimedia"
-Title of "https://www.jewishjournal.com" is "Jewish Journal"
-INFO: BasicCrawler: All the requests from request list and/or request queue have been processed, the crawler will shut down.
+Title of "https://www.aljazeera.com/" is "Breaking News, World News and Video from Al Jazeera"
+Title of "https://www.cnn.com/" is "CNN - Breaking News, Latest News and Videos"
+Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, US News, World News and Videos"
+Title of "https://www.aljazeera.com/news/" is "News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/africa/" is "Africa News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/middle-east/" is "Middle East News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/latin-america/" is "Latin America News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/asia/" is "Asia News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/live" is "LIVE - Al Jazeera English News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/us-canada/" is "US & Canada News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/asia-pacific/" is "Asia Pacific News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/features/" is "Features | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/europe/" is "Europe News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/us-elections-2020/" is "US Elections 2020 News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/economy/" is "Economy News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/opinion/" is "Opinion | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/videos/" is "Videos News | Today's latest from Al Jazeera"
+Title of "https://www.aljazeera.com/investigations/" is "Investigations News | Today's latest from Al Jazeera"
+Title of "https://www.cnn.com/privacy" is "CNN Privacy Statement - CNN"
+Title of "https://www.cnn.com/terms" is "CNN Terms of Use - CNN"
+Title of "https://www.cnn.com/us" is "US News – Top national stories and latest headlines - CNN"
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 21 requests and will shut down.
