@@ -5,6 +5,7 @@ const metascraper = require('metascraper')([
     require('metascraper-publisher')(),
     require('metascraper-title')(),
     require('metascraper-url')(),
+    require('metascraper-lang')(),
 ]);
  
 const linkFile = './link_title_list.json';
@@ -12,8 +13,8 @@ const linkFile = './link_title_list.json';
 const got = require('got');
 var fs = require('fs') ;
 
-function getDate() {
-    readFile(linkFile, promiseLoop);
+exports.getDate = (file) => {
+    readFile(file, promiseLoop);
 }
 
 
@@ -21,11 +22,20 @@ function readFile(linkFile, callback){
 
     // callback
     fs.readFile(linkFile, function (err, data) {
-        // json 
-        let json = JSON.parse(data);
-        // console.log(json);
+        if (err) {
+            throw err;
+        }
 
-        callback(json);
+        try {
+            // json 
+            let json = JSON.parse(data);
+            // console.log(json);
+
+            callback(json);
+        } catch (e) {
+            throw e;
+        }
+
     });
 
 }
@@ -84,6 +94,7 @@ async function promiseLoopAsync (json) {
             newJson[key] = articleListMetadata;
             
         }).catch ((e) =>
+            // this part is suppose to be unreachable
             console.log(e)
         );
 
@@ -124,5 +135,5 @@ function promiseDate (article) {
 }
 
 if (require.main === module) {
-    getDate();
+    this.getDate(linkFile);
 }
