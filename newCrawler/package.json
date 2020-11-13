@@ -15,9 +15,20 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jsdom": "^16.4.0",
+    "metascraper": "^5.14.20",
+    "metascraper-author": "^5.14.22",
+    "metascraper-date": "^5.14.20",
+    "metascraper-description": "^5.14.22",
+    "metascraper-lang": "^5.14.22",
+    "metascraper-publisher": "^5.14.22",
+    "metascraper-title": "^5.14.22",
+    "metascraper-url": "^5.14.20",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
     "puppeteer": "^5.3.0",
     "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1"
   }
 }
