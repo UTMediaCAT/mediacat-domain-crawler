@@ -131,7 +131,7 @@ Apify.main(async () => {
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
                     dom_orig = url_list[l_i];
                     match = dom_orig.match(general_regex);
-                    if (match.length > 5) {
+                    if (match != null && match.length > 5) {
                         domainName = [domainNameIndex];
                         domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
                         //if(hrefLink.includes("www.")) {
