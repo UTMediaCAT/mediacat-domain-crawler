@@ -130,13 +130,16 @@ Apify.main(async () => {
                 
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
                     dom_orig = url_list[l_i];
-                    domainName = dom_orig.match(general_regex)[domainNameIndex];
-                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
-                    //if(hrefLink.includes("www.")) {
-                    //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
-                    //}
-                    if (domainRegex.test(hrefLink) || twitter_url.test(hrefLink)) {
-                        inscope = true;
+                    match = dom_orig.match(general_regex);
+                    if (match.length > 5) {
+                        domainName = [domainNameIndex];
+                        domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                        //if(hrefLink.includes("www.")) {
+                        //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
+                        //}
+                        if (domainRegex.test(hrefLink) || twitter_url.test(hrefLink)) {
+                            inscope = true;
+                        }
                     }
                 }
                 if (inscope) {
