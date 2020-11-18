@@ -132,7 +132,8 @@ Apify.main(async () => {
                     dom_orig = url_list[l_i];
                     match = dom_orig.match(general_regex);
                     if (match != null && match.length > 5) {
-                        domainName = [domainNameIndex];
+                        domainName = match[domainNameIndex];
+                        console.log("Links: "+domainName+" "+hrefLink);
                         domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
                         //if(hrefLink.includes("www.")) {
                         //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
