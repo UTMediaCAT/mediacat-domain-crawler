@@ -11,6 +11,7 @@ const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+const { v5: uuidv5 } = require('uuid');
 
 var fs = require('fs');
 var util = require('util');
@@ -90,6 +91,14 @@ Apify.main(async () => {
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
+
+    // Create a directory to hold all the individual JSON files.
+    fs.mkdir(path.join(__dirname, 'results'), (err) => { 
+        if (err) { 
+            return console.error(err);
+        } 
+        console.log('Results folder created.'); 
+    }); 
 
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
@@ -185,6 +194,7 @@ Apify.main(async () => {
 
             let elem = {
                 title: parsedArticle.title,
+                url: request.url,
                 author_metadata: parsedArticle.byline,
                 date: '',
                 html_content: parsedArticle.content,
@@ -193,6 +203,13 @@ Apify.main(async () => {
                 domain: domain_url,
                 found_urls: tuple_list
             }
+
+            // Create a JSON for this link with a uuid.
+            let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
+            fs.writeFileSync("results/" + fileName, JSON.stringify(elem), function(err) {
+                if (err) throw err;
+                console.log('complete');
+            });
             // Add this list to the dict.
             output_dict[request.url] = elem; 
 
@@ -235,10 +252,10 @@ Apify.main(async () => {
 
     // Create a JSON file from the tuples in the output list.
     // Overwrites if it already exists.
-    fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
+    // fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
+    //     if (err) throw err;
+    //     console.log('complete');
+    //     });
     fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
         if (err) throw err;
         console.log('complete');
