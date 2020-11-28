@@ -101,13 +101,13 @@ Apify.main(async () => {
         },
         handlePageFunction: async ({ request, page }) => {
             const title = await page.title();   // Get the title of the page.
-            let general_regex = /(http(s)?:\/\/(www\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
+            let domainNameIndex = 5;
+            let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
             let match = request.url.match(general_regex);
-            let link_start = "";
-            // Uncomment the line below if you want for the script to not include any links that have
-            // anything before the domain name.
-            //link_start = match[1];
-            domainName = link_start+match[4]+ ".";
+            domainName = match[4]+ "";
+            let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
+            var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+
             console.log(`Title of "${request.url}" is "${title}"`);
             // Get the HTML of the page and write it to a file.
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
@@ -127,14 +127,20 @@ Apify.main(async () => {
                 hrefLink = hrefs[i];
                 // Checks that the link is a part of domain.
                 let inscope = false;
+                
                 for (let l_i = 0; l_i < url_list.length; l_i++) {
                     dom_orig = url_list[l_i];
-                    dom_without_www = url_list[l_i].replace("www.", "");
-                    hrefLink_without_www = hrefLink.replace("www.", "");
-                    if (hrefLink.includes(dom_orig)) {
-                        inscope = true;
-                    } else if (hrefLink_without_www.includes(dom_without_www)) {
-                        inscope = true;
+                    match = dom_orig.match(general_regex);
+                    if (match != null && match.length > 5) {
+                        domainName = match[domainNameIndex];
+                        //console.log("Links: "+domainName+" "+hrefLink);
+                        domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                        //if(hrefLink.includes("www.")) {
+                        //    console.log(hrefLink+" "+domainName+" "+dom_orig + " https://www.cnn.com "+"https://www.cnn.com".match(general_regex)[domainNameIndex]);
+                        //}
+                        if (domainRegex.test(hrefLink) || twitter_url.test(hrefLink)) {
+                            inscope = true;
+                        }
                     }
                 }
                 if (inscope) {
@@ -156,7 +162,7 @@ Apify.main(async () => {
                 else {
                     out_of_scope_match = hrefLink.match(general_regex)
                     if (out_of_scope_match != null) {
-                        out_of_scope_domain = out_of_scope_match[4];
+                        out_of_scope_domain = out_of_scope_match[domainNameIndex];
                     
                         if (out_of_scope_domain in incorrect_dict) {
                             incorrect_dict[out_of_scope_domain].push(hrefLink);
@@ -172,7 +178,7 @@ Apify.main(async () => {
             let domain_url = ''
             for (var i = 0; i < url_list.length; i++) {
                 if (request.url.includes(url_list[i])) {
-                    // Updae the domain.
+                    // Update the domain.
                     domain_url = url_list[i];
                 }
             }
