@@ -16,6 +16,7 @@
   "dependencies": {
     "csv-write-stream": "^2.0.0",
     "csv-writer": "^1.6.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "watch": "^1.0.2"
   }
 }

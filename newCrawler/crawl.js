@@ -17,6 +17,15 @@ var fs = require('fs');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
+const mongoose = require('mongoose');
+let db = require('./database.js')
+
+
+mongoose.connection
+  .once('open', () => console.log('Connected to DB'))
+  .on('error', (error) => { 
+      console.log("Your Error", error);
+  });
 
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
@@ -210,6 +219,13 @@ Apify.main(async () => {
                 if (err) throw err;
                 console.log('complete');
             });
+
+            //Write into a database
+
+            let metaObj = new db.metaModel(elem);
+
+            await metaObj.save();
+
             // Add this list to the dict.
             output_dict[request.url] = elem; 
 
@@ -260,4 +276,7 @@ Apify.main(async () => {
         if (err) throw err;
         console.log('complete');
         });
+
+    // mongoose.connection.close()
+    
 });

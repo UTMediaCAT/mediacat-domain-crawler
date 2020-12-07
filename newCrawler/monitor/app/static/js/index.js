@@ -11,6 +11,15 @@
                 line.innerText = `${res.messages} link(s) were found`;
                 document.querySelector('#output').appendChild( line );
                 document.querySelector('#outputChange').innerHTML = line.innerHTML;
+                document.querySelector('#domainOutputChange').innerHTML = "";
+
+                let i;
+                for (i = 0; i < (res.links).length; i++) {
+                    let countline = document.createElement("p");
+                    countline.innerText = `Domain: ${res.links[i]._id} Count: ${res.links[i].count}`;
+                    document.querySelector('#domainOutputChange').appendChild( countline );
+
+                }
 
             })
         }

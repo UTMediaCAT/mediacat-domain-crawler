@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const fs = require('fs');
 
@@ -24,6 +25,7 @@ let csvWriter = require('csv-write-stream')
 let writer = csvWriter()
 
 
+let db = require('../../database.js')
 
 let path = require('path');
 
@@ -100,13 +102,7 @@ app.get('/api/fetch', function(req, res, next) {
             return path.extname(file).toLowerCase() === EXTENSION;
         });
         
-
         let data = targetFiles.length;
-
-
-
-
-        
 
         // fs.appendFile("./links", `${data} link(s) were saved \n`, function(err) {
         //     if(err) {
@@ -121,8 +117,6 @@ app.get('/api/fetch', function(req, res, next) {
         // ] 
         // csvWriter.writeRecords(dataCSV).then(()=> console.log('The CSV file was written successfully'));
 
-
-
         if (!fs.existsSync(finalPathFile))
             writer = csvWriter({ headers: ["numberOfLinks"]});
         else
@@ -136,7 +130,14 @@ app.get('/api/fetch', function(req, res, next) {
 
         writer.on('end', function () {
             console.log(data);
-            return res.json({messages: data});
+
+            database().then(domainNumber => {
+                console.log(domainNumber)
+                return res.json({links: domainNumber, messages: data});
+            }).catch( (err) => {
+                console.log(err)
+            });
+            
           });
 
       });
@@ -148,3 +149,20 @@ http.createServer(app).listen(PORT, function (err) {
     if (err) console.log(err);
     else console.log("HTTP server on http://localhost:%s", PORT);
 });
+
+function database() {
+    return new Promise((resolve, reject) => {
+        let agg = db.metaModel.aggregate([
+
+                {"$group" : {_id:"$domain", count:{$sum:1}}},
+                {"$sort": {_id: 1}}
+
+        ])
+        agg.then((results) => {
+            resolve(results)
+        }).catch((err) => {
+            reject(err)
+        });
+    })
+    
+}
