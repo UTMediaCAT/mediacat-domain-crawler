@@ -12,6 +12,7 @@ const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
 const { v5: uuidv5 } = require('uuid');
+const parse = require('csv-parse/lib/sync')
 
 var fs = require('fs');
 var util = require('util');
@@ -57,20 +58,60 @@ function getParsedArticle(url, html) {
     return article
 }
 
+function parseCSV(file){
+    var urls = [];
+    // Read the file.
+    var csv_file = fs.readFileSync(file, 'utf8');
+    // Parse the file into a list of objects.
+    const csv_list = parse(csv_file, {
+        columns: true
+    });
+    // Format the data to only get the urls.
+    for (let row of csv_list) {
+        // Make sure that there is a slash at the end.
+        let domain = row["Source"];
+        if (domain[domain.length - 1] !== '/') {
+            domain += '/';
+        }
+        // Push the domain to the list.
+        urls.push(domain);
+    }
+    // Return the list of domain urls.
+    return urls;
+    // Asynchronous method below.
+    // fs.createReadStream(file)
+    // .pipe(csv())
+    // .on('data', (row) => {
+    //   urls.push(row["Source"]);
+    // //   console.log(row);
+    // })
+    // .on('end', () => {
+    //   // print CSV file successfully processed
+    //   console.log('CSV file successfully processed');
+    // //   console.log(urls);
+    //   return urls;
+    // });
+}
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
-    var url_list = [];
     var is_url = false;
-    process.argv.forEach(function (val, index, array) {
-        // Add the links.
-        if(is_url) {
-            url_list.push(val);
-        }
-        // If it is a flag for the link.
-        if (val === "-l") {
-            is_url = true;
-        }
-      });
+    // If a CSV file is given, parse it.
+    if (process.argv[2] == "-f") {
+        var url_list = parseCSV(process.argv[3]);
+    } else {
+        var url_list = [];
+        process.argv.forEach(function (val, index, array) {
+            // Add the links.
+            if(is_url) {
+                url_list.push(val);
+            }
+            // If it is a flag for the link.
+            if (val === "-l") {
+                is_url = true;
+            }
+        });
+    }
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -217,8 +258,8 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 20,
-        maxConcurrency: 10,
+        // maxRequestsPerCrawl: 20,
+        maxConcurrency: 20,
     });
     // Run the crawler.
     await crawler.run();
