@@ -227,11 +227,21 @@ Apify.main(async () => {
                 }
             }
             // Get the domain.
-            let domain_url = ''
-            for (var i = 0; i < url_list.length; i++) {
-                if (request.url.includes(url_list[i])) {
-                    // Update the domain.
-                    domain_url = url_list[i];
+            let listIndex = 0;
+            let foundDomain = false;
+            while (listIndex < url_list.length && !foundDomain) {
+                dom_orig = url_list[listIndex];
+                match = dom_orig.match(general_regex);
+                if (match != null && match.length > 5) {
+                    domainName = match[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    if (domainRegex.test(request.url)) {
+                        foundDomain = true;
+                    } else {
+                        listIndex++;
+                    }
+                } else {
+                    listIndex++;
                 }
             }
 
@@ -243,7 +253,7 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: domain_url,
+                domain: url_list[listIndex],
                 found_urls: tuple_list,
                 out_of_scope_urls: local_out_of_scope
             }
