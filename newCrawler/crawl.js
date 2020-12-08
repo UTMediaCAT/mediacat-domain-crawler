@@ -172,6 +172,7 @@ Apify.main(async () => {
             // Create the list of tuples for this url.
             var valid_links = [];
             var tuple_list = [];
+            var local_out_of_scope = [];
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
@@ -221,7 +222,8 @@ Apify.main(async () => {
                             incorrect_dict[out_of_scope_domain] = [hrefLink];
                         }
                     }
-
+                    // Check if this domain name already exists inside.
+                    local_out_of_scope.push(hrefLink);
                 }
             }
             // Get the domain.
@@ -242,7 +244,8 @@ Apify.main(async () => {
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
                 domain: domain_url,
-                found_urls: tuple_list
+                found_urls: tuple_list,
+                out_of_scope_urls: local_out_of_scope
             }
 
             // Create a JSON for this link with a uuid.
@@ -252,7 +255,7 @@ Apify.main(async () => {
                 console.log('complete');
             });
             // Add this list to the dict.
-            output_dict[request.url] = elem; 
+            output_dict[request.url] = elem;
 
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
