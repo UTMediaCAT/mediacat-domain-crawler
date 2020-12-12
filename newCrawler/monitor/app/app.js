@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const app = express();
 const fs = require('fs');
 
-const dir = './jsonfiles';
+const dir = '../../../../mediacat-backend/commandline/results';
 
 app.use(express.static('static'));
 
 
 const http = require('http');
-const PORT = 4000;
+const PORT = 80;
 
 // const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 // const csvWriter = createCsvWriter({

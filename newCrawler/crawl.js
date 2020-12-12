@@ -12,6 +12,7 @@ const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
 const { v5: uuidv5 } = require('uuid');
+const parse = require('csv-parse/lib/sync')
 
 var fs = require('fs');
 var util = require('util');
@@ -66,20 +67,60 @@ function getParsedArticle(url, html) {
     return article
 }
 
+function parseCSV(file){
+    var urls = [];
+    // Read the file.
+    var csv_file = fs.readFileSync(file, 'utf8');
+    // Parse the file into a list of objects.
+    const csv_list = parse(csv_file, {
+        columns: true
+    });
+    // Format the data to only get the urls.
+    for (let row of csv_list) {
+        // Make sure that there is a slash at the end.
+        let domain = row["Source"];
+        if (domain[domain.length - 1] !== '/') {
+            domain += '/';
+        }
+        // Push the domain to the list.
+        urls.push(domain);
+    }
+    // Return the list of domain urls.
+    return urls;
+    // Asynchronous method below.
+    // fs.createReadStream(file)
+    // .pipe(csv())
+    // .on('data', (row) => {
+    //   urls.push(row["Source"]);
+    // //   console.log(row);
+    // })
+    // .on('end', () => {
+    //   // print CSV file successfully processed
+    //   console.log('CSV file successfully processed');
+    // //   console.log(urls);
+    //   return urls;
+    // });
+}
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
-    var url_list = [];
     var is_url = false;
-    process.argv.forEach(function (val, index, array) {
-        // Add the links.
-        if(is_url) {
-            url_list.push(val);
-        }
-        // If it is a flag for the link.
-        if (val === "-l") {
-            is_url = true;
-        }
-      });
+    // If a CSV file is given, parse it.
+    if (process.argv[2] == "-f") {
+        var url_list = parseCSV(process.argv[3]);
+    } else {
+        var url_list = [];
+        process.argv.forEach(function (val, index, array) {
+            // Add the links.
+            if(is_url) {
+                url_list.push(val);
+            }
+            // If it is a flag for the link.
+            if (val === "-l") {
+                is_url = true;
+            }
+        });
+    }
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -140,6 +181,7 @@ Apify.main(async () => {
             // Create the list of tuples for this url.
             var valid_links = [];
             var tuple_list = [];
+            var local_out_of_scope = [];
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
@@ -189,15 +231,26 @@ Apify.main(async () => {
                             incorrect_dict[out_of_scope_domain] = [hrefLink];
                         }
                     }
-
+                    // Check if this domain name already exists inside.
+                    local_out_of_scope.push(hrefLink);
                 }
             }
             // Get the domain.
-            let domain_url = ''
-            for (var i = 0; i < url_list.length; i++) {
-                if (request.url.includes(url_list[i])) {
-                    // Update the domain.
-                    domain_url = url_list[i];
+            let listIndex = 0;
+            let foundDomain = false;
+            while (listIndex < url_list.length && !foundDomain) {
+                dom_orig = url_list[listIndex];
+                match = dom_orig.match(general_regex);
+                if (match != null && match.length > 5) {
+                    domainName = match[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    if (domainRegex.test(request.url)) {
+                        foundDomain = true;
+                    } else {
+                        listIndex++;
+                    }
+                } else {
+                    listIndex++;
                 }
             }
 
@@ -209,8 +262,9 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: domain_url,
-                found_urls: tuple_list
+                domain: url_list[listIndex],
+                found_urls: tuple_list,
+                out_of_scope_urls: local_out_of_scope
             }
 
             // Create a JSON for this link with a uuid.
@@ -227,7 +281,7 @@ Apify.main(async () => {
             await metaObj.save();
 
             // Add this list to the dict.
-            output_dict[request.url] = elem; 
+            output_dict[request.url] = elem;
 
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
