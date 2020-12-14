@@ -20,6 +20,7 @@ var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 const mongoose = require('mongoose');
 let db = require('./database.js')
+let memInfo = require('./monitor/memoryInfo')
 
 
 mongoose.connection
@@ -279,6 +280,9 @@ Apify.main(async () => {
             let metaObj = new db.metaModel(elem);
 
             await metaObj.save();
+
+            // print memory stats about process
+            memInfo.getMemoryInfo(process.memoryUsage())
 
             // Add this list to the dict.
             output_dict[request.url] = elem;
