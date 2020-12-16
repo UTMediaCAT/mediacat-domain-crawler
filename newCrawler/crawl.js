@@ -7,6 +7,7 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
+let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
@@ -102,6 +103,21 @@ function parseCSV(file){
     //   return urls;
     // });
 }
+
+// Uncomment to see monitoring of the environment on the output
+
+// var monitoring = appmetrics.monitor();
+
+// monitoring.on('initialized', function (env) {
+//     env = monitoring.getEnvironment();
+//     for (var entry in env) {
+//         console.log(entry + ':' + env[entry]);
+//     };
+// });
+
+// monitoring.on('cpu', function (cpu) {
+//     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
+// });
 
 Apify.main(async () => {
     // Get the urls from the command line arguments.
