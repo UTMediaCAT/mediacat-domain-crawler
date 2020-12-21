@@ -11,6 +11,7 @@ const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+const { performance } = require('perf_hooks');
 
 var fs = require('fs');
 var util = require('util');
@@ -100,6 +101,7 @@ Apify.main(async () => {
             useChrome: false,
         },
         handlePageFunction: async ({ request, page }) => {
+            const t2 = performance.now();
             const title = await page.title();   // Get the title of the page.
             let domainNameIndex = 5;
             let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
@@ -195,7 +197,9 @@ Apify.main(async () => {
             }
             // Add this list to the dict.
             output_dict[request.url] = elem; 
-
+            const t3 = performance.now();
+            // Log the time for this request.
+            console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
@@ -203,14 +207,20 @@ Apify.main(async () => {
         maxRequestsPerCrawl: 20,
         maxConcurrency: 10,
     });
+    
+    const t0 = performance.now();
     // Run the crawler.
     await crawler.run();
+    const t1 = performance.now();
+    // Log the time to run the crawler.
+    console.log(`Call to run Crawler took ${t1/1000.0 - t0/1000.0} milliseconds.`);
     
     // Delete the apify storage.
     // Note: If the apify_storage file is not removed, it doesn't crawl
     // during subsequent runs.
     // Implementation of rmdir.
-    console.log(JSON.stringify(output_dict));
+    // console.log(JSON.stringify(output_dict));
+    
     const rmDir = function (dirPath, removeSelf) {
     if (removeSelf === undefined)
         removeSelf = true;
