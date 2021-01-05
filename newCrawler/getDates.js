@@ -11,97 +11,74 @@ const metascraper = require('metascraper')([
 const linkFile = './link_title_list.json';
   
 const got = require('got');
-var fs = require('fs') ;
+const mongoose = require('mongoose');
+let db = require('./database.js')
 
-exports.getDate = (file) => {
-    readFile(file, promiseLoop);
-}
+mongoose.connection
+  .once('open', () => console.log('Connected to DB'))
+  .on('error', (error) => { 
+      console.log("Your Error", error);
+  });
+exports.getDate = () => {
+    ongoing = true;
+    databaseLoop();
+} 
+function databaseLoop() {
+        db.metaModel.find({'updated': false}, function (err, docs) {
+            if (err) return handleError(err);
+            // Checks the amount of links that weren't updated, if there aren't any, exits, otherwise applies recursion.
+            if (docs.length != 0) {
+                console.log(docs.length);
+                promiseLoop(docs);
+            } else {
+                db.metaModel.find({'updated': true}, function (err, docs) {
+                    if (err) return handleError(err);
+                    console.log(docs.length);
+                    mongoose.connection.close();
+                });
+                console.log('we are done! :)');
+                
+            }
 
-
-function readFile(linkFile, callback){
-
-    // callback
-    fs.readFile(linkFile, function (err, data) {
-        if (err) {
-            throw err;
-        }
-
-        try {
-            // json 
-            let json = JSON.parse(data);
-            // console.log(json);
-
-            callback(json);
-        } catch (e) {
-            throw e;
-        }
-
-    });
-
-}
+          });
+}    
 
 async function promiseLoop(json) {
-    let newJson = await promiseLoopAsync(json);
-    console.log(newJson);
-
-    console.log('we are done! :)');
-
-    fs.writeFile('metadata_modified_list.json', JSON.stringify(newJson), function(err) {
-        // console.log(newJson)
-        if (err) {
-            console.log('The date json has been processed with an error');
-            console.log(err);
-        } else {
-            console.log('complete!');
-        }
-    });
+    await promiseLoopAsync(json);
+    databaseLoop();
 }
 
 
 async function promiseLoopAsync (json) {
-
-    let newJson = {};
-    let key;
-
-    for (key in json) {
-        let articlesList = json[key];
-        let promises = [];
-        let i;
-        for (i = 0; i < articlesList.length; i++) {
-            let article = articlesList[i];
-            promises.push(promiseDate(article));
-        }
-        await Promise.allSettled(promises).then( (promiseResults) => {
+    promises = []
+    for (let i = 0; i < json.length; i++) {
+        let article = json[i];
+        promises.push(promiseDate(article));
+    await Promise.allSettled(promises).then( (promiseResults) => {
             let articleListMetadata = [];
             promiseResults.forEach(
-                (result) => {
+                async (result) => {
                     if (result.status === 'fulfilled') {
                         // change from list to object here TODO: Raiyan
-                        let link = result.value[0];
-                        let metascraper = result.value[result.value.length - 1];
-                        let date = metascraper.date
-                        // console.log("result : ", result)
-                        console.log('Valid link ' + link  + 'with date ' + date);
-                        articleListMetadata.push(result.value);
+                        newArticle = result.value;
+                        let date = newArticle["date"];
+                        console.log('Valid link ' + newArticle["url"]  + ' with date ' + date + ' with author ' + newArticle["author_metadata"] +
+                        ' with title ' + newArticle["title"]);
+                        await db.metaModel.updateOne({"_id":newArticle["_id"]},
+                        {"date":date, "updated":true, "author_metadata":newArticle["author_metadata"], "title":newArticle["title"]});
                     } else {
-                        // console.log("result : ", result)
                         console.log('Failed link ' + result.reason);
                         articleListMetadata.push(result.reason);
                     }
                 }
             );
-
-            newJson[key] = articleListMetadata;
             
-        }).catch ((e) =>
-            // this part is suppose to be unreachable
+    }).catch ((e) =>
+            // this part is supposed to be unreachable
             console.log(e)
-        );
+    );
 
     }
-
-    return newJson;
-
 }
 
 
@@ -109,31 +86,37 @@ async function promiseLoopAsync (json) {
 function promiseDate (article) {
     
     let promise = new Promise ((resolve, reject) => {
-        let link = article[0];
+        let link = article['url'];
         got(link)
             .on('request', request => setTimeout(() => request.destroy(), 20000))
             .then(({ body: html, url }) => {
                 metascraper({ html, url }).then((metadata) => {
                     console.log('metadata : ', metadata);
                     console.log('Pass: '+link+ ' '+metadata['date']);
-                    article.push(metadata);
+                    article['date'] = metadata['date'];
+                    if (article['metadata-author'] == null) {
+                        article['metadata-author'] = metadata['author'];
+                    }
+                    if (article['title'] == null) {
+                        article['title'] = metadata['title'];
+                    }
                     resolve(article); 
                 }).catch ((e) => {
                     console.log('error : ', e.hostname);
                     console.log('Fail: '+link);
-                    article.push(null);
                     reject(article);
                 }); 
             }).catch((e) => {
                 console.log('error : ', e.hostname);
                 console.log('Fail: at get request: ' + link);
-                article.push(null);
                 reject(article);
             });
     });
     return promise;
 }
-
+function handleError(err) {
+    console.log(err);
+}
 if (require.main === module) {
-    this.getDate(linkFile);
+    this.getDate();
 }

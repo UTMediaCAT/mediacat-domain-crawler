@@ -11,8 +11,10 @@ const schema = new mongoose.Schema({
     article_text: String,
     article_len: String,
     domain: String,
+    updated: Boolean,
     found_urls: [{
         title: String,
+        date: String,
         url: String
     }],
 
