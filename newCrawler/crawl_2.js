@@ -213,6 +213,19 @@ Apify.main(async () => {
             // CHANGE THIS PART!!!!!!
 
 
+
+            let extractlist = Apify.utils.extractUrls(
+                {
+                    string: $.html()
+
+                }
+            )
+
+            // console.log("EXTRACTER")
+            // console.log(extractlist)
+
+
+
             let hrefs = []
             let titles = []
             let texts = []
@@ -228,26 +241,28 @@ Apify.main(async () => {
               });
 
 
-            console.log("title");
-            console.log(title);
-            console.log("page links over here!!!!!");
-            console.log(links);
+            // console.log("title");
+            // console.log(title);
+            // console.log("page links over here!!!!!");
+            // console.log(links);
 
-            console.log("page links over here2!!!!!");
-            console.log($(links));
+            // console.log("page links over here2!!!!!");
+            // console.log($(links));
 
 
-            console.log("request queue")
-            console.log(requestQueue)
+            // console.log("request queue")
+            // console.log(requestQueue)
 
             $(links).each(function(i, link){
                 texts.push($(link).text());
 
-                if ($(link).attr('href') !== 'undefined') {
+                if ($(link).attr('href') !== undefined) {
                     if ($(link).attr('href').startsWith('/')){
 
-                        hrefs.push(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-                        console.log(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        hrefs.push(request.loadedUrl.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+
+
+                        console.log(request.loadedUrl.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
                         // console.log(request.url)
                         // console.log(request.loadedUrl)
 
@@ -363,7 +378,8 @@ Apify.main(async () => {
                 article_len: parsedArticle.length,
                 domain: url_list[listIndex],
                 found_urls: tuple_list,
-                out_of_scope_urls: local_out_of_scope
+                out_of_scope_urls: local_out_of_scope,
+                extractor: extractlist
             }
 
             //save data onto dataset
@@ -397,7 +413,7 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 5,
+        maxRequestsPerCrawl: 10,
         maxConcurrency: 50,
     });
 
@@ -435,7 +451,7 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    rmDir('./apify_storage/', true);
+    // rmDir('./apify_storage/', true);
 
     // Create a JSON file from the tuples in the output list.
     // Overwrites if it already exists.
