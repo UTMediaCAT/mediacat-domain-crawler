@@ -304,14 +304,4 @@ Apify.main(async () => {
     };
     rmDir('./apify_storage/', true);
 
-    // Create a JSON file from the tuples in the output list.
-    // Overwrites if it already exists.
-    // fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
-    //     if (err) throw err;
-    //     console.log('complete');
-    //     });
-    fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
 });
