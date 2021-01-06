@@ -39,7 +39,7 @@ function databaseLoop() {
                 console.log('we are done! :)');
                 
             }
-
+            //mongoose.connection.close();
           });
 }    
 
@@ -65,7 +65,7 @@ async function promiseLoopAsync (json) {
                         console.log('Valid link ' + newArticle["url"]  + ' with date ' + date + ' with author ' + newArticle["author_metadata"] +
                         ' with title ' + newArticle["title"]);
                         await db.metaModel.updateOne({"_id":newArticle["_id"]},
-                        {"date":date, "updated":true, "author_metadata":newArticle["author_metadata"], "title":newArticle["title"]});
+                        {"date":date, "updated":true, "author_metascraper":newArticle["author_metascraper"], "title_metascraper":newArticle["title_metascraper"]});
                     } else {
                         console.log('Failed link ' + result.reason);
                         articleListMetadata.push(result.reason);
@@ -94,12 +94,8 @@ function promiseDate (article) {
                     console.log('metadata : ', metadata);
                     console.log('Pass: '+link+ ' '+metadata['date']);
                     article['date'] = metadata['date'];
-                    if (article['metadata-author'] == null) {
-                        article['metadata-author'] = metadata['author'];
-                    }
-                    if (article['title'] == null) {
-                        article['title'] = metadata['title'];
-                    }
+                    article['title_metascraper'] = metadata['title'];
+                    article['author_metascraper'] = metadata['author'];
                     resolve(article); 
                 }).catch ((e) => {
                     console.log('error : ', e.hostname);
