@@ -232,15 +232,6 @@ Apify.main(async () => {
 
             let links = $('a'); 
 
-            fs = require('fs');
-
-            let r = Math.random().toString(36).substring(7);
-
-            fs.writeFile(`./${r}.txt`, bodyHTML , function (err) {
-                if (err) return console.log(err);
-              });
-
-
             // console.log("title");
             // console.log(title);
             // console.log("page links over here!!!!!");
@@ -253,21 +244,47 @@ Apify.main(async () => {
             // console.log("request queue")
             // console.log(requestQueue)
 
+
+            // Get the domain.
+            let listIndex = 0;
+            let foundDomain = false;
+            while (listIndex < url_list.length && !foundDomain) {
+                dom_orig = url_list[listIndex];
+                match = dom_orig.match(general_regex);
+                if (match != null && match.length > 5) {
+                    domainName = match[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    if (domainRegex.test(request.url)) {
+                        foundDomain = true;
+                    } else {
+                        listIndex++;
+                    }
+                } else {
+                    listIndex++;
+                }
+            }
+
             $(links).each(function(i, link){
                 texts.push($(link).text());
 
                 if ($(link).attr('href') !== undefined) {
+
+                    // relative links
                     if ($(link).attr('href').startsWith('/')){
 
-                        hrefs.push(request.loadedUrl.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        // hrefs.push(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
 
 
-                        console.log(request.loadedUrl.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        // console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        hrefs.push(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+
+
+                        console.log(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
                         // console.log(request.url)
                         // console.log(request.loadedUrl)
 
                         
-
+                    // absolute links
                     } else if ($(link).attr('href').startsWith('http')){
                         hrefs.push($(link).attr('href'));
                     } else {
@@ -349,6 +366,7 @@ Apify.main(async () => {
                     local_out_of_scope.push(hrefLink);
                 }
             }
+            /*
             // Get the domain.
             let listIndex = 0;
             let foundDomain = false;
@@ -367,6 +385,7 @@ Apify.main(async () => {
                     listIndex++;
                 }
             }
+            */
 
             let elem = {
                 title: parsedArticle.title,
