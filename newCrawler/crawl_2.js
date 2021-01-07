@@ -74,6 +74,10 @@ function getParsedArticle(url, html) {
     return article
 }
 
+function getDomain(url) {
+    
+}
+
 function parseCSV(file){
     var urls = [];
     // Read the file.
@@ -272,17 +276,8 @@ Apify.main(async () => {
                     // relative links
                     if ($(link).attr('href').startsWith('/')){
 
-                        // hrefs.push(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-
-
-                        // console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-                        hrefs.push(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-
-
-                        console.log(request.url.replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-                        // console.log(request.url)
-                        // console.log(request.loadedUrl)
-
+                        hrefs.push(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
                         
                     // absolute links
                     } else if ($(link).attr('href').startsWith('http')){
