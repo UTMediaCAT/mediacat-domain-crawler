@@ -12,8 +12,10 @@ const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
+const { performance } = require('perf_hooks');
 
 var fs = require('fs');
 var util = require('util');
@@ -331,7 +333,8 @@ Apify.main(async () => {
     // Note: If the apify_storage file is not removed, it doesn't crawl
     // during subsequent runs.
     // Implementation of rmdir.
-    console.log(JSON.stringify(output_dict));
+    // console.log(JSON.stringify(output_dict));
+    
     const rmDir = function (dirPath, removeSelf) {
     if (removeSelf === undefined)
         removeSelf = true;
