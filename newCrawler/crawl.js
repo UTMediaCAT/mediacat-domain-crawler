@@ -23,6 +23,7 @@ const mongoose = require('mongoose');
 let db = require('./database.js')
 let memInfo = require('./monitor/memoryInfo')
 
+const { performance } = require('perf_hooks');
 
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))
@@ -172,10 +173,11 @@ Apify.main(async () => {
         requestQueue,
         launchPuppeteerOptions: {
             headless: true,
-            stealth: false,
+            stealth: true,
             useChrome: false,
         },
         handlePageFunction: async ({ request, page }) => {
+            const t2 = performance.now();
             const title = await page.title();   // Get the title of the page.
             let domainNameIndex = 5;
             let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
@@ -195,6 +197,7 @@ Apify.main(async () => {
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
             
+
             // Create the list of tuples for this url.
             var valid_links = [];
             var tuple_list = [];
@@ -303,15 +306,26 @@ Apify.main(async () => {
             // Add this list to the dict.
             output_dict[request.url] = elem;
 
+            const t3 = performance.now();
+            // Log the time for this request.
+            console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
+
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: Infinity,
-        maxConcurrency: 10,
+        maxConcurrency: 50,
     });
+
+    const t0 = performance.now();
+
     // Run the crawler.
     await crawler.run();
+
+    const t1 = performance.now();
+    // Log the time to run the crawler.
+    console.log(`Call to run Crawler took ${t1/1000.0 - t0/1000.0} milliseconds.`);
     
     // Delete the apify storage.
     // Note: If the apify_storage file is not removed, it doesn't crawl
