@@ -25,7 +25,6 @@ const mongoose = require('mongoose');
 let db = require('./database.js')
 let memInfo = require('./monitor/memoryInfo')
 
-const { performance } = require('perf_hooks');
 
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))
