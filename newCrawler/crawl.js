@@ -7,15 +7,31 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
+let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
 
+const { v5: uuidv5 } = require('uuid');
+const parse = require('csv-parse/lib/sync')
+const { performance } = require('perf_hooks');
+
 var fs = require('fs');
 var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
+const mongoose = require('mongoose');
+let db = require('./database.js')
+let memInfo = require('./monitor/memoryInfo')
+
+const { performance } = require('perf_hooks');
+
+mongoose.connection
+  .once('open', () => console.log('Connected to DB'))
+  .on('error', (error) => { 
+      console.log("Your Error", error);
+  });
 
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
@@ -56,20 +72,75 @@ function getParsedArticle(url, html) {
     return article
 }
 
+function parseCSV(file){
+    var urls = [];
+    // Read the file.
+    var csv_file = fs.readFileSync(file, 'utf8');
+    // Parse the file into a list of objects.
+    const csv_list = parse(csv_file, {
+        columns: true
+    });
+    // Format the data to only get the urls.
+    for (let row of csv_list) {
+        // Make sure that there is a slash at the end.
+        let domain = row["Source"];
+        if (domain[domain.length - 1] !== '/') {
+            domain += '/';
+        }
+        // Push the domain to the list.
+        urls.push(domain);
+    }
+    // Return the list of domain urls.
+    return urls;
+    // Asynchronous method below.
+    // fs.createReadStream(file)
+    // .pipe(csv())
+    // .on('data', (row) => {
+    //   urls.push(row["Source"]);
+    // //   console.log(row);
+    // })
+    // .on('end', () => {
+    //   // print CSV file successfully processed
+    //   console.log('CSV file successfully processed');
+    // //   console.log(urls);
+    //   return urls;
+    // });
+}
+
+// Uncomment to see monitoring of the environment on the output
+
+// var monitoring = appmetrics.monitor();
+
+// monitoring.on('initialized', function (env) {
+//     env = monitoring.getEnvironment();
+//     for (var entry in env) {
+//         console.log(entry + ':' + env[entry]);
+//     };
+// });
+
+// monitoring.on('cpu', function (cpu) {
+//     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
+// });
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
-    var url_list = [];
     var is_url = false;
-    process.argv.forEach(function (val, index, array) {
-        // Add the links.
-        if(is_url) {
-            url_list.push(val);
-        }
-        // If it is a flag for the link.
-        if (val === "-l") {
-            is_url = true;
-        }
-      });
+    // If a CSV file is given, parse it.
+    if (process.argv[2] == "-f") {
+        var url_list = parseCSV(process.argv[3]);
+    } else {
+        var url_list = [];
+        process.argv.forEach(function (val, index, array) {
+            // Add the links.
+            if(is_url) {
+                url_list.push(val);
+            }
+            // If it is a flag for the link.
+            if (val === "-l") {
+                is_url = true;
+            }
+        });
+    }
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -91,15 +162,24 @@ Apify.main(async () => {
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
 
+    // Create a directory to hold all the individual JSON files.
+    fs.mkdir(path.join(__dirname, 'results'), (err) => { 
+        if (err) { 
+            return console.error(err);
+        } 
+        console.log('Results folder created.'); 
+    }); 
+
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
         requestQueue,
         launchPuppeteerOptions: {
             headless: true,
-            stealth: false,
+            stealth: true,
             useChrome: false,
         },
         handlePageFunction: async ({ request, page }) => {
+            const t2 = performance.now();
             const title = await page.title();   // Get the title of the page.
             let domainNameIndex = 5;
             let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
@@ -119,9 +199,11 @@ Apify.main(async () => {
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
             
+
             // Create the list of tuples for this url.
             var valid_links = [];
             var tuple_list = [];
+            var local_out_of_scope = [];
             // Set the title of the link to be the text content if the title is not present.
             for (let i = 0; i < hrefs.length; i++) {
                 hrefLink = hrefs[i];
@@ -171,46 +253,88 @@ Apify.main(async () => {
                             incorrect_dict[out_of_scope_domain] = [hrefLink];
                         }
                     }
-
+                    // Check if this domain name already exists inside.
+                    local_out_of_scope.push(hrefLink);
                 }
             }
             // Get the domain.
-            let domain_url = ''
-            for (var i = 0; i < url_list.length; i++) {
-                if (request.url.includes(url_list[i])) {
-                    // Update the domain.
-                    domain_url = url_list[i];
+            let listIndex = 0;
+            let foundDomain = false;
+            while (listIndex < url_list.length && !foundDomain) {
+                dom_orig = url_list[listIndex];
+                match = dom_orig.match(general_regex);
+                if (match != null && match.length > 5) {
+                    domainName = match[domainNameIndex];
+                    domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
+                    if (domainRegex.test(request.url)) {
+                        foundDomain = true;
+                    } else {
+                        listIndex++;
+                    }
+                } else {
+                    listIndex++;
                 }
             }
 
             let elem = {
                 title: parsedArticle.title,
+                url: request.url,
                 author_metadata: parsedArticle.byline,
                 date: '',
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: domain_url,
-                found_urls: tuple_list
+                domain: url_list[listIndex],
+                found_urls: tuple_list,
+                out_of_scope_urls: local_out_of_scope
             }
+
+            // Create a JSON for this link with a uuid.
+            let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
+            fs.writeFileSync("results/" + fileName, JSON.stringify(elem), function(err) {
+                if (err) throw err;
+                console.log('complete');
+            });
+
+            //Write into a database
+
+            let metaObj = new db.metaModel(elem);
+
+            await metaObj.save();
+
+            // print memory stats about process
+            memInfo.getMemoryInfo(process.memoryUsage())
+
             // Add this list to the dict.
-            output_dict[request.url] = elem; 
+            output_dict[request.url] = elem;
+
+            const t3 = performance.now();
+            // Log the time for this request.
+            console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
             // Enqueue the deeper URLs to crawl.
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 20,
-        maxConcurrency: 10,
+        maxRequestsPerCrawl: Infinity,
+        maxConcurrency: 50,
     });
+
+    const t0 = performance.now();
+
     // Run the crawler.
     await crawler.run();
+
+    const t1 = performance.now();
+    // Log the time to run the crawler.
+    console.log(`Call to run Crawler took ${t1/1000.0 - t0/1000.0} milliseconds.`);
     
     // Delete the apify storage.
     // Note: If the apify_storage file is not removed, it doesn't crawl
     // during subsequent runs.
     // Implementation of rmdir.
-    console.log(JSON.stringify(output_dict));
+    // console.log(JSON.stringify(output_dict));
+    
     const rmDir = function (dirPath, removeSelf) {
     if (removeSelf === undefined)
         removeSelf = true;
@@ -233,14 +357,5 @@ Apify.main(async () => {
     };
     rmDir('./apify_storage/', true);
 
-    // Create a JSON file from the tuples in the output list.
-    // Overwrites if it already exists.
-    fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
-    fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
+
 });
