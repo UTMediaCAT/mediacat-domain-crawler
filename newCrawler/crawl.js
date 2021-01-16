@@ -25,6 +25,9 @@ const mongoose = require('mongoose');
 let db = require('./database.js')
 let memInfo = require('./monitor/memoryInfo')
 
+let argv = require('minimist')(process.argv.slice(2));
+
+let maxRequests = 20;
 
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))
@@ -124,22 +127,48 @@ function parseCSV(file){
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
+
     // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
+    // if (process.argv[2] == "-f") {
+    //     var url_list = parseCSV(process.argv[3]);
+    // } else {
+    //     var url_list = [];
+    //     process.argv.forEach(function (val, index, array) {
+    //         // Add the links.
+    //         if(is_url) {
+    //             url_list.push(val);
+    //         }
+    //         // If it is a flag for the link.
+    //         if (val === "-l") {
+    //             is_url = true;
+    //         }
+    //     });
+    // }
+
+    if ("f" in argv) {
         var url_list = parseCSV(process.argv[3]);
     } else {
         var url_list = [];
-        process.argv.forEach(function (val, index, array) {
-            // Add the links.
-            if(is_url) {
-                url_list.push(val);
-            }
-            // If it is a flag for the link.
-            if (val === "-l") {
-                is_url = true;
-            }
+
+        var links = argv._ // where the links are in the argv dic
+
+        links.forEach(function (val, index, array) {
+            url_list.push(val);
         });
     }
+
+    if ("n" in argv) {
+        var number = argv.n
+
+        if (number === "Infinity" || number == "infinity" || number == "inf") {
+            maxRequests = Infinity
+        } else {
+            maxRequests = parseInt(number)
+        }
+    }
+
+    console.log(argv); // output the arguments
+
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -315,7 +344,7 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: Infinity,
+        maxRequestsPerCrawl: maxRequests,
         maxConcurrency: 50,
     });
 
