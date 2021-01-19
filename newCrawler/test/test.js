@@ -10,6 +10,12 @@ let path = "/voyage_storage/mediacat-domain-crawler/newCrawler";
 
 let db = require('./database.js')
 
+// remove the database current contents
+db.metaModel.remove({}, function(err){
+    console.log('collection removed'); 
+});
+
+
 // delete file named 'output.txt' in the very beginning
 fs.unlink('output.txt', function (err) {
     if (err) {
@@ -119,19 +125,30 @@ function testTime1 () {
 
 function testTime2 () {
     let file = "./test/csv/nytimes.csv"
-    getCrawlerTime(20, path, file, testTime3);
+    getCrawlerTime(10, path, file, testTime3);
 }
-
 
 function testTime3 () {
     let file = "./test/csv/nytimes.csv"
-    getCrawlerTime(50, path, file, testTime4);
+    getCrawlerTime(20, path, file, testTime4);
 }
+
 
 function testTime4 () {
     let file = "./test/csv/nytimes.csv"
+    getCrawlerTime(50, path, file, testTime5);
+}
+
+function testTime5 () {
+    let file = "./test/csv/nytimes.csv"
+    getCrawlerTime(100, path, file, testTime6);
+}
+
+function testTime6 () {
+    let file = "./test/csv/nytimes.csv"
     getCrawlerTime(100, path, file, finish);
 }
+
 
 
 // call on domains that found only 1 link back
@@ -141,26 +158,16 @@ function testTime4 () {
 
 async function nytimes () {
     let file = "./test/csv/nytimes.csv"
-    let result = await getCrawlerNumberOfLinks(5, path, file, NineTwoSevenMag, "https://www.nytimes.com/");
+    let result = await getCrawlerNumberOfLinks(5, path, file, NineSevenTwoMag, "https://www.nytimes.com/");
 }
 
-async function NineTwoSevenMag () {
+async function NineSevenTwoMag () {
     let file = "./test/csv/nineseventwo.csv"
     let result = await getCrawlerNumberOfLinks(5, path, file, finish, "http://972mag.com/");
 }
 
 
-
-// async function testFreq () {
-//     await nytimes(5); // nytimes test
-//     await NineTwoSevenMag(5); // 927 mag test
-// }
-
-
-
-
 ///////////uncomment as needed/////////////////
 
-// testTime1() // test nytimes 1, 20, 50 and 100 links timer
-// testFreq() // test the if expected number of the urls found
-nytimes()
+testTime1() // test nytimes 1, 20, 50 and 100 links timer
+// nytimes() // test whether nytimes, 972 mag had 1 link
