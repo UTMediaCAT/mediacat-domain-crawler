@@ -22,7 +22,8 @@ var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 const mongoose = require('mongoose');
-let db = require('./database.js')
+// let db = require('./database.js')
+let db = "";
 let memInfo = require('./monitor/memoryInfo')
 
 let argv = require('minimist')(process.argv.slice(2));
@@ -166,6 +167,12 @@ Apify.main(async () => {
             maxRequests = parseInt(number)
         }
     }
+    
+    if ("t" in argv) {
+        db = require('./test/database.js')
+    } else {{
+        db = require('./database.js')
+    }}
 
     console.log(argv); // output the arguments
 
@@ -345,7 +352,8 @@ Apify.main(async () => {
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: maxRequests,
-        maxConcurrency: 50,
+        minConcurrency: 20,
+        maxConcurrency: 100,
     });
 
     const t0 = performance.now();
