@@ -17,4 +17,12 @@ const schema = new mongoose.Schema({
     }],
 
 })
+
+const close = () => {
+    mongoose.connection.close();
+}
+
+
 module.exports.metaModel = mongoose.model('metaModel',schema) 
+
+module.exports.close = close;

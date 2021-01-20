@@ -1,4 +1,3 @@
-
 /* crawl.js
    Author: Raiyan Rahman
    Date: March 1st, 2020
@@ -13,8 +12,10 @@ const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
+const { performance } = require('perf_hooks');
 
 var fs = require('fs');
 var util = require('util');
@@ -22,9 +23,12 @@ var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 // const mongoose = require('mongoose');
 // let db = require('./database.js')
+let db = "";
 let memInfo = require('./monitor/memoryInfo')
 
-const { performance } = require('perf_hooks');
+let argv = require('minimist')(process.argv.slice(2));
+
+let maxRequests = 20;
 
 const {log} = Apify.utils
 log.setLevel(log.LEVELS.DEBUG)
@@ -74,9 +78,6 @@ function getParsedArticle(url, html) {
     return article
 }
 
-function getDomain(url) {
-    
-}
 
 function parseCSV(file){
     var urls = [];
@@ -132,21 +133,52 @@ Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
     // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
+    // if (process.argv[2] == "-f") {
+    //     var url_list = parseCSV(process.argv[3]);
+    // } else {
+    //     var url_list = [];
+    //     process.argv.forEach(function (val, index, array) {
+    //         // Add the links.
+    //         if(is_url) {
+    //             url_list.push(val);
+    //         }
+    //         // If it is a flag for the link.
+    //         if (val === "-l") {
+    //             is_url = true;
+    //         }
+    //     });
+    // }
+
+    if ("f" in argv) {
         var url_list = parseCSV(process.argv[3]);
     } else {
         var url_list = [];
-        process.argv.forEach(function (val, index, array) {
-            // Add the links.
-            if(is_url) {
-                url_list.push(val);
-            }
-            // If it is a flag for the link.
-            if (val === "-l") {
-                is_url = true;
-            }
+
+        var links = argv._ // where the links are in the argv dic
+
+        links.forEach(function (val, index, array) {
+            url_list.push(val);
         });
     }
+
+    if ("n" in argv) {
+        var number = argv.n
+
+        if (number === "Infinity" || number == "infinity" || number == "inf") {
+            maxRequests = Infinity
+        } else {
+            maxRequests = parseInt(number)
+        }
+    }
+    
+    if ("t" in argv) {
+        db = require('./test/database.js')
+    } else {{
+        db = require('./databaseCheerio.js')
+    }}
+
+    console.log(argv); // output the arguments
+
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -180,7 +212,6 @@ Apify.main(async () => {
     // Initialize the crawler.
     const crawler = new Apify.CheerioCrawler({
         requestQueue,
-        maxConcurrency: 50,
         // launchPuppeteerOptions: {
         //     headless: true,
         //     stealth: true,
@@ -409,9 +440,9 @@ Apify.main(async () => {
 
             //Write into a database
 
-            // let metaObj = new db.metaModel(elem);
+            let metaObj = new db.metaModel(elem);
 
-            // await metaObj.save();
+            await metaObj.save();
 
             // print memory stats about process
             memInfo.getMemoryInfo(process.memoryUsage())
@@ -427,8 +458,9 @@ Apify.main(async () => {
             await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 10,
-        maxConcurrency: 50,
+        maxRequestsPerCrawl: maxRequests,
+        minConcurrency: 20,
+        maxConcurrency: 100,
     });
 
     const t0 = performance.now();
@@ -465,19 +497,7 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    // rmDir('./apify_storage/', true);
-
-    // Create a JSON file from the tuples in the output list.
-    // Overwrites if it already exists.
-    // fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
-    //     if (err) throw err;
-    //     console.log('complete');
-    //     });
-    fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
-
-    // mongoose.connection.close()
+    rmDir('./apify_storage/', true);
     
+
 });

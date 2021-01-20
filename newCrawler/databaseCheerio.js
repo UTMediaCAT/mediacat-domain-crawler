@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/articles', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/articlesCheerio', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const schema = new mongoose.Schema({
     title: String, 
@@ -22,6 +22,6 @@ const close = () => {
     mongoose.connection.close();
 }
 
-module.exports.metaModel = mongoose.model('metaModel',schema) 
+module.exports.metaModel = mongoose.model('metaModel',schema);
 
 module.exports.close = close;
