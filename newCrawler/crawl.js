@@ -235,7 +235,6 @@ Apify.main(async () => {
                         // Add the tuple to the list.
                         let found_elem = {
                             title: hrefTitle,
-                            date: "",
                             url: hrefLink
                         }
                         tuple_list.push(found_elem);

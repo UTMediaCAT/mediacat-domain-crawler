@@ -30,16 +30,15 @@ function databaseLoop() {
             if (docs.length != 0) {
                 console.log(docs.length);
                 promiseLoop(docs);
+                //mongoose.connection.close();
             } else {
                 db.metaModel.find({'updated': true}, function (err, docs) {
                     if (err) return handleError(err);
                     console.log(docs.length);
-                    mongoose.connection.close();
+                    //mongoose.connection.close();
                 });
-                console.log('we are done! :)');
-                
+                console.log('we are done! :)');                
             }
-            //mongoose.connection.close();
           });
 }    
 

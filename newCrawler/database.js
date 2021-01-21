@@ -16,7 +16,6 @@ const schema = new mongoose.Schema({
     updated: Boolean,
     found_urls: [{
         title: String,
-        date: String,
         url: String
     }],
 
