@@ -189,6 +189,8 @@ Apify.main(async () => {
     const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
     for (var i = 0; i < url_list.length; i++) {
+        console.log("requestQueue will add...")
+        console.log({ url: url_list[i] });
         await requestQueue.addRequest({ url: url_list[i] });
         // Add the domain to the pseudoURLs.
         let pseudoDomain = url_list[i];
@@ -454,8 +456,15 @@ Apify.main(async () => {
             // Log the time for this request.
             console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
-            // Enqueue the deeper URLs to crawl.
-            await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
+
+            // Enqueue the deeper URLs to crawl manually
+
+            for (var i = 0, l = tuple_list.length; i < l; i++) {
+                await requestQueue.addRequest({url: tuple_list[i].url})
+            }
+
+            // // Enqueue the deeper URLs to crawl.
+            // await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: maxRequests,
