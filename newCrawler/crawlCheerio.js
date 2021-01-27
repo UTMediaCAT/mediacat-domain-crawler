@@ -13,6 +13,11 @@ const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
 
+//email
+let nodemailer = require('nodemailer');
+
+let {mailOptions, mailError} = require('./email')
+
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
 const { performance } = require('perf_hooks');
@@ -43,6 +48,7 @@ console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
+
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     result = !valid_links.includes(url) && (url != domain_url)
@@ -129,25 +135,18 @@ function parseCSV(file){
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mediacatut@gmail.com',
+      pass: "DO NOT COMMIT THIS password"
+    }
+});
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
-    // If a CSV file is given, parse it.
-    // if (process.argv[2] == "-f") {
-    //     var url_list = parseCSV(process.argv[3]);
-    // } else {
-    //     var url_list = [];
-    //     process.argv.forEach(function (val, index, array) {
-    //         // Add the links.
-    //         if(is_url) {
-    //             url_list.push(val);
-    //         }
-    //         // If it is a flag for the link.
-    //         if (val === "-l") {
-    //             is_url = true;
-    //         }
-    //     });
-    // }
 
     if ("f" in argv) {
         var url_list = parseCSV(process.argv[3]);
@@ -203,13 +202,19 @@ Apify.main(async () => {
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
 
+    console.log("making results directory....");
+
     // Create a directory to hold all the individual JSON files.
-    fs.mkdir(path.join(__dirname, 'results'), (err) => { 
-        if (err) { 
-            return console.error(err);
-        } 
-        console.log('Results folder created.'); 
-    }); 
+
+    try {
+        fs.mkdirSync(path.join(__dirname, 'results')); 
+        console.log("finished making results directory...");
+    } catch(e){
+        console.error(e);
+        console.log("error in creating results folder");
+
+    }
+
 
     // Initialize the crawler.
     const crawler = new Apify.CheerioCrawler({
@@ -475,7 +480,15 @@ Apify.main(async () => {
     const t0 = performance.now();
 
     // Run the crawler.
-    await crawler.run();
+    try {
+        console.log("running the cheerio crawler...\n")
+        await crawler.run();
+        await sendMail(mailOptions);
+
+    } catch(e){
+        console.error(e);
+        await sendMail(mailError);
+    }  
 
     const t1 = performance.now();
     // Log the time to run the crawler.
@@ -486,14 +499,37 @@ Apify.main(async () => {
     // during subsequent runs.
     // Implementation of rmdir.
     // console.log(JSON.stringify(output_dict));
-    const rmDir = function (dirPath, removeSelf) {
+
+    console.log("removing apify storage")
+    rmDir('./apify_storage/', true);
+
+});  
+
+
+function sendMail (mailOptions){
+    return new Promise(function (resolve, reject){
+       transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+             console.log("error: ", err);
+             console.log("email could not be sent");
+             reject(err);
+          } else {
+             console.log(`Mail sent successfully!`);
+             resolve(info);
+          }
+       });
+    });
+ 
+ }
+
+function rmDir (dirPath, removeSelf){
     if (removeSelf === undefined)
         removeSelf = true;
     try {
         var files = fs.readdirSync(dirPath);
     } catch (e) {
         // throw e
-        return;
+        console.error(e);
     }
     if (files.length > 0)
         for (let i = 0; i < files.length; i++) {
@@ -506,7 +542,3 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    rmDir('./apify_storage/', true);
-    
-
-});

@@ -366,7 +366,12 @@ Apify.main(async () => {
     const t0 = performance.now();
 
     // Run the crawler.
-    await crawler.run();
+
+    try {
+        await crawler.run();
+    } catch(e){
+        console.log(e)   
+    }
 
     const t1 = performance.now();
     // Log the time to run the crawler.
