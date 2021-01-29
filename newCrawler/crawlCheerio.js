@@ -7,6 +7,10 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
+
+// set process environmental variable
+process.env.APIFY_MEMORY_MBYTES = 2048
+
 // let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
@@ -315,7 +319,7 @@ Apify.main(async () => {
                     if ($(link).attr('href').startsWith('/')){
 
                         hrefs.push(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-                        console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        // console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
                         
                     // absolute links
                     } else if ($(link).attr('href').startsWith('http')){
