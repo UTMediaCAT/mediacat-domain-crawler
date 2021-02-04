@@ -178,6 +178,22 @@ Apify.main(async () => {
             stealth: true,
             useChrome: false,
         },
+        gotoFunction: async ({request, page}) => {
+            // Set the request interception to true.
+            await page.setRequestInterception(true);
+            // Create the list of different resources that should be blocked.
+            let blockedResources = ['image', 'stylesheet', 'media'];
+            // On loading the request.
+            page.on('request', request => {
+                // If the request is a blocked resource, abort. Load otherwise.
+                if (blockedResources.includes(request.resourceType()))
+                  request.abort();
+                else
+                  request.continue();
+              });
+            // Navigate to the page.
+            await page.goto(request.url);
+        },
         handlePageFunction: async ({ request, page }) => {
             const t2 = performance.now();
             const title = await page.title();   // Get the title of the page.
