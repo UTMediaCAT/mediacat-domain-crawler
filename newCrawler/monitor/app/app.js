@@ -3,13 +3,19 @@ const mongoose = require('mongoose');
 const app = express();
 const fs = require('fs');
 
-const dir = '../../../../mediacat-backend/commandline/results';
+const dir = '../../results';
 
 app.use(express.static('static'));
 
 
 const http = require('http');
 const PORT = 80;
+
+
+const { Parser } = require('json2csv');
+
+const fields = ['_id', 'count'];
+const opts = { fields };
 
 // const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 // const csvWriter = createCsvWriter({
@@ -34,6 +40,8 @@ let EXTENSION = '.json';
 let finalPathFile = './links.csv';
 
 let finalPathFileNames = './linkNames.txt';
+
+let listOfDomainHits = 'linkHits.csv'
 
 let watch = require('watch');
 
@@ -129,10 +137,11 @@ app.get('/api/fetch', function(req, res, next) {
         writer.end();
 
         writer.on('end', function () {
-            console.log(data);
+            console.log( "number of links in directory " + data);
 
             database().then(domainNumber => {
-                console.log(domainNumber)
+                // MAKE DB HERE
+                
                 return res.json({links: domainNumber, messages: data});
             }).catch( (err) => {
                 console.log(err)
@@ -142,6 +151,42 @@ app.get('/api/fetch', function(req, res, next) {
 
       });
     
+});
+
+app.get('/api/downloadCSV', function(req, res, next) {
+    database().then(domainNumber => {
+
+        console.log(domainNumber)
+
+        let fileName = 'listOfDomainHits.csv';
+
+        try {
+            const parser = new Parser(opts);
+            const csv = parser.parse(domainNumber);
+            // fs.writeFile(fileName, csv, function(err){
+            //     if (err) throw err;
+            //     console.log('File Saved!')
+            //     console.log(csv);
+            // })
+            fs.writeFileSync(fileName, csv);
+
+            console.log(csv);
+
+            // res.setHeader('Content-disposition', 'attachment; filename=listOfDomainHits.csv');
+            // res.set('Content-Type', 'text/csv');
+            res.status(200)
+            return res.download(fileName);
+
+
+        } catch (err) {
+            console.error(err);
+            return res.send(err)
+        }
+
+    }).catch( (err) => {
+        console.log("ERROR")
+        return res.send(err)
+    });
 });
 
 
@@ -163,6 +208,5 @@ function database() {
         }).catch((err) => {
             reject(err)
         });
-    })
-    
+    })   
 }

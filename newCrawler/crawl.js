@@ -7,6 +7,7 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
+process.env.APIFY_MEMORY_MBYTES = 30720
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
@@ -288,7 +289,7 @@ Apify.main(async () => {
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: Infinity,
-        maxConcurrency: 10,
+        maxConcurrency: 100,
     });
     // Run the crawler.
     await crawler.run();
