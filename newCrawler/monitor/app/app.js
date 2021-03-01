@@ -9,7 +9,7 @@ app.use(express.static('static'));
 
 
 const http = require('http');
-const PORT = 3030;
+const PORT = 80;
 
 
 const { Parser } = require('json2csv');
