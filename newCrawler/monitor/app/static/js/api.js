@@ -39,6 +39,10 @@ var api = (function(){
     module.downloadCSV = function(callback, data){
         sendCSV("GET", "/api/downloadCSV/", null, callback)
     }
+
+    module.downloadProblematicLinks = function(callback, data){
+        sendCSV("GET", "/api/downloadProblematicLinks/", null, callback)
+    }
     
     return module;
 }());

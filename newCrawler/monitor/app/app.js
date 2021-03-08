@@ -189,6 +189,33 @@ app.get('/api/downloadCSV', function(req, res, next) {
     });
 });
 
+app.get('/api/downloadProblematicLinks', function(req, res, next) {
+    oneHitLinks().then(domainNumber => {
+
+        console.log(domainNumber)
+
+        let fileName = 'listOfProblematicDomainHits.csv';
+
+        try {
+            const parser = new Parser(opts);
+            const csv = parser.parse(domainNumber);
+            fs.writeFileSync(fileName, csv);
+            console.log(csv);
+            res.status(200)
+            return res.download(fileName);
+
+
+        } catch (err) {
+            console.error(err);
+            return res.send(err)
+        }
+
+    }).catch( (err) => {
+        console.log("ERROR")
+        return res.send(err)
+    });
+});
+
 
 http.createServer(app).listen(PORT, function (err) {
     if (err) console.log(err);
@@ -201,6 +228,24 @@ function database() {
 
                 {"$group" : {_id:"$domain", count:{$sum:1}}},
                 {"$sort": {_id: 1}}
+
+        ])
+        agg.then((results) => {
+            resolve(results)
+        }).catch((err) => {
+            reject(err)
+        });
+    })   
+}
+
+
+function oneHitLinks() {
+    return new Promise((resolve, reject) => {
+        let agg = db.metaModel.aggregate([
+
+                {"$group" : {_id:"$domain", count:{$sum:1}}},
+                {"$sort": {_id: 1}},
+                {"$match":{"count": {"$lt": 5}}}
 
         ])
         agg.then((results) => {
