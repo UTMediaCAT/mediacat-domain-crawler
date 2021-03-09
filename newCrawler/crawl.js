@@ -7,12 +7,20 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
-process.env.APIFY_MEMORY_MBYTES = 30720
+
+
+process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
+
 // let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+
+//email
+let nodemailer = require('nodemailer');
+
+let {mailOptions, mailError} = require('./email')
 
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
@@ -126,6 +134,14 @@ function parseCSV(file){
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mediacatut@gmail.com',
+      pass: "DO NOT COMMIT THIS password"
+    }
+});
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
@@ -197,6 +213,7 @@ Apify.main(async () => {
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
+    console.log('making results directory...')
 
     // Create a directory to hold all the individual JSON files.
     fs.mkdir(path.join(__dirname, 'results'), (err) => { 
@@ -370,9 +387,13 @@ Apify.main(async () => {
     // Run the crawler.
 
     try {
+        console.log('running the crawler...\n')
         await crawler.run();
+        await sendMail(mailOptions)
+
     } catch(e){
-        console.log(e)   
+        console.log(e)
+        await sendMail(mailOptions)   
     }
 
     const t1 = performance.now();
@@ -405,7 +426,47 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
+
+    console.log("removing apify storage")
     rmDir('./apify_storage/', true);
 
 
 });
+
+
+function sendMail (mailOptions){
+    return new Promise(function (resolve, reject){
+       transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+             console.log("error: ", err);
+             console.log("email could not be sent");
+             reject(err);
+          } else {
+             console.log(`Mail sent successfully!`);
+             resolve(info);
+          }
+       });
+    });
+
+ }
+
+ function rmDir (dirPath, removeSelf){
+    if (removeSelf === undefined)
+        removeSelf = true;
+    try {
+        var files = fs.readdirSync(dirPath);
+    } catch (e) {
+        // throw e
+        console.error(e);
+    }
+    if (files.length > 0)
+        for (let i = 0; i < files.length; i++) {
+        const filePath = path.join(dirPath, files[i]);
+        if (fs.statSync(filePath).isFile())
+            fs.unlinkSync(filePath);
+        else
+            rmDir(filePath);
+        }
+    if (removeSelf)
+        fs.rmdirSync(dirPath);
+    };

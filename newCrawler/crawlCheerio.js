@@ -20,7 +20,7 @@ var JSDOM = require('jsdom').JSDOM;
 //email
 let nodemailer = require('nodemailer');
 
-let {mailOptions, mailError} = require('./email')
+let {mailOptions, mailError, mailOptionsCheerio, mailErrorCheerio} = require('./email')
 
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
@@ -487,11 +487,11 @@ Apify.main(async () => {
     try {
         console.log("running the cheerio crawler...\n")
         await crawler.run();
-        await sendMail(mailOptions);
+        await sendMail(mailOptionsCheerio);
 
     } catch(e){
         console.error(e);
-        await sendMail(mailError);
+        await sendMail(mailErrorCheerio);
     }  
 
     const t1 = performance.now();
@@ -510,9 +510,9 @@ Apify.main(async () => {
 });  
 
 
-function sendMail (mailOptions){
+function sendMail (mailOptionsCheerio){
     return new Promise(function (resolve, reject){
-       transporter.sendMail(mailOptions, (err, info) => {
+       transporter.sendMail(mailOptionsCheerio, (err, info) => {
           if (err) {
              console.log("error: ", err);
              console.log("email could not be sent");
