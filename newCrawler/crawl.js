@@ -307,8 +307,8 @@ Apify.main(async () => {
             // Get the domain.
             let listIndex = 0;
             let foundDomain = false;
-            while (listIndex < url_list.length && !foundDomain) {
-                dom_orig = url_list[listIndex];
+            while (listIndex < batchScopeFile.length && !foundDomain) {
+                dom_orig = batchScopeFile[listIndex];
                 match = dom_orig.match(general_regex);
                 if (match != null && match.length > 5) {
                     domainName = match[domainNameIndex];
@@ -331,7 +331,7 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: url_list[listIndex],
+                domain: batchScopeFile[listIndex],
                 found_urls: tuple_list,
                 out_of_scope_urls: local_out_of_scope
             }
