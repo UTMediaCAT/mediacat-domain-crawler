@@ -130,6 +130,9 @@ Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
 
+    var url_list = []
+    let batchScopeFile = []
+
     // If a CSV file is given, parse it.
     // if (process.argv[2] == "-f") {
     //     var url_list = parseCSV(process.argv[3]);
@@ -148,15 +151,18 @@ Apify.main(async () => {
     // }
 
     if ("f" in argv) {
-        var url_list = parseCSV(process.argv[3]);
+        url_list = parseCSV(argv.f);
+        batchScopeFile = url_list
     } else {
-        var url_list = [];
+        url_list = [];
 
         var links = argv._ // where the links are in the argv dic
 
         links.forEach(function (val, index, array) {
             url_list.push(val);
         });
+
+        batchScopeFile = url_list
     }
 
     if ("n" in argv) {
@@ -175,6 +181,10 @@ Apify.main(async () => {
         db = require('./database.js')
     }}
 
+    if ("b" in argv) {
+        batchScopeFile = parseCSV(argv.b)
+    }
+
     console.log(argv); // output the arguments
 
     console.log(url_list);  // Ouput the links provided.
@@ -183,14 +193,15 @@ Apify.main(async () => {
     var output_dict = {};
     var incorrect_dict = {};
     const requestQueue = await Apify.openRequestQueue();
+    
     // Crawl the deeper URLs recursively.
     const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
-    for (var i = 0; i < url_list.length; i++) {
-        await requestQueue.addRequest({ url: url_list[i] });
+    for (var i = 0; i < batchScopeFile.length; i++) {
+        await requestQueue.addRequest({ url: batchScopeFile[i] });
         // Add the domain to the pseudoURLs.
-        let pseudoDomain = url_list[i];
-        if (url_list[i][url_list[i].length - 1] !== "/") {
+        let pseudoDomain = batchScopeFile[i];
+        if (batchScopeFile[i][batchScopeFile[i].length - 1] !== "/") {
             pseudoDomain += "/[.*]";
         } else {
             pseudoDomain += "[.*]";
@@ -296,8 +307,8 @@ Apify.main(async () => {
             // Get the domain.
             let listIndex = 0;
             let foundDomain = false;
-            while (listIndex < url_list.length && !foundDomain) {
-                dom_orig = url_list[listIndex];
+            while (listIndex < batchScopeFile.length && !foundDomain) {
+                dom_orig = batchScopeFile[listIndex];
                 match = dom_orig.match(general_regex);
                 if (match != null && match.length > 5) {
                     domainName = match[domainNameIndex];
@@ -320,7 +331,7 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: url_list[listIndex],
+                domain: batchScopeFile[listIndex],
                 found_urls: tuple_list,
                 out_of_scope_urls: local_out_of_scope
             }
