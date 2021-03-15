@@ -7,11 +7,20 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
-let appmetrics = require('appmetrics');
+
+
+process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
+
+// let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+
+//email
+let nodemailer = require('nodemailer');
+
+let {mailOptions, mailError} = require('./email')
 
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
@@ -22,10 +31,13 @@ var util = require('util');
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 const mongoose = require('mongoose');
-let db = require('./database.js')
+// let db = require('./database.js')
+let db = "";
 let memInfo = require('./monitor/memoryInfo')
 
-const { performance } = require('perf_hooks');
+let argv = require('minimist')(process.argv.slice(2));
+
+let maxRequests = 20;
 
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))
@@ -122,45 +134,97 @@ function parseCSV(file){
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mediacatut@gmail.com',
+      pass: "DO NOT COMMIT THIS password"
+    }
+});
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
+
+    var url_list = []
+    let batchScopeFile = []
+
     // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
-        var url_list = parseCSV(process.argv[3]);
+    // if (process.argv[2] == "-f") {
+    //     var url_list = parseCSV(process.argv[3]);
+    // } else {
+    //     var url_list = [];
+    //     process.argv.forEach(function (val, index, array) {
+    //         // Add the links.
+    //         if(is_url) {
+    //             url_list.push(val);
+    //         }
+    //         // If it is a flag for the link.
+    //         if (val === "-l") {
+    //             is_url = true;
+    //         }
+    //     });
+    // }
+
+    if ("f" in argv) {
+        url_list = parseCSV(argv.f);
+        batchScopeFile = url_list
     } else {
-        var url_list = [];
-        process.argv.forEach(function (val, index, array) {
-            // Add the links.
-            if(is_url) {
-                url_list.push(val);
-            }
-            // If it is a flag for the link.
-            if (val === "-l") {
-                is_url = true;
-            }
+        url_list = [];
+
+        var links = argv._ // where the links are in the argv dic
+
+        links.forEach(function (val, index, array) {
+            url_list.push(val);
         });
+
+        batchScopeFile = url_list
     }
+
+    if ("n" in argv) {
+        var number = argv.n
+
+        if (number === "Infinity" || number == "infinity" || number == "inf") {
+            maxRequests = Infinity
+        } else {
+            maxRequests = parseInt(number)
+        }
+    }
+    
+    if ("t" in argv) {
+        db = require('./test/database.js')
+    } else {{
+        db = require('./database.js')
+    }}
+
+    if ("b" in argv) {
+        batchScopeFile = parseCSV(argv.b)
+    }
+
+    console.log(argv); // output the arguments
+
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
     var incorrect_dict = {};
     const requestQueue = await Apify.openRequestQueue();
+    
     // Crawl the deeper URLs recursively.
     const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
-    for (var i = 0; i < url_list.length; i++) {
-        await requestQueue.addRequest({ url: url_list[i] });
+    for (var i = 0; i < batchScopeFile.length; i++) {
+        await requestQueue.addRequest({ url: batchScopeFile[i] });
         // Add the domain to the pseudoURLs.
-        let pseudoDomain = url_list[i];
-        if (url_list[i][url_list[i].length - 1] !== "/") {
+        let pseudoDomain = batchScopeFile[i];
+        if (batchScopeFile[i][batchScopeFile[i].length - 1] !== "/") {
             pseudoDomain += "/[.*]";
         } else {
             pseudoDomain += "[.*]";
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
+    console.log('making results directory...')
 
     // Create a directory to hold all the individual JSON files.
     fs.mkdir(path.join(__dirname, 'results'), (err) => { 
@@ -260,8 +324,8 @@ Apify.main(async () => {
             // Get the domain.
             let listIndex = 0;
             let foundDomain = false;
-            while (listIndex < url_list.length && !foundDomain) {
-                dom_orig = url_list[listIndex];
+            while (listIndex < batchScopeFile.length && !foundDomain) {
+                dom_orig = batchScopeFile[listIndex];
                 match = dom_orig.match(general_regex);
                 if (match != null && match.length > 5) {
                     domainName = match[domainNameIndex];
@@ -286,9 +350,9 @@ Apify.main(async () => {
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
-                domain: domain_url,
-                updated: false,
-                found_urls: tuple_list
+                domain: batchScopeFile[listIndex],
+                found_urls: tuple_list,
+                out_of_scope_urls: local_out_of_scope
             }
 
             // Create a JSON for this link with a uuid.
@@ -314,18 +378,36 @@ Apify.main(async () => {
             // Log the time for this request.
             console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
-            // Enqueue the deeper URLs to crawl.
-            await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
+
+            // Enqueue the deeper URLs to crawl manually
+
+            for (var i = 0, l = tuple_list.length; i < l; i++) {
+                await requestQueue.addRequest({ url: tuple_list[i].url });
+            }
+
+            // // Enqueue the deeper URLs to crawl.
+            // await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
         },
         // The max concurrency and max requests to crawl through.
         maxRequestsPerCrawl: Infinity,
-        maxConcurrency: 50,
+        maxRequestsPerCrawl: maxRequests,
+        minConcurrency: 20,
+        maxConcurrency: 100,
     });
 
     const t0 = performance.now();
 
     // Run the crawler.
-    await crawler.run();
+
+    try {
+        console.log('running the crawler...\n')
+        await crawler.run();
+        await sendMail(mailOptions)
+
+    } catch(e){
+        console.log(e)
+        await sendMail(mailOptions)   
+    }
 
     const t1 = performance.now();
     // Log the time to run the crawler.
@@ -357,7 +439,47 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
+
+    console.log("removing apify storage")
     rmDir('./apify_storage/', true);
 
 
 });
+
+
+function sendMail (mailOptions){
+    return new Promise(function (resolve, reject){
+       transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+             console.log("error: ", err);
+             console.log("email could not be sent");
+             reject(err);
+          } else {
+             console.log(`Mail sent successfully!`);
+             resolve(info);
+          }
+       });
+    });
+
+ }
+
+ function rmDir (dirPath, removeSelf){
+    if (removeSelf === undefined)
+        removeSelf = true;
+    try {
+        var files = fs.readdirSync(dirPath);
+    } catch (e) {
+        // throw e
+        console.error(e);
+    }
+    if (files.length > 0)
+        for (let i = 0; i < files.length; i++) {
+        const filePath = path.join(dirPath, files[i]);
+        if (fs.statSync(filePath).isFile())
+            fs.unlinkSync(filePath);
+        else
+            rmDir(filePath);
+        }
+    if (removeSelf)
+        fs.rmdirSync(dirPath);
+    };

@@ -16,6 +16,8 @@
   "dependencies": {
     "csv-write-stream": "^2.0.0",
     "csv-writer": "^1.6.0",
+    "json2csv": "^5.0.6",
+    "mongoose": "^5.11.5",
     "nodemon": "^2.0.6",
     "watch": "^1.0.2"
   }

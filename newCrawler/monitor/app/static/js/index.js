@@ -26,8 +26,42 @@
 
         setInterval(fetchData,10000);
 
+        function downloadData() {
+            console.log("CSV IS DOWNLOADING ...");
+            api.downloadCSV(function(err, res) {
+                console.log("finish downloading csv")
+            });
+        }
 
+        function downloadForce(){
+            let pdfSrc='http://199.241.167.146/api/downloadCSV/';
+            var redirectWindow = window.open(pdfSrc, '_blank');
+            redirectWindow.location;
+
+        }
+
+        function downloadProblematicLinksData() {
+            console.log("CSV IS DOWNLOADING ...");
+            api.downloadProblematicLinks(function(err, res) {
+                console.log("finish downloading csv")
+            });
+        }
+
+        function downloadProblematicLinksForce(){
+            let pdfSrc='http://199.241.167.146/api/downloadProblematicLinks/';
+            var redirectWindow = window.open(pdfSrc, '_blank');
+            redirectWindow.location;
+
+        }
+
+        document.getElementById("downloadCSV").addEventListener("click", function(){
+            downloadData();
+            downloadForce();
+        });
+
+        document.getElementById("downloadProblematicLinks").addEventListener("click", function(){
+            downloadProblematicLinksData();
+            downloadProblematicLinksForce();
+        });
     });
-
-
 }());

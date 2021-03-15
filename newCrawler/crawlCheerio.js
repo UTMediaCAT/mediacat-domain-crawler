@@ -1,4 +1,3 @@
-
 /* crawl.js
    Author: Raiyan Rahman
    Date: March 1st, 2020
@@ -8,13 +7,24 @@
    Use: "node crawl.js -l <url1> ..."
    Output: link_title_list.json
 */
+
+// set process environmental variable
+process.env.APIFY_MEMORY_MBYTES = 2048
+
 // let appmetrics = require('appmetrics');
 const Apify = require('apify');
 const path = require('path');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
+
+//email
+let nodemailer = require('nodemailer');
+
+let {mailOptions, mailError, mailOptionsCheerio, mailErrorCheerio} = require('./email')
+
 const { v5: uuidv5 } = require('uuid');
 const parse = require('csv-parse/lib/sync')
+const { performance } = require('perf_hooks');
 
 var fs = require('fs');
 var util = require('util');
@@ -22,9 +32,12 @@ var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 // const mongoose = require('mongoose');
 // let db = require('./database.js')
+let db = "";
 let memInfo = require('./monitor/memoryInfo')
 
-const { performance } = require('perf_hooks');
+let argv = require('minimist')(process.argv.slice(2));
+
+let maxRequests = 20;
 
 const {log} = Apify.utils
 log.setLevel(log.LEVELS.DEBUG)
@@ -39,6 +52,7 @@ console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
+
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     result = !valid_links.includes(url) && (url != domain_url)
@@ -74,9 +88,6 @@ function getParsedArticle(url, html) {
     return article
 }
 
-function getDomain(url) {
-    
-}
 
 function parseCSV(file){
     var urls = [];
@@ -128,25 +139,49 @@ function parseCSV(file){
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mediacatut@gmail.com',
+      pass: "DO NOT COMMIT THIS password"
+    }
+});
+
 Apify.main(async () => {
     // Get the urls from the command line arguments.
     var is_url = false;
-    // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
+
+    if ("f" in argv) {
         var url_list = parseCSV(process.argv[3]);
     } else {
         var url_list = [];
-        process.argv.forEach(function (val, index, array) {
-            // Add the links.
-            if(is_url) {
-                url_list.push(val);
-            }
-            // If it is a flag for the link.
-            if (val === "-l") {
-                is_url = true;
-            }
+
+        var links = argv._ // where the links are in the argv dic
+
+        links.forEach(function (val, index, array) {
+            url_list.push(val);
         });
     }
+
+    if ("n" in argv) {
+        var number = argv.n
+
+        if (number === "Infinity" || number == "infinity" || number == "inf") {
+            maxRequests = Infinity
+        } else {
+            maxRequests = parseInt(number)
+        }
+    }
+    
+    if ("t" in argv) {
+        db = require('./test/database.js')
+    } else {{
+        db = require('./databaseCheerio.js')
+    }}
+
+    console.log(argv); // output the arguments
+
     console.log(url_list);  // Ouput the links provided.
 
     // Create the JSON object to store the tuples of links and titles for each url.
@@ -157,6 +192,8 @@ Apify.main(async () => {
     const pseudoUrls = [];
     // Add the links to the queue of websites to crawl.
     for (var i = 0; i < url_list.length; i++) {
+        console.log("requestQueue will add...")
+        console.log({ url: url_list[i] });
         await requestQueue.addRequest({ url: url_list[i] });
         // Add the domain to the pseudoURLs.
         let pseudoDomain = url_list[i];
@@ -169,18 +206,23 @@ Apify.main(async () => {
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
 
+    console.log("making results directory....");
+
     // Create a directory to hold all the individual JSON files.
-    fs.mkdir(path.join(__dirname, 'results'), (err) => { 
-        if (err) { 
-            return console.error(err);
-        } 
-        console.log('Results folder created.'); 
-    }); 
+
+    try {
+        fs.mkdirSync(path.join(__dirname, 'results')); 
+        console.log("finished making results directory...");
+    } catch(e){
+        console.error(e);
+        console.log("error in creating results folder");
+
+    }
+
 
     // Initialize the crawler.
     const crawler = new Apify.CheerioCrawler({
         requestQueue,
-        maxConcurrency: 50,
         // launchPuppeteerOptions: {
         //     headless: true,
         //     stealth: true,
@@ -277,7 +319,7 @@ Apify.main(async () => {
                     if ($(link).attr('href').startsWith('/')){
 
                         hrefs.push(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
-                        console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
+                        // console.log(url_list[listIndex].replace(/\/$/, "") + '/' + $(link).attr('href').replace(/^\/+/g, ''));
                         
                     // absolute links
                     } else if ($(link).attr('href').startsWith('http')){
@@ -409,9 +451,9 @@ Apify.main(async () => {
 
             //Write into a database
 
-            // let metaObj = new db.metaModel(elem);
+            let metaObj = new db.metaModel(elem);
 
-            // await metaObj.save();
+            await metaObj.save();
 
             // print memory stats about process
             memInfo.getMemoryInfo(process.memoryUsage())
@@ -423,18 +465,34 @@ Apify.main(async () => {
             // Log the time for this request.
             console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
-            // Enqueue the deeper URLs to crawl.
-            await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
+
+            // Enqueue the deeper URLs to crawl manually
+
+            for (var i = 0, l = tuple_list.length; i < l; i++) {
+                await requestQueue.addRequest({url: tuple_list[i].url})
+            }
+
+            // // Enqueue the deeper URLs to crawl.
+            // await Apify.utils.enqueueLinks({ $, pseudoUrls, requestQueue, baseUrl: request.loadedUrl });
         },
         // The max concurrency and max requests to crawl through.
-        maxRequestsPerCrawl: 10,
-        maxConcurrency: 50,
+        maxRequestsPerCrawl: maxRequests,
+        minConcurrency: 20,
+        maxConcurrency: 100,
     });
 
     const t0 = performance.now();
 
     // Run the crawler.
-    await crawler.run();
+    try {
+        console.log("running the cheerio crawler...\n")
+        await crawler.run();
+        await sendMail(mailOptionsCheerio);
+
+    } catch(e){
+        console.error(e);
+        await sendMail(mailErrorCheerio);
+    }  
 
     const t1 = performance.now();
     // Log the time to run the crawler.
@@ -445,14 +503,37 @@ Apify.main(async () => {
     // during subsequent runs.
     // Implementation of rmdir.
     // console.log(JSON.stringify(output_dict));
-    const rmDir = function (dirPath, removeSelf) {
+
+    console.log("removing apify storage")
+    rmDir('./apify_storage/', true);
+
+});  
+
+
+function sendMail (mailOptionsCheerio){
+    return new Promise(function (resolve, reject){
+       transporter.sendMail(mailOptionsCheerio, (err, info) => {
+          if (err) {
+             console.log("error: ", err);
+             console.log("email could not be sent");
+             reject(err);
+          } else {
+             console.log(`Mail sent successfully!`);
+             resolve(info);
+          }
+       });
+    });
+ 
+ }
+
+function rmDir (dirPath, removeSelf){
     if (removeSelf === undefined)
         removeSelf = true;
     try {
         var files = fs.readdirSync(dirPath);
     } catch (e) {
         // throw e
-        return;
+        console.error(e);
     }
     if (files.length > 0)
         for (let i = 0; i < files.length; i++) {
@@ -465,19 +546,3 @@ Apify.main(async () => {
     if (removeSelf)
         fs.rmdirSync(dirPath);
     };
-    // rmDir('./apify_storage/', true);
-
-    // Create a JSON file from the tuples in the output list.
-    // Overwrites if it already exists.
-    // fs.writeFileSync("link_title_list.json", JSON.stringify(output_dict), function(err) {
-    //     if (err) throw err;
-    //     console.log('complete');
-    //     });
-    fs.writeFileSync("failed_links_list.json", JSON.stringify(incorrect_dict), function(err) {
-        if (err) throw err;
-        console.log('complete');
-        });
-
-    // mongoose.connection.close()
-    
-});
