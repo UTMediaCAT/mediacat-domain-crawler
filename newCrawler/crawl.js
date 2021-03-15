@@ -342,8 +342,10 @@ Apify.main(async () => {
 
             let elem = {
                 title: parsedArticle.title,
+                title_metascraper: '',
                 url: request.url,
                 author_metadata: parsedArticle.byline,
+                author_metascraper: '',
                 date: '',
                 html_content: parsedArticle.content,
                 article_text: parsedArticle.textContent,

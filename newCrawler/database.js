@@ -4,13 +4,16 @@ mongoose.connect('mongodb://localhost/articles', {useNewUrlParser: true, useUnif
 
 const schema = new mongoose.Schema({
     title: String, 
+    title_metascraper: String,
     url: String,
     author_metadata: String,
+    author_metascraper: String,
     date: String,
     html_content: String,
     article_text: String,
     article_len: String,
     domain: String,
+    updated: Boolean,
     found_urls: [{
         title: String,
         url: String
