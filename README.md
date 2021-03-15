@@ -21,7 +21,8 @@ flags
 
 altogether it might look something like this
 
-node --max-old-space-size=7168 crawl.js -f ../../mediacat-hidden/domain.csv -n inf -t -m -b ../../mediacat-hidden/batch.csv
+`node --max-old-space-size=7168 crawl.js -f ../../mediacat-hidden/domain.csv -n inf -t -m -b ../../mediacat-hidden/batch.csv`
 
 or if you are just feeding single urls one by one 
-node --max-old-space-size=7168 crawl.js -n 5 https://www.nytimes.com/ https://www.aljazeera.com/ https://www.cnn.com
+
+`node --max-old-space-size=7168 crawl.js -n 5 https://www.nytimes.com/ https://www.aljazeera.com/ https://www.cnn.com`
