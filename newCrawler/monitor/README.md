@@ -34,9 +34,9 @@ username and password is admin, admin. Skip changing the password or if you do j
 Configure grafana to listen to prometheus and node_exporter 
 
 - add data source:
-    -- select prometheus,
-    -- url: http://localhost:80
-    -- save and test
+    - select prometheus,
+    - url: http://localhost:80
+    - save and test
 
 create dashboards:
 - click the plus sign, and import
@@ -52,6 +52,8 @@ Go to localhost:80/metrics or localhost:80/metrics to see the metrics there
 May have to clear previous data info from the metrics databases (documentation: https://prometheus.io/,  https://github.com/prometheus/node_exporter , https://grafana.com/)
 
 # Appmetrics
+
+Appmetrics may be commented out due to the library becoming incompatible with the latest version(s).
 
 go to 
 http://206.12.91.146:3001/appmetrics-dash/
