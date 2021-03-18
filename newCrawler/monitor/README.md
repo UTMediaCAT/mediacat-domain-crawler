@@ -10,6 +10,7 @@ Here are some notes as to how to set it up:
 1. First start the crawler or whatever process that you want to monitor in a screen
 
 `screen -L -S crawler`
+
 `root@instance-1:/voyage_storage/mediacat-domain-crawler/newCrawler# node crawl.js -f ../../mediacat-hidden/domain.csv `
 
 2. Set up the monitor end point for looking at the database entries on another screen
