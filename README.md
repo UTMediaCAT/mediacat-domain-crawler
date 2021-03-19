@@ -11,7 +11,7 @@ node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -
 # run the cheerio crawler 
 node --max-old-space-size=7168 crawlCheerio.js -f ../../../mediacat-hidden/domain.csv -n inf
 
-flags
+# flags
 - f (string) indicates the scope file
 - n (integer) indicates the maxrequests you would like to crawl, inf is infinity else give it an integer, default is 20
 - t () if the flag is present, use the test database
@@ -26,3 +26,16 @@ altogether it might look something like this
 or if you are just feeding single urls one by one 
 
 `node --max-old-space-size=7168 crawl.js -n 5 https://www.nytimes.com/ https://www.aljazeera.com/ https://www.cnn.com`
+
+# monitoring the results
+Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)
+
+# testing
+this [script](https://github.com/UTMediaCAT/mediacat-domain-crawler/tree/master/newCrawler/test) has been written to time how long it takes for the crawlers to crawl through a certain number of links. The user will have to uncomment or comment in which tests to run on main().
+
+testTime1 or nytimes is the first of a chain of tests for the puppeteer crawler
+similiarily, for testTime1Cheerio and nytimesCheerio
+
+# forever.js
+
+a script that helps restart the crawl if needed
