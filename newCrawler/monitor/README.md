@@ -59,3 +59,8 @@ go to
 http://206.12.91.146:3001/appmetrics-dash/
 
 root@instance-1:/voyage_storage/mediacat-domain-crawler/newCrawler/monitor/appmetrics# node app.js 
+
+
+# Errors
+
+If for some reason the sites are not reachable, be sure that the ports are exposed on the server. This can be configured on the server side/ server provider's site/interface.
