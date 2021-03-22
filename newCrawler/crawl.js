@@ -351,6 +351,7 @@ Apify.main(async () => {
                 article_text: parsedArticle.textContent,
                 article_len: parsedArticle.length,
                 domain: batchScopeFile[listIndex],
+                updated: false,
                 found_urls: tuple_list,
                 out_of_scope_urls: local_out_of_scope
             }
