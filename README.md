@@ -34,6 +34,7 @@ Instructions to monitor the results of the crawl are in the readme in the direct
 this [script](https://github.com/UTMediaCAT/mediacat-domain-crawler/tree/master/newCrawler/test) has been written to time how long it takes for the crawlers to crawl through a certain number of links. The user will have to uncomment or comment in which tests to run on main().
 
 testTime1 or nytimes is the first of a chain of tests for the puppeteer crawler
+
 similiarily, for testTime1Cheerio and nytimesCheerio
 
 # forever.js
