@@ -17,6 +17,7 @@ node --max-old-space-size=7168 crawlCheerio.js -f ../../../mediacat-hidden/domai
 - t () if the flag is present, use the test database
 - b (string) if b is present use the batch scope file to run a subset of the full scope. MUST appear with the -f flag
 - m () if the flag is present, manually crawl instead of using apify's automatic queue (to be implemented)
+- 
 --max-old-space-size is a node process flag that sets the process to mb amount of ram
 
 altogether it might look something like this
