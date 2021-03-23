@@ -70,3 +70,23 @@ The output will be in a file named `metadata_modified_list.json`
     ]
 }
 ```
+
+
+
+# testing
+
+Please ensure that the crawl.js has been set up for testing
+
+## testMetascraper.js
+
+`node testMetascraper.js` to execute the test script. `npm install` if you haven't already.
+The mongod client must be running already.
+
+uncomment the constant targetUrl you are interested in 
+
+## testDatabase.js
+
+`node testDatabase.js`lists all the domains and how many articles/hits has been found.
+
+
+
