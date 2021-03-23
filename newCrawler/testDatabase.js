@@ -1,6 +1,7 @@
-'''
-
-'''
+/*
+prints out the number of found articles per domain
+mongod needs to be running
+*/
 
 const mongoose = require('mongoose');
 let db = require('./database.js')
