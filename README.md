@@ -4,6 +4,7 @@
 ## prereqs
 node v14.15.3 (make sure to have this installed, or switch to it if needed `nvm use v14.15.3`)
 npm install
+`cd newCrawler` to get to the crawl.js script
 
 # run the puppeteer crawler 
 node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf
