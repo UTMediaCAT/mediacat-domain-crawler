@@ -6,6 +6,7 @@ This README pertains to the crawling aspect of the application. THe crawl script
 At the end of the crawl, it can notify by email whether the crawl stopped or not. OThe email aspect must be set up first before the crawl. (or ignored if not desired)
 
 Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
+
 PLEASE do not EVER commit your password. As a future issue, we should probably make a seperate constant file that is git ignored.
 
 ## prereqs
