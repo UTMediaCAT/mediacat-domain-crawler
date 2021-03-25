@@ -175,7 +175,7 @@ Apify.main(async () => {
     }
     
     if ("t" in argv) {
-        db = require('./test/database.js')
+        db = require('./test/crawl-test/database.js')
     } else {{
         db = require('./databaseCheerio.js')
     }}
@@ -444,7 +444,7 @@ Apify.main(async () => {
 
             // Create a JSON for this link with a uuid.
             let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
-            fs.writeFileSync("results/" + fileName, JSON.stringify(elem), function(err) {
+            fs.writeFileSync(path.join(__dirname, 'results', fileName), JSON.stringify(elem), function(err) {
                 if (err) throw err;
                 console.log('complete');
             });
