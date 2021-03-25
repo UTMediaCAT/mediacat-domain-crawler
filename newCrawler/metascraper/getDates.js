@@ -12,7 +12,7 @@ const linkFile = './link_title_list.json';
   
 const got = require('got');
 const mongoose = require('mongoose');
-let db = require('./database.js')
+let db = require('../database.js')
 
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))

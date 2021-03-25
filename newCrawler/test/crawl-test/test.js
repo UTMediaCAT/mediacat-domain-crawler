@@ -35,8 +35,6 @@ function getCrawlerTime (crawlType, number, path, file , nextTest ) {
     let ls = ""
     const t1 = performance.now();
 
-    console.log(t1);
-
     if (crawlType === "cheerio") {
         ls = spawn('node', ['crawlCheerio.js', '-f', file, '-n', number , '-t'], {cwd: path});
     } else {
@@ -47,8 +45,7 @@ function getCrawlerTime (crawlType, number, path, file , nextTest ) {
     console.log(`${data}`);
     });
 
-    ls.stderr.on('error', (data) => {
-        console.log("an error has occured")
+    ls.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
 
@@ -66,7 +63,6 @@ function getCrawlerTime (crawlType, number, path, file , nextTest ) {
 
 
 function getCrawlerNumberOfLinks (crawlType, number, path, file , nextTest , url) {
-    console.log("getCrawlerNumberOfLinks")
 
     return new Promise (function (resolve, reject) {
 
@@ -81,8 +77,7 @@ function getCrawlerNumberOfLinks (crawlType, number, path, file , nextTest , url
             console.log(`${data}`);
         });
 
-        ls.stderr.on('error', (data) => {
-            console.log("ERROR HERER")
+        ls.stderr.on('data', (data) => {
             console.error(`stderr: ${data}`);
         });
 
@@ -112,7 +107,6 @@ function getCrawlerNumberOfLinks (crawlType, number, path, file , nextTest , url
 
             }).catch( (err) => {
                 console.log(err)
-                console.log("ERROR HERE")
                 reject(err)
             });
 
@@ -195,18 +189,6 @@ async function nytimes () {
 }
 
 
-// function nytimesCheerio () {
-//     return new Promise (function(resolve, reject) {
-//         let file = csvFolderPath + "nytimes.csv"
-//         console.log(file);
-//         getCrawlerNumberOfLinks("cheerio", 5, path, file, NineSevenTwoMagCheerio, "https://www.nytimes.com/").then( value => {
-//             resolve(value);
-//         }).catch((err) => {
-//             reject(err);
-//         });
-//     })
-// }
-
 
 function NineSevenTwoMag () {
     return new Promise (function(resolve, reject) {
@@ -260,13 +242,9 @@ function testTime6Cheerio () {
 function nytimesCheerio () {
     return new Promise (function(resolve, reject) {
         let file = csvFolderPath + "nytimes.csv"
-        console.log(file)
-        console.log("nytimesCheerio")
         getCrawlerNumberOfLinks("cheerio", 5, path, file, NineSevenTwoMagCheerio, "https://www.nytimes.com/").then( value => {
             resolve(value);
         }).catch((err) => {
-            console.log("ERROR HERE")
-            console.log(err)
             reject(err)
         });
     })
@@ -279,8 +257,6 @@ function NineSevenTwoMagCheerio () {
         getCrawlerNumberOfLinks("cheerio", 5, path, file, finish, "http://972mag.com/").then( value => {
             resolve(value);
         }).catch( (err) => {
-            console.log("error here ")
-            console.log(err)
             reject(err);
         });
     })
@@ -291,17 +267,17 @@ function main() {
     ///////////uncomment as needed/////////////////
 
     // testTime1() // test nytimes 1, 20, 50 and 100 links timer
-    nytimes() // test whether nytimes, 972 mag had 1 link
+    // nytimes() // test whether nytimes, 972 mag had 1 link
 
 
     /// test these below
     // testTime1Cheerio()
 
-//     nytimesCheerio().then( value => { // test nytimes and the next test, 972 afterwords
-//         console.log("finished crawling nytimes");
-//     }).catch( err => {
-//         console.log("crawled nytimes with an error...");
-//     }); // test whether nytimes, 972 mag had 1 link with cheerio
+    nytimesCheerio().then( value => { // test nytimes and the next test, 972 afterwords
+        console.log("finished crawling nytimes");
+    }).catch( err => {
+        console.log("crawled nytimes with an error...");
+    }); // test whether nytimes, 972 mag had 1 link with cheerio
   }
 
 
