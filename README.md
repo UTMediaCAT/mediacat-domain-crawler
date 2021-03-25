@@ -1,9 +1,20 @@
 [![Build Status](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler.svg?branch=master)](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler)
 # mediacat-domain-crawler
 
+This README pertains to the crawling aspect of the application. THe crawl script(s) would be located in the folder `/newCrawler/ `
+
+At the end of the crawl, it can notify by email whether the crawl stopped or not. OThe email aspect must be set up first before the crawl. (or ignored if not desired)
+
+Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
+
+PLEASE do not EVER commit your password. As a future issue, we should probably make a seperate constant file that is git ignored.
+
 ## prereqs
 node v14.15.3 (make sure to have this installed, or switch to it if needed `nvm use v14.15.3`)
+
 npm install
+
+`cd newCrawler` to get to the crawl.js script
 
 # run the puppeteer crawler 
 node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf
@@ -30,6 +41,10 @@ or if you are just feeding single urls one by one
 
 # monitoring the results
 Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)
+
+# Apify tips
+
+When using Apify, it is important to know that when the crawler needs to be rerun without the previous queue, the apify_storage needs to deleted before running. Otherwise, it will continue from where it left off in the queue.
 
 # testing
 this [script](https://github.com/UTMediaCAT/mediacat-domain-crawler/tree/master/newCrawler/test) has been written to time how long it takes for the crawlers to crawl through a certain number of links. The user will have to uncomment or comment in which tests to run on main().
