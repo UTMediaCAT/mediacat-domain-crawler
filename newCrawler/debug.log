@@ -1,0 +1,267 @@
+INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Darwin","nodeVersion":"v12.18.3"}
+WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Volumes/Raiyan-External-HDD 1/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/apify_storage"
+[
+  'https://www.tvnz.co.nz/one-news/',
+  'https://7days.ru/',
+  'https://www.aamulehti.fi/',
+  'https://abcnews.go.com/',
+  'https://www.aberdeennews.com/',
+  'https://www.ad.nl/',
+  'https://www.adnkronos.com/',
+  'https://africanmanager.com/',
+  'https://www.afp.com/en/',
+  'https://www.afp.com/',
+  'https://www.agi.it/',
+  'https://www.alarab.com/',
+  'https://www.alarabiya.net/',
+  'https://www.alaraby.co.uk/',
+  'https://www.albawaba.com/',
+  'https://alghad.com/',
+  'https://www.aljazeera.com/',
+  'http://almashareq.com/',
+  'http://english.ahram.org.eg/',
+  'https://www.al-akhbar.com/',
+  'http://aljazeerah.info/',
+  'https://www.al-monitor.com/',
+  'http://www.aps.dz/',
+  'https://allafrica.com/',
+  'https://www.alternet.org/',
+  'https://www.ambito.com/',
+  'https://www.americanisraelite.com/',
+  'https://www.adn.com/',
+  'https://www.aa.com.tr/',
+  'https://www.anp.nl/',
+  'http://www.ansa.it/',
+  'https://answersingenesis.org/answers/magazine/',
+  'https://en.antaranews.com/',
+  'https://www.antiwar.com/',
+  'https://www.aporrea.org/',
+  'https://www.appeal-democrat.com/',
+  'http://www.arabnews.com/',
+  'https://www.artforum.com/',
+  'https://ag.org/',
+  'https://atlantajewishtimes.timesofisrael.com/',
+  'https://gellerreport.com/',
+  'https://www.keystone-sda.ch/',
+  'https://www.statesman.com/',
+  'https://www.afr.com/',
+  'https://www.axios.com/',
+  'http://axisoflogic.com/',
+  'https://www.bna.bh/',
+  'https://jewishtimes.com/',
+  'http://www.bpnews.net/',
+  'https://www.bbc.com/news/',
+  'https://www.bharian.com.my/',
+  'https://www.morgenpost.de/',
+  'http://bernama.com/en/',
+  'https://www.bloomberg.com/',
+  'https://www.bndestem.nl/',
+  'http://bostonglobe.com/',
+  'https://www.bd.nl/',
+  'https://www.breakingisraelnews.com/',
+  'https://www.breakingnews.ie/',
+  'https://briarpatchmagazine.com/',
+  'https://www.breitbart.com/',
+  'http://buffalonews.com/',
+  'https://www.buzzfeed.com/',
+  'https://calgaryherald.com/',
+  'https://www.capebretonpost.com/',
+  'http://www.caretas.com.pe/',
+  'http://www.cartacapital.com.br/',
+  'https://www.cbsnews.com/',
+  'http://www.charentelibre.fr/',
+  'https://www.charismamag.com/',
+  'https://www.chicagojewishnews.com/',
+  'https://chicago.suntimes.com/',
+  'https://www.chicagotribune.com/',
+  'http://chinadaily.com.cn/',
+  'http://www.ecns.cn/',
+  'https://www1.cbn.com/',
+  'https://www.christiancentury.org/',
+  'https://www.christianheadlines.com/',
+  'https://christiannewsjournal.com/',
+  'https://www.csmonitor.com/',
+  'https://www.christianitytoday.com/',
+  'https://citizentruth.org/',
+  'http://www.clarin.com/',
+  'https://www.clevelandjewishnews.com/',
+  'https://www.cnn.com/',
+  'https://www.cogencis.com/newssection/news/',
+  'http://www.cjr.org/',
+  'http://columbian.com/',
+  'https://columbustelegram.com/',
+  'https://www.commondreams.org/',
+  'https://www.concordmonitor.com/',
+  'https://www.corriere.it/',
+  'https://www.counter-currents.com/',
+  'http://www.counterpunch.org/',
+  'https://www.crikey.com.au/',
+  'https://www.ctk.eu/',
+  'https://cyprus-mail.com/',
+  'https://www.dvhn.nl/',
+  'https://www.dailybreeze.com/',
+  'https://www.dailymail.co.uk/',
+  ... 1271 more items
+]
+Using existing results folder.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 5 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 0.05967848600074621 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 5 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://7days.ru/ 0.04835256700031465 milliseconds.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 10 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 10 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 0.04508995399996607 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 10 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 10 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://7days.ru/ 0.051621081998572294 milliseconds.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 15 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 15 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 0.046493503000587744 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 15 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 15 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
+Finished crawling https://7days.ru/ 0.043583487998694714 milliseconds.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001" is "History beckons for Kiwi cyclist George Bennett with shot at Giro d'Italia glory | 1 NEWS | TVNZ"
+Title of "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1" is "History beckons for Kiwi cyclist George Bennett with shot at Giro d'Italia glory | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1
+Call to "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001" took 1.4571816850006591 seconds.
+Call to "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1" took 1.4914948180001222 seconds.
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+Title of "https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club" is "Phoenix captain Ulises Davila in contract talks to stay at Wellington club | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club
+Call to "https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club" took 0.6487046019993734 seconds.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 21 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":4659,"perMinute":21,"finished":3,"failed":0,"retryHistogram":[3]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 8.47549640900083 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://7days.ru/news/sports/" is "Новости - Спорт - 7Дней.ру"
+Saving PDF of https://7days.ru/news/sports/
+Call to "https://7days.ru/news/sports/" took 1.036468795999884 seconds.
+Title of "https://7days.ru/news/politics/" is "Политики - новости о политиках, политических деятелях России и мира - 7Дней.ру"
+Saving PDF of https://7days.ru/news/politics/
+Call to "https://7days.ru/news/politics/" took 1.091152865000069 seconds.
+Title of "https://7days.ru/stars/" is "Все о звездах, знаменитости, знаменитые люди - фото, видео, биография - 7Дней.ру"
+Saving PDF of https://7days.ru/stars/
+Title of "https://7days.ru/news/world/" is "В мире - новости о важных событиях в России и в мире - 7Дней.ру"
+Title of "https://7days.ru/stars/chronic/" is "Светская хроника и новости светской жизни 2020 - 7Дней.ру"
+Saving PDF of https://7days.ru/news/world/
+Saving PDF of https://7days.ru/stars/chronic/
+Call to "https://7days.ru/stars/" took 2.732267424000426 seconds.
+Call to "https://7days.ru/news/world/" took 1.881381539000202 seconds.
+Call to "https://7days.ru/stars/chronic/" took 2.245438967999071 seconds.
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 21 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":9344,"perMinute":16,"finished":5,"failed":0,"retryHistogram":[5]}
+Finished crawling https://7days.ru/ 19.279916337998586 milliseconds.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue" is "Highlanders to host trans-Tasman Super Rugby match at picturesque Queenstown venue | 1 NEWS | TVNZ"
+Title of "https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney" is "Ex-NRL star Sam Burgess back in court after admitting to drug driving in Sydney | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney
+Call to "https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue" took 0.6326975360009826 seconds.
+Call to "https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney" took 0.6051520229987801 seconds.
+Title of "https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl" is "Kiwi cricketers not looking to get out of India after Covid-19 reaches IPL | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl
+Title of "https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi" is "From warehouse night shifts to an NRL debut: The rapid rise of new Warrior Ed Kosi | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi
+Call to "https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl" took 0.8000630829986193 seconds.
+Call to "https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi" took 0.6040030290000118 seconds.
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 25 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+Title of "https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59" is "Silver Ferns great Margaret Forsyth dies aged 59 | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59
+Call to "https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59" took 0.585598037000743 seconds.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 25 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 26 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":3472,"perMinute":30,"finished":5,"failed":0,"retryHistogram":[5]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 9.972347200000662 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://7days.ru/stars/ratings/" is "Топы и подборки фактов о звездах и знаменитостях - 7Дней.ру"
+Saving PDF of https://7days.ru/stars/ratings/
+Title of "https://7days.ru/stars/privatelife/" is "Частная и личная жизнь звезд, актеров, знаменитостей, фото, обсуждение - 7Дней.ру"
+Saving PDF of https://7days.ru/stars/privatelife/
+Call to "https://7days.ru/stars/ratings/" took 2.030894915999845 seconds.
+Call to "https://7days.ru/stars/privatelife/" took 1.2405233190003813 seconds.
+Title of "https://7days.ru/stars/bio/" is "Энциклопедия звезд - 7Дней.ру"
+Saving PDF of https://7days.ru/stars/bio/
+Call to "https://7days.ru/stars/bio/" took 1.0796611480005112 seconds.
+Title of "https://7days.ru/beauty/makeup/" is "Макияж - Красота - 7Дней.ру"
+Title of "https://7days.ru/beauty/novelty/" is "Новинки - Красота - 7Дней.ру"
+Title of "https://7days.ru/beauty/" is "Красота - 7Дней.ру"
+Saving PDF of https://7days.ru/beauty/makeup/
+Saving PDF of https://7days.ru/beauty/novelty/
+Saving PDF of https://7days.ru/beauty/
+Call to "https://7days.ru/beauty/makeup/" took 2.753903021000326 seconds.
+Call to "https://7days.ru/beauty/novelty/" took 2.1176066629998402 seconds.
+Call to "https://7days.ru/beauty/" took 1.6893694369997831 seconds.
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 25 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 25 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 27 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":6214,"perMinute":21,"finished":6,"failed":0,"retryHistogram":[6]}
+Finished crawling https://7days.ru/ 17.033608493000273 milliseconds.
+CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury" is "Black Caps breathe sigh of relief as Ross Taylor cleared of serious injury | 1 NEWS | TVNZ"
+Title of "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001" is "Black Caps breathe sigh of relief as Ross Taylor cleared of serious injury | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001
+Call to "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury" took 0.8926185710001775 seconds.
+Call to "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001" took 1.0047527229990791 seconds.
+Title of "https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland" is "Black Sox name 31-strong training squad as focus turns to next year's Softball World Cup in Auckland | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland
+Title of "https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban" is "Scott Morrison dismisses 'absurd' claims by Aussie cricketer he has blood on his hands for India travel ban | 1 NEWS | TVNZ"
+Call to "https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland" took 0.5456679679993641 seconds.
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban
+Call to "https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban" took 0.5032060879990468 seconds.
+INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 30 requests and will shut down soon. Requests that are in progress will be allowed to finish.
+Title of "https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours" is "On a hat-trick: Black Caps add No.1 ODI rank to top Test team honours | 1 NEWS | TVNZ"
+Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours
+Call to "https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours" took 0.44183228099903715 seconds.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 30 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 31 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":3450,"perMinute":31,"finished":5,"failed":0,"retryHistogram":[5]}
+Finished crawling https://www.tvnz.co.nz/one-news/ 9.87594313799962 milliseconds.
+CRAWLING THROUGH https://7days.ru/
+INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://7days.ru/beauty/secrets/" is "Секреты красоты - Красота - 7Дней.ру"
+Saving PDF of https://7days.ru/beauty/secrets/
+Title of "https://7days.ru/beauty/hairstyles/" is "Причёски - Красота - 7Дней.ру"
