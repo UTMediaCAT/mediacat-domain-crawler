@@ -1,14 +1,13 @@
 /* parseHelper.js
    Author: Raiyan Rahman
    Date: May 6th, 2021
-   Description: Contains helpers for parsing the scope CSV.
+   Description: Contains helpers for parsing scope, and articles.
 */
 const fs = require('fs');
 const path = require('path');
 const JSDOM = require('jsdom').JSDOM;
 const parse = require('csv-parse/lib/sync')
 const { Readability } = require('@mozilla/readability');
-
 
 
 // Parse the CSV file to get a list of domains.
@@ -34,7 +33,7 @@ let parseCSV = function(file){
     return urls;
 };
 
-// Get the parsed article.
+// Get the parsed article using readability.
 let getParsedArticle = function(url, html) {
     var doc = new JSDOM(html, {
         url: url
