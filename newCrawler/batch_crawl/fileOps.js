@@ -49,7 +49,7 @@ let mkDir = function(dirName) {
             console.log(dirName + ' folder created.');
         });
     } else {
-        console.log(dirName + ' already exists.');
+        console.log('Using existing ' + dirName + ' folder.');
     }
 };
 

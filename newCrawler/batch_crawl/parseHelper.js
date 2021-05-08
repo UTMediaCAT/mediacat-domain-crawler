@@ -4,7 +4,6 @@
    Description: Contains helpers for parsing scope, and articles.
 */
 const fs = require('fs');
-const path = require('path');
 const JSDOM = require('jsdom').JSDOM;
 const parse = require('csv-parse/lib/sync')
 const { Readability } = require('@mozilla/readability');

@@ -1,98 +1,76 @@
 /* batchCrawl.js
    Author: Raiyan Rahman
-   Date: March 18th, 2021
+   Date: May 7th, 2021
    Description: Crawl the given urls in batches.
    Use: "node batchCrawl.js -f full_scope.csv"
 */
-// let appmetrics = require('appmetrics');
-const Apify = require('apify');
+
+// Imports.
+const fs = require('fs');
+const util = require('util');
 const path = require('path');
-var { Readability } = require('@mozilla/readability');
-var JSDOM = require('jsdom').JSDOM;
-
-const { v5: uuidv5 } = require('uuid');
-const parse = require('csv-parse/lib/sync')
-const { performance } = require('perf_hooks');
-
-var fs = require('fs');
-var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
-// const mongoose = require('mongoose');
-// let db = require('./database.js')
-let memInfo = require('./monitor/memoryInfo');
-const { transform } = require('csv');
+const Apify = require('apify');
 const { exit } = require('process');
-
+const { transform } = require('csv');
+const JSDOM = require('jsdom').JSDOM;
+// const mongoose = require('mongoose');
+// let appmetrics = require('appmetrics');
+const { v5: uuidv5 } = require('uuid');
+const { performance } = require('perf_hooks');
 // const { performance } = require('perf_hooks');
 
+// Local imports.
+const fileOps = require('./fileOps');
+const parseHelper = require('./parseHelper');
+
+
+// Database set up.
+// let db = require('./database.js')
+let memInfo = require('./monitor/memoryInfo');
+// Open a connection to the database.
 // mongoose.connection
 //   .once('open', () => console.log('Connected to DB'))
 //   .on('error', (error) => { 
 //       console.log("Your Error", error);
 //   });
 
+
+// Logging set up.
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+// Overwrite the console.log method.
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
+
+// Filter function.
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     return !valid_links.includes(url) && (url != domain_url)
 }
 
-function getParsedArticle(url, html) {
-    var doc = new JSDOM(html, {
-        url: url
-      });
-    let reader = new Readability(doc.window.document);
-    let article = reader.parse();
-    return article
-}
 
-function parseCSV(file){
-    var urls = [];
-    // Read the file.
-    var csv_file = fs.readFileSync(file, 'utf8');
-    // Parse the file into a list of objects.
-    const csv_list = parse(csv_file, {
-        columns: true
-    });
-    // Format the data to only get the urls.
-    for (let row of csv_list) {
-        // Make sure that there is a slash at the end.
-        let domain = row["Source"];
-        if (domain[domain.length - 1] !== '/') {
-            domain += '/';
-        }
-        // Push the domain to the list.
-        urls.push(domain);
-    }
-    // Return the list of domain urls.
-    return urls;
-}
-
-// Uncomment to see monitoring of the environment on the output
-
+// Monitor the environment.
 // var monitoring = appmetrics.monitor();
-
 // monitoring.on('initialized', function (env) {
 //     env = monitoring.getEnvironment();
 //     for (var entry in env) {
 //         console.log(entry + ':' + env[entry]);
 //     };
 // });
-
 // monitoring.on('cpu', function (cpu) {
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+
 Apify.main(async () => {
+
     // Get the urls from the command line arguments.
     var is_url = false;
     // If a CSV file is given, parse it.
     if (process.argv[2] == "-f") {
-        var url_list = parseCSV(process.argv[3]);
+        var url_list = parseHelper.parseCSV(process.argv[3]);
     } else {
         var url_list = [];
         process.argv.forEach(function (val, index, array) {
@@ -107,21 +85,13 @@ Apify.main(async () => {
         });
     }
 
+    
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
     var incorrect_dict = {};
-
     // Create a directory to hold all the individual JSON files.
-    if (!fs.existsSync('results')) {
-        fs.mkdir(path.join(__dirname, 'results'), (err) => { 
-            if (err) { 
-                return console.error(err);
-            } 
-            console.log('Results folder created.'); 
-        });
-    } else {
-        console.log('Using existing results folder.'); 
-    }
+    fileOps.mkDir('Results');
+
 
     // Keep track of the number of passes across the domains.
     round = 0;
@@ -157,7 +127,8 @@ Apify.main(async () => {
             pseudoDomain += "[.*]";
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
-        
+
+
         /** CRAWLER CODE START */
         // Initialize the crawler.
         const crawler = new Apify.PuppeteerCrawler({
@@ -213,7 +184,7 @@ Apify.main(async () => {
                 let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
                 // Use readability.js to read information about the article.
-                parsedArticle = getParsedArticle(request.url, bodyHTML);
+                parsedArticle = parseHelper.getParsedArticle(request.url, bodyHTML);
 
                 const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
                 const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
@@ -313,15 +284,8 @@ Apify.main(async () => {
                 
                 let folderName = "results/" + url_list[listIndex].replace(/[^a-z0-9]/gi, '_').toLowerCase() + "/"
 
-                // Create a directory to hold all this domaon's files.
-                if (!fs.existsSync(folderName)) {
-                    fs.mkdir(path.join(__dirname, folderName), (err) => { 
-                        if (err) { 
-                            return console.error(err);
-                        } 
-                        console.log('Domain folder created.'); 
-                    });
-                }
+                // Create a directory to hold all this domain's files.
+                fileOps.mkDir(folderName);
 
                 // Create a JSON for this link with a uuid.
                 let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
@@ -360,6 +324,7 @@ Apify.main(async () => {
             maxConcurrency: 50,
         });
         /** CRAWLER CODE END */
+
 
         // Start time.
         const t0 = performance.now();
