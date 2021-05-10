@@ -26,7 +26,8 @@ const parseHelper = require('./parseHelper');
 
 // Database set up.
 // let db = require('./database.js')
-let memInfo = require('./monitor/memoryInfo');
+// let memInfo = require('./monitor/memoryInfo');
+const { url } = require('inspector');
 // Open a connection to the database.
 // mongoose.connection
 //   .once('open', () => console.log('Connected to DB'))
@@ -52,6 +53,7 @@ function Filter(url, domain_url, valid_links) {
 
 
 // Monitor the environment.
+// process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
 // var monitoring = appmetrics.monitor();
 // monitoring.on('initialized', function (env) {
 //     env = monitoring.getEnvironment();
@@ -94,21 +96,21 @@ Apify.main(async () => {
 
 
     // Keep track of the number of passes across the domains.
-    round = 0;
+    let round = 1;
+    let i = 0;
     // Loop through the scope and crawl each domain.
-    for (var j = 0; j < url_list.length; j++) {
-        // TESTING AN INFINITE LOOP WITH ONLY 2 DOMAINS START.
-        if (j % 2 == 0) {
+    while (true) {
+        // If all urls are complete, begin the next round.
+        if (i == url_list.length) {
             i = 0;
             round++;
-        } else {
-            i = 1;
         }
-        // TESTING AN INFINITE LOOP WITH ONLY 2 DOMAINS END.
         // Get the domain url.
         domainURL = url_list[i];
         // Print out the domain that is currently being crawled.
-        console.log("CRAWLING THROUGH " + domainURL);
+        console.log('//////////////////////////////////////////////////////////');
+        console.log("ROUND: " + round + ", CRAWLING: " + domainURL);
+        console.log('//////////////////////////////////////////////////////////');
         // Convert the domain URL to be safe to be used as a folder name.
         safeDomain = domainURL.replace(/[^a-z0-9]/gi, '_').toLowerCase()
         // Open the key-value store for this domain.
@@ -334,6 +336,8 @@ Apify.main(async () => {
         const t1 = performance.now();
         // Log the time to run the crawler.
         console.log(`Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} milliseconds.`);
+        // Increment the index of the current url.
+        i++;
     }
 
 });
