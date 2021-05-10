@@ -22,12 +22,16 @@ let parseCSV = function(file){
     for (let row of csv_list) {
         // Make sure that there is a slash at the end.
         let domain = row["Source"];
-        if (domain[domain.length - 1] !== '/') {
-            domain += '/';
+        // If this row contains data.
+        if (domain.length > 0) {
+            if (domain[domain.length - 1] !== '/') {
+                domain += '/';
+            }
+            // Push the domain to the list.
+            urls.push(domain);
         }
-        // Push the domain to the list.
-        urls.push(domain);
     }
+    console.log(urls);
     // Return the list of domain urls.
     return urls;
 };
