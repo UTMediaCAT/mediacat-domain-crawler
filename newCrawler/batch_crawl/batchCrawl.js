@@ -108,9 +108,9 @@ Apify.main(async () => {
         // Get the domain url.
         domainURL = url_list[i];
         // Print out the domain that is currently being crawled.
-        console.log('//////////////////////////////////////////////////////////');
-        console.log("ROUND: " + round + ", CRAWLING: " + domainURL);
-        console.log('//////////////////////////////////////////////////////////');
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
+        console.log("ROUND " + round + ", CRAWLING URL " + (i + 1) + " of " + url_list.length + ": " + domainURL);
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
         // Convert the domain URL to be safe to be used as a folder name.
         safeDomain = domainURL.replace(/[^a-z0-9]/gi, '_').toLowerCase()
         // Open the key-value store for this domain.
