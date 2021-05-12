@@ -2,7 +2,16 @@
    Author: Raiyan Rahman
    Date: May 7th, 2021
    Description: Crawl the given urls in batches.
-   Use: "node batchCrawl.js -f full_scope.csv"
+   Parameters: -l : links separated by spaces
+               -f : csv file containing the scope
+               -n : number of pages to crawl per round for each domain (default is 5)
+               -r : the maximum number of rounds
+               -pdf : use this parameter if PDFs are to be saved
+   Usage: "node batchCrawl.js -f full_scope.csv"
+          "node batchCrawl.js -n 10 -f full_scope.csv"
+          "node batchCrawl.js -r 5 -f full_scope.csv"
+          "node batchCrawl.js -pdf -f full_scope.csv"
+          "node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/"
 */
 
 // Imports.
