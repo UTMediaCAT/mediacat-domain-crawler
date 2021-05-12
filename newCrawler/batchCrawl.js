@@ -1,99 +1,91 @@
 /* batchCrawl.js
    Author: Raiyan Rahman
-   Date: March 18th, 2021
+   Date: May 7th, 2021
    Description: Crawl the given urls in batches.
-   Use: "node batchCrawl.js -f full_scope.csv"
+   Parameters: -l : links separated by spaces
+               -f : csv file containing the scope
+               -n : number of pages to crawl per round for each domain (default is 5)
+               -r : the maximum number of rounds
+               -pdf : use this parameter if PDFs are to be saved
+   Usage: "node batchCrawl.js -f full_scope.csv"
+          "node batchCrawl.js -n 10 -f full_scope.csv"
+          "node batchCrawl.js -r 5 -f full_scope.csv"
+          "node batchCrawl.js -pdf -f full_scope.csv"
+          "node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/"
 */
-// let appmetrics = require('appmetrics');
-const Apify = require('apify');
+
+// Imports.
+const fs = require('fs');
+const util = require('util');
 const path = require('path');
-var { Readability } = require('@mozilla/readability');
-var JSDOM = require('jsdom').JSDOM;
-
-const { v5: uuidv5 } = require('uuid');
-const parse = require('csv-parse/lib/sync')
-const { performance } = require('perf_hooks');
-
-var fs = require('fs');
-var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
-// const mongoose = require('mongoose');
-// let db = require('./database.js')
-let memInfo = require('./monitor/memoryInfo');
-const { transform } = require('csv');
+const Apify = require('apify');
 const { exit } = require('process');
-
+const { transform } = require('csv');
+const JSDOM = require('jsdom').JSDOM;
+// const mongoose = require('mongoose');
+// let appmetrics = require('appmetrics');
+const { v5: uuidv5 } = require('uuid');
+const { performance } = require('perf_hooks');
 // const { performance } = require('perf_hooks');
 
+// Local imports.
+const fileOps = require('./fileOps');
+const parseHelper = require('./parseHelper');
+
+
+// Database set up.
+// let db = require('./database.js')
+// let memInfo = require('./monitor/memoryInfo');
+const { url } = require('inspector');
+// Open a connection to the database.
 // mongoose.connection
 //   .once('open', () => console.log('Connected to DB'))
 //   .on('error', (error) => { 
 //       console.log("Your Error", error);
 //   });
 
+
+// Logging set up.
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+// Overwrite the console.log method.
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
+
+// Filter function.
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     return !valid_links.includes(url) && (url != domain_url)
 }
 
-function getParsedArticle(url, html) {
-    var doc = new JSDOM(html, {
-        url: url
-      });
-    let reader = new Readability(doc.window.document);
-    let article = reader.parse();
-    return article
-}
 
-function parseCSV(file){
-    var urls = [];
-    // Read the file.
-    var csv_file = fs.readFileSync(file, 'utf8');
-    // Parse the file into a list of objects.
-    const csv_list = parse(csv_file, {
-        columns: true
-    });
-    // Format the data to only get the urls.
-    for (let row of csv_list) {
-        // Make sure that there is a slash at the end.
-        let domain = row["Source"];
-        if (domain[domain.length - 1] !== '/') {
-            domain += '/';
-        }
-        // Push the domain to the list.
-        urls.push(domain);
-    }
-    // Return the list of domain urls.
-    return urls;
-}
-
-// Uncomment to see monitoring of the environment on the output
-
+// Monitor the environment.
+// process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
 // var monitoring = appmetrics.monitor();
-
 // monitoring.on('initialized', function (env) {
 //     env = monitoring.getEnvironment();
 //     for (var entry in env) {
 //         console.log(entry + ':' + env[entry]);
 //     };
 // });
-
 // monitoring.on('cpu', function (cpu) {
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
+
 Apify.main(async () => {
+
+    // Argument Parsing.
     // Get the urls from the command line arguments.
     var is_url = false;
+    var f_index = process.argv.indexOf("-f");
+    var l_index = process.argv.indexOf("-l");
     // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
-        var url_list = parseCSV(process.argv[3]);
-    } else {
+    if (f_index != -1) {
+        var url_list = parseHelper.parseCSV(process.argv[f_index + 1]);
+    } else if (l_index != -1) {
         var url_list = [];
         process.argv.forEach(function (val, index, array) {
             // Add the links.
@@ -106,39 +98,46 @@ Apify.main(async () => {
             }
         });
     }
+    // Check if there is a given number of pages to crawl in each round for each domain.
+    var pagesPerRound = 5;
+    var n_index = process.argv.indexOf("-n");
+    if (n_index != -1) {
+        pagesPerRound = parseInt(process.argv[n_index + 1]);
+    }
+    // Check if there is a given number of rounds to run the crawler for.
+    var maxRounds = -1;
+    var infiniteRounds = true;
+    var r_index = process.argv.indexOf("-r");
+    if (r_index != -1) {
+        infiniteRounds = false;
+        maxRounds = parseInt(process.argv[r_index + 1]);
+    }
+    // Check if PDFs should be saved.
+    var savePDF = false;
+    var pdf_index = process.argv.indexOf("-pdf");
+    if (pdf_index != -1) {
+        savePDF = true;
+    }
+
 
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
     var incorrect_dict = {};
-
     // Create a directory to hold all the individual JSON files.
-    if (!fs.existsSync('results')) {
-        fs.mkdir(path.join(__dirname, 'results'), (err) => { 
-            if (err) { 
-                return console.error(err);
-            } 
-            console.log('Results folder created.'); 
-        });
-    } else {
-        console.log('Using existing results folder.'); 
-    }
+    fileOps.mkDir('Results');
+
 
     // Keep track of the number of passes across the domains.
-    round = 0;
+    let round = 1;
+    let i = 0;
     // Loop through the scope and crawl each domain.
-    for (var j = 0; j < url_list.length; j++) {
-        // TESTING AN INFINITE LOOP WITH ONLY 2 DOMAINS START.
-        if (j % 2 == 0) {
-            i = 0;
-            round++;
-        } else {
-            i = 1;
-        }
-        // TESTING AN INFINITE LOOP WITH ONLY 2 DOMAINS END.
+    while (infiniteRounds || round <= maxRounds) {
         // Get the domain url.
         domainURL = url_list[i];
         // Print out the domain that is currently being crawled.
-        console.log("CRAWLING THROUGH " + domainURL);
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
+        console.log("ROUND " + round + ", CRAWLING URL " + (i + 1) + " of " + url_list.length + ": " + domainURL);
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
         // Convert the domain URL to be safe to be used as a folder name.
         safeDomain = domainURL.replace(/[^a-z0-9]/gi, '_').toLowerCase()
         // Open the key-value store for this domain.
@@ -157,7 +156,8 @@ Apify.main(async () => {
             pseudoDomain += "[.*]";
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
-        
+
+
         /** CRAWLER CODE START */
         // Initialize the crawler.
         const crawler = new Apify.PuppeteerCrawler({
@@ -208,12 +208,11 @@ Apify.main(async () => {
                 let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
 
-                console.log(`Title of "${request.url}" is "${title}"`);
                 // Get the HTML of the page and write it to a file.
                 let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
                 // Use readability.js to read information about the article.
-                parsedArticle = getParsedArticle(request.url, bodyHTML);
+                parsedArticle = parseHelper.getParsedArticle(request.url, bodyHTML);
 
                 const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
                 const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
@@ -313,28 +312,23 @@ Apify.main(async () => {
                 
                 let folderName = "results/" + url_list[listIndex].replace(/[^a-z0-9]/gi, '_').toLowerCase() + "/"
 
-                // Create a directory to hold all this domaon's files.
-                if (!fs.existsSync(folderName)) {
-                    fs.mkdir(path.join(__dirname, folderName), (err) => { 
-                        if (err) { 
-                            return console.error(err);
-                        } 
-                        console.log('Domain folder created.'); 
-                    });
-                }
+                // Create a directory to hold all this domain's files.
+                fileOps.mkDir(folderName);
 
                 // Create a JSON for this link with a uuid.
                 let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
                 fs.writeFileSync(folderName + fileName, JSON.stringify(elem), function(err) {
                     if (err) throw err;
-                    console.log('complete');
                 });
 
                 // Save a PDF of the page.
-                console.log("Saving PDF of " + request.url);
-                const pdfBuffer = await page.pdf({ format: 'A4' });
-                let pdfName = uuidv5(request.url, uuidv5.URL);
-                await store.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
+                if (savePDF) {
+                    console.log("Saving PDF of " + request.url);
+                    const pdfBuffer = await page.pdf({ format: 'A4' });
+                    let pdfName = uuidv5(request.url, uuidv5.URL);
+                    await store.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
+                }
+
                 //Write into a database
 
                 // let metaObj = new db.metaModel(elem);
@@ -356,10 +350,11 @@ Apify.main(async () => {
             },
             // The max concurrency and max requests to crawl through.
             // maxRequestsPerCrawl: Infinity,
-            maxRequestsPerCrawl: 5 * round,
+            maxRequestsPerCrawl: pagesPerRound * round,
             maxConcurrency: 50,
         });
         /** CRAWLER CODE END */
+
 
         // Start time.
         const t0 = performance.now();
@@ -369,6 +364,13 @@ Apify.main(async () => {
         const t1 = performance.now();
         // Log the time to run the crawler.
         console.log(`Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} milliseconds.`);
+        // Increment the index of the current url.
+        i++;
+        // If all urls are complete, begin the next round.
+        if (i == url_list.length) {
+            i = 0;
+            round++;
+        }
     }
 
 });
