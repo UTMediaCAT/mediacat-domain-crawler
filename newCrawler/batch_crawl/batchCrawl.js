@@ -132,11 +132,6 @@ Apify.main(async () => {
     let i = 0;
     // Loop through the scope and crawl each domain.
     while (infiniteRounds || round <= maxRounds) {
-        // If all urls are complete, begin the next round.
-        if (i == url_list.length) {
-            i = 0;
-            round++;
-        }
         // Get the domain url.
         domainURL = url_list[i];
         // Print out the domain that is currently being crawled.
@@ -373,6 +368,11 @@ Apify.main(async () => {
         console.log(`Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} milliseconds.`);
         // Increment the index of the current url.
         i++;
+        // If all urls are complete, begin the next round.
+        if (i == url_list.length) {
+            i = 0;
+            round++;
+        }
     }
 
 });
