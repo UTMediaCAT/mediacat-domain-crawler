@@ -208,7 +208,6 @@ Apify.main(async () => {
                 let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*"+domainName+"\\.(.*)");
 
-                console.log(`Title of "${request.url}" is "${title}"`);
                 // Get the HTML of the page and write it to a file.
                 let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
@@ -320,7 +319,6 @@ Apify.main(async () => {
                 let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
                 fs.writeFileSync(folderName + fileName, JSON.stringify(elem), function(err) {
                     if (err) throw err;
-                    console.log('complete');
                 });
 
                 // Save a PDF of the page.

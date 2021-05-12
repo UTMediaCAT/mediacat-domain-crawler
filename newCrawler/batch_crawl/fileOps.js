@@ -48,8 +48,6 @@ let mkDir = function(dirName) {
             } 
             console.log(dirName + ' folder created.');
         });
-    } else {
-        console.log('Using existing ' + dirName + ' folder.');
     }
 };
 
