@@ -122,7 +122,7 @@ Apify.main(async () => {
     let round = 1;
     let i = 0;
     // Loop through the scope and crawl each domain.
-    while (true) {
+    while (infiniteRounds || round <= maxRounds) {
         // If all urls are complete, begin the next round.
         if (i == url_list.length) {
             i = 0;
@@ -320,10 +320,13 @@ Apify.main(async () => {
                 });
 
                 // Save a PDF of the page.
-                console.log("Saving PDF of " + request.url);
-                const pdfBuffer = await page.pdf({ format: 'A4' });
-                let pdfName = uuidv5(request.url, uuidv5.URL);
-                await store.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
+                if (savePDF) {
+                    console.log("Saving PDF of " + request.url);
+                    const pdfBuffer = await page.pdf({ format: 'A4' });
+                    let pdfName = uuidv5(request.url, uuidv5.URL);
+                    await store.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
+                }
+
                 //Write into a database
 
                 // let metaObj = new db.metaModel(elem);
@@ -345,7 +348,7 @@ Apify.main(async () => {
             },
             // The max concurrency and max requests to crawl through.
             // maxRequestsPerCrawl: Infinity,
-            maxRequestsPerCrawl: 5 * round,
+            maxRequestsPerCrawl: pagesPerRound * round,
             maxConcurrency: 50,
         });
         /** CRAWLER CODE END */
