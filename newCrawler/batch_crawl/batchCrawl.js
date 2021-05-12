@@ -68,12 +68,15 @@ function Filter(url, domain_url, valid_links) {
 
 Apify.main(async () => {
 
+    // Argument Parsing.
     // Get the urls from the command line arguments.
     var is_url = false;
+    var f_index = process.argv.indexOf("-f");
+    var l_index = process.argv.indexOf("-l");
     // If a CSV file is given, parse it.
-    if (process.argv[2] == "-f") {
-        var url_list = parseHelper.parseCSV(process.argv[3]);
-    } else {
+    if (f_index != -1) {
+        var url_list = parseHelper.parseCSV(process.argv[f_index + 1]);
+    } else if (l_index != -1) {
         var url_list = [];
         process.argv.forEach(function (val, index, array) {
             // Add the links.
@@ -86,8 +89,28 @@ Apify.main(async () => {
             }
         });
     }
+    // Check if there is a given number of pages to crawl in each round for each domain.
+    var pagesPerRound = 5;
+    var n_index = process.argv.indexOf("-n");
+    if (n_index != -1) {
+        pagesPerRound = parseInt(process.argv[n_index + 1]);
+    }
+    // Check if there is a given number of rounds to run the crawler for.
+    var maxRounds = -1;
+    var infiniteRounds = true;
+    var r_index = process.argv.indexOf("-r");
+    if (r_index != -1) {
+        infiniteRounds = false;
+        maxRounds = parseInt(process.argv[r_index + 1]);
+    }
+    // Check if PDFs should be saved.
+    var savePDF = false;
+    var pdf_index = process.argv.indexOf("-pdf");
+    if (pdf_index != -1) {
+        savePDF = true;
+    }
 
-    
+
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
     var incorrect_dict = {};
