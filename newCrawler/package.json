@@ -29,10 +29,10 @@
     "metascraper-title": "^5.14.22",
     "metascraper-url": "^5.14.20",
     "mocha": "^8.2.1",
-    "mongoose": "^5.11.4",
+    "mongoose": "^5.12.9",
     "morgan": "~1.9.1",
     "node-sass-middleware": "0.11.0",
-    "nodemailer": "^6.5.0",
+    "nodemailer": "^6.6.0",
     "puppeteer": "^5.3.0",
     "uuid": "^8.3.1"
   },
