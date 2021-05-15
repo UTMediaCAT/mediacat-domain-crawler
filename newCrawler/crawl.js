@@ -1,54 +1,76 @@
 /* crawl.js
    Author: Raiyan Rahman
-   Date: March 1st, 2020
-   Description: This script takes in one or more urls and then crawls those
-   dynamically rendered webpages and returns the JSON file containing lists
-   of tuples of links and titles for each url.
-   Use: "node crawl.js -l <url1> ..."
-   Output: link_title_list.json
+   Date: May 12th, 2021
+   Description: Crawl the given urls or CSV of domains.
+   Parameters: -l : links separated by spaces
+               -f : csv file containing the scope
+               -n : the number of requests to crawl through
+   Usage: "node crawl.js -f full_scope.csv"
+          "node crawl.js -n 50000 -f full_scope.csv"
+          "node crawl.js -l https://www.nytimes.com/ https://cnn.com/"
 */
 
 
 process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
 
-// let appmetrics = require('appmetrics');
-const Apify = require('apify');
-const path = require('path');
-var { Readability } = require('@mozilla/readability');
-var JSDOM = require('jsdom').JSDOM;
 
-//email
-let nodemailer = require('nodemailer');
-
-let {mailOptions, mailError} = require('./email')
-
-const { v5: uuidv5 } = require('uuid');
-const parse = require('csv-parse/lib/sync')
-const { performance } = require('perf_hooks');
-
+// Imports
 var fs = require('fs');
 var util = require('util');
+const path = require('path');
+const Apify = require('apify');
+const { v5: uuidv5 } = require('uuid');
+// let appmetrics = require('appmetrics');
+const { performance } = require('perf_hooks');
+
+
+// Local imports.
+const fileOps = require('./fileOps');
+const parseHelper = require('./parseHelper');
+
+
+// Logging set up.
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
+console.log = function(d) {
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+};
+
+
+// Email set up.
+let nodemailer = require('nodemailer');
+let {mailOptions, mailError} = require('./email')
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'mediacatut@gmail.com',
+      pass: "DO NOT COMMIT THIS password"
+    }
+});
+
+
+// Database set up.
 const mongoose = require('mongoose');
 // let db = require('./database.js')
 let db = "";
 let memInfo = require('./monitor/memoryInfo')
-
-let argv = require('minimist')(process.argv.slice(2));
-
-let maxRequests = 20;
-
 mongoose.connection
   .once('open', () => console.log('Connected to DB'))
   .on('error', (error) => { 
       console.log("Your Error", error);
   });
 
-console.log = function(d) {
-  log_file.write(util.format(d) + '\n');
-  log_stdout.write(util.format(d) + '\n');
-};
+
+// Args set up.
+let argv = require('minimist')(process.argv.slice(2));
+
+
+// Default maximum number of requests to crawl.
+let maxRequests = 20;
+
+
+// Filter function.
 function Filter(url, domain_url, valid_links) {
     // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
     result = !valid_links.includes(url) && (url != domain_url)
@@ -66,144 +88,64 @@ function Filter(url, domain_url, valid_links) {
     return result
 }
 
-function getParsedArticle(url, html) {
-    var doc = new JSDOM(html, {
-        url: url
-      });
-    let reader = new Readability(doc.window.document);
-    let article = reader.parse();
-    return article
-}
 
-function getParsedArticle(url, html) {
-    var doc = new JSDOM(html, {
-        url: url
-      });
-    let reader = new Readability(doc.window.document);
-    let article = reader.parse();
-    return article
-}
-
-function parseCSV(file){
-    var urls = [];
-    // Read the file.
-    var csv_file = fs.readFileSync(file, 'utf8');
-    // Parse the file into a list of objects.
-    const csv_list = parse(csv_file, {
-        columns: true
-    });
-    // Format the data to only get the urls.
-    for (let row of csv_list) {
-        // Make sure that there is a slash at the end.
-        let domain = row["Source"];
-        if (domain[domain.length - 1] !== '/') {
-            domain += '/';
-        }
-        // Push the domain to the list.
-        urls.push(domain);
-    }
-    // Return the list of domain urls.
-    return urls;
-    // Asynchronous method below.
-    // fs.createReadStream(file)
-    // .pipe(csv())
-    // .on('data', (row) => {
-    //   urls.push(row["Source"]);
-    // //   console.log(row);
-    // })
-    // .on('end', () => {
-    //   // print CSV file successfully processed
-    //   console.log('CSV file successfully processed');
-    // //   console.log(urls);
-    //   return urls;
-    // });
-}
-
-// Uncomment to see monitoring of the environment on the output
-
+// Monitor the environment.
 // var monitoring = appmetrics.monitor();
-
 // monitoring.on('initialized', function (env) {
 //     env = monitoring.getEnvironment();
 //     for (var entry in env) {
 //         console.log(entry + ':' + env[entry]);
 //     };
 // });
-
 // monitoring.on('cpu', function (cpu) {
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'mediacatut@gmail.com',
-      pass: "DO NOT COMMIT THIS password"
-    }
-});
 
 Apify.main(async () => {
+
+    // Argument Parsing.
     // Get the urls from the command line arguments.
     var is_url = false;
-
     var url_list = []
     let batchScopeFile = []
-
-    // If a CSV file is given, parse it.
-    // if (process.argv[2] == "-f") {
-    //     var url_list = parseCSV(process.argv[3]);
-    // } else {
-    //     var url_list = [];
-    //     process.argv.forEach(function (val, index, array) {
-    //         // Add the links.
-    //         if(is_url) {
-    //             url_list.push(val);
-    //         }
-    //         // If it is a flag for the link.
-    //         if (val === "-l") {
-    //             is_url = true;
-    //         }
-    //     });
-    // }
-
     if ("f" in argv) {
-        url_list = parseCSV(argv.f);
+        url_list = parseHelper.parseCSV(argv.f);
         batchScopeFile = url_list
     } else {
+        // If the links are provided in the arguments.
         url_list = [];
-
         var links = argv._ // where the links are in the argv dic
-
         links.forEach(function (val, index, array) {
             url_list.push(val);
         });
-
         batchScopeFile = url_list
     }
-
+    // Get the number of requests.
     if ("n" in argv) {
         var number = argv.n
 
         if (number === "Infinity" || number == "infinity" || number == "inf") {
-            maxRequests = Infinity
+            maxRequests = Infinity;
         } else {
-            maxRequests = parseInt(number)
+            maxRequests = parseInt(number);
         }
     }
-    
+    // Configure the database.
     if ("t" in argv) {
-        db = require('./test/crawl-test/database.js')
+        db = require('./test/crawl-test/database.js');
     } else {{
-        db = require('./database.js')
+        db = require('./database.js');
     }}
-
+    // Configure the batch scope.
     if ("b" in argv) {
-        batchScopeFile = parseCSV(argv.b)
+        batchScopeFile = parseHelper.parseCSV(argv.b);
     }
-
+    // Logging.
     console.log(argv); // output the arguments
 
     console.log(url_list);  // Ouput the links provided.
+
 
     // Create the JSON object to store the tuples of links and titles for each url.
     var output_dict = {};
@@ -224,15 +166,10 @@ Apify.main(async () => {
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     }
-    console.log('making results directory...')
+    console.log('Making results directory...');
 
     // Create a directory to hold all the individual JSON files.
-    fs.mkdir(path.join(__dirname, 'results'), (err) => { 
-        if (err) { 
-            return console.error(err);
-        } 
-        console.log('Results folder created.'); 
-    }); 
+    fileOps.mkDir("Results");
 
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
@@ -257,12 +194,12 @@ Apify.main(async () => {
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);   // Get the HTML content of the page.
 
             // Use readability.js to read information about the article.
-            parsedArticle = getParsedArticle(request.url, bodyHTML);
+            parsedArticle = parseHelper.getParsedArticle(request.url, bodyHTML);
 
             const hrefs = await page.$$eval('a', as => as.map(a => a.href));    // Get all the hrefs with the links.
             const titles = await page.$$eval('a', as => as.map(a => a.title));  // Get the titles of all the links.
             const texts = await page.$$eval('a', as => as.map(a => a.text));    // Get the text content of all the a tags.
-            
+
 
             // Create the list of tuples for this url.
             var valid_links = [];
@@ -381,7 +318,6 @@ Apify.main(async () => {
 
 
             // Enqueue the deeper URLs to crawl manually
-
             for (var i = 0, l = tuple_list.length; i < l; i++) {
                 await requestQueue.addRequest({ url: tuple_list[i].url });
             }
@@ -403,11 +339,11 @@ Apify.main(async () => {
     try {
         console.log('running the crawler...\n')
         await crawler.run();
-        await sendMail(mailOptions)
+        await sendMail(mailOptions);
 
     } catch(e){
         console.log(e)
-        await sendMail(mailOptions)   
+        await sendMail(mailOptions);
     }
 
     const t1 = performance.now();
@@ -417,34 +353,9 @@ Apify.main(async () => {
     // Delete the apify storage.
     // Note: If the apify_storage file is not removed, it doesn't crawl
     // during subsequent runs.
-    // Implementation of rmdir.
     // console.log(JSON.stringify(output_dict));
-    
-    const rmDir = function (dirPath, removeSelf) {
-    if (removeSelf === undefined)
-        removeSelf = true;
-    try {
-        var files = fs.readdirSync(dirPath);
-    } catch (e) {
-        // throw e
-        return;
-    }
-    if (files.length > 0)
-        for (let i = 0; i < files.length; i++) {
-        const filePath = path.join(dirPath, files[i]);
-        if (fs.statSync(filePath).isFile())
-            fs.unlinkSync(filePath);
-        else
-            rmDir(filePath);
-        }
-    if (removeSelf)
-        fs.rmdirSync(dirPath);
-    };
-
     console.log("removing apify storage")
-    rmDir('./apify_storage/', true);
-
-
+    fileOps.rmDir('./apify_storage/', true);
 });
 
 
@@ -463,24 +374,3 @@ function sendMail (mailOptions){
     });
 
  }
-
- function rmDir (dirPath, removeSelf){
-    if (removeSelf === undefined)
-        removeSelf = true;
-    try {
-        var files = fs.readdirSync(dirPath);
-    } catch (e) {
-        // throw e
-        console.error(e);
-    }
-    if (files.length > 0)
-        for (let i = 0; i < files.length; i++) {
-        const filePath = path.join(dirPath, files[i]);
-        if (fs.statSync(filePath).isFile())
-            fs.unlinkSync(filePath);
-        else
-            rmDir(filePath);
-        }
-    if (removeSelf)
-        fs.rmdirSync(dirPath);
-    };
