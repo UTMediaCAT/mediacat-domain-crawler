@@ -1,8 +1,9 @@
 # Execute Watching Application
 
+
 `npm install`
 
-`nodemon app.js`
+`nodemon app.js` Suggestion: Execute this command in a screen!
 
 
 The `links.csv` notes down the progress as well.
