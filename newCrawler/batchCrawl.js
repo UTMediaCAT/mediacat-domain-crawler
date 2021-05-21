@@ -26,7 +26,6 @@ const JSDOM = require('jsdom').JSDOM;
 // let appmetrics = require('appmetrics');
 const { v5: uuidv5 } = require('uuid');
 const { performance } = require('perf_hooks');
-// const { performance } = require('perf_hooks');
 
 // Local imports.
 const fileOps = require('./fileOps');
