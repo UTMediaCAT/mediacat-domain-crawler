@@ -309,7 +309,7 @@ Apify.main(async () => {
                     found_urls: tuple_list
                 }
                 
-                let folderName = "results/" + url_list[listIndex].replace(/[^a-z0-9]/gi, '_').toLowerCase() + "/"
+                let folderName = "Results/" + url_list[listIndex].replace(/[^a-z0-9]/gi, '_').toLowerCase() + "/"
 
                 // Create a directory to hold all this domain's files.
                 fileOps.mkDir(folderName);
