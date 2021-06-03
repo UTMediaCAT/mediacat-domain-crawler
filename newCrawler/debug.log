@@ -1,267 +1,1172 @@
-INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Darwin","nodeVersion":"v12.18.3"}
-WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Volumes/Raiyan-External-HDD 1/School/University/Work-Study/Repositories/mediacat-domain-crawler/newCrawler/apify_storage"
+INFO: System info {"apifyVersion":"0.19.1","apifyClientVersion":"0.5.26","osType":"Darwin","nodeVersion":"v14.15.3"}
+WARNING: Neither APIFY_LOCAL_STORAGE_DIR nor APIFY_TOKEN environment variable is set, defaulting to APIFY_LOCAL_STORAGE_DIR="/Users/john/Development/mediacat-domain-crawler/newCrawler/apify_storage"
+{
+  _: [
+    'https://www.nytimes.com/',
+    'https://www.aljazeera.com/',
+    'https://www.cnn.com'
+  ],
+  n: 5
+}
 [
-  'https://www.tvnz.co.nz/one-news/',
-  'https://7days.ru/',
-  'https://www.aamulehti.fi/',
-  'https://abcnews.go.com/',
-  'https://www.aberdeennews.com/',
-  'https://www.ad.nl/',
-  'https://www.adnkronos.com/',
-  'https://africanmanager.com/',
-  'https://www.afp.com/en/',
-  'https://www.afp.com/',
-  'https://www.agi.it/',
-  'https://www.alarab.com/',
-  'https://www.alarabiya.net/',
-  'https://www.alaraby.co.uk/',
-  'https://www.albawaba.com/',
-  'https://alghad.com/',
+  'https://www.nytimes.com/',
   'https://www.aljazeera.com/',
-  'http://almashareq.com/',
-  'http://english.ahram.org.eg/',
-  'https://www.al-akhbar.com/',
-  'http://aljazeerah.info/',
-  'https://www.al-monitor.com/',
-  'http://www.aps.dz/',
-  'https://allafrica.com/',
-  'https://www.alternet.org/',
-  'https://www.ambito.com/',
-  'https://www.americanisraelite.com/',
-  'https://www.adn.com/',
-  'https://www.aa.com.tr/',
-  'https://www.anp.nl/',
-  'http://www.ansa.it/',
-  'https://answersingenesis.org/answers/magazine/',
-  'https://en.antaranews.com/',
-  'https://www.antiwar.com/',
-  'https://www.aporrea.org/',
-  'https://www.appeal-democrat.com/',
-  'http://www.arabnews.com/',
-  'https://www.artforum.com/',
-  'https://ag.org/',
-  'https://atlantajewishtimes.timesofisrael.com/',
-  'https://gellerreport.com/',
-  'https://www.keystone-sda.ch/',
-  'https://www.statesman.com/',
-  'https://www.afr.com/',
-  'https://www.axios.com/',
-  'http://axisoflogic.com/',
-  'https://www.bna.bh/',
-  'https://jewishtimes.com/',
-  'http://www.bpnews.net/',
-  'https://www.bbc.com/news/',
-  'https://www.bharian.com.my/',
-  'https://www.morgenpost.de/',
-  'http://bernama.com/en/',
-  'https://www.bloomberg.com/',
-  'https://www.bndestem.nl/',
-  'http://bostonglobe.com/',
-  'https://www.bd.nl/',
-  'https://www.breakingisraelnews.com/',
-  'https://www.breakingnews.ie/',
-  'https://briarpatchmagazine.com/',
-  'https://www.breitbart.com/',
-  'http://buffalonews.com/',
-  'https://www.buzzfeed.com/',
-  'https://calgaryherald.com/',
-  'https://www.capebretonpost.com/',
-  'http://www.caretas.com.pe/',
-  'http://www.cartacapital.com.br/',
-  'https://www.cbsnews.com/',
-  'http://www.charentelibre.fr/',
-  'https://www.charismamag.com/',
-  'https://www.chicagojewishnews.com/',
-  'https://chicago.suntimes.com/',
-  'https://www.chicagotribune.com/',
-  'http://chinadaily.com.cn/',
-  'http://www.ecns.cn/',
-  'https://www1.cbn.com/',
-  'https://www.christiancentury.org/',
-  'https://www.christianheadlines.com/',
-  'https://christiannewsjournal.com/',
-  'https://www.csmonitor.com/',
-  'https://www.christianitytoday.com/',
-  'https://citizentruth.org/',
-  'http://www.clarin.com/',
-  'https://www.clevelandjewishnews.com/',
-  'https://www.cnn.com/',
-  'https://www.cogencis.com/newssection/news/',
-  'http://www.cjr.org/',
-  'http://columbian.com/',
-  'https://columbustelegram.com/',
-  'https://www.commondreams.org/',
-  'https://www.concordmonitor.com/',
-  'https://www.corriere.it/',
-  'https://www.counter-currents.com/',
-  'http://www.counterpunch.org/',
-  'https://www.crikey.com.au/',
-  'https://www.ctk.eu/',
-  'https://cyprus-mail.com/',
-  'https://www.dvhn.nl/',
-  'https://www.dailybreeze.com/',
-  'https://www.dailymail.co.uk/',
-  ... 1271 more items
+  'https://www.cnn.com'
 ]
-Using existing results folder.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+Making results directory...
+running the crawler...
+
+INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":20,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
+INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
+Title of "https://www.cnn.com" is "CNN - Breaking News, Latest News and Videos"
+Call to "https://www.cnn.com" took 1.8220068420171742 seconds.
+Title of "https://www.nytimes.com/" is "The New York Times - Breaking News, US News, World News and Videos"
+Title of "https://www.aljazeera.com/" is "Breaking News, World News and Video from Al Jazeera"
+Call to "https://www.nytimes.com/" took 8.258098390936851 seconds.
+Call to "https://www.aljazeera.com/" took 1.6124395990371738 seconds.
+INFO: Crawler request statistics: {"avgDurationMillis":39665,"perMinute":3,"finished":3,"failed":0,"retryHistogram":[3]}
+INFO: AutoscaledPool state {"currentConcurrency":20,"desiredConcurrency":20,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.893},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.339},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+Title of "https://www.cnn.com/videos" is "Channels | CNN"
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/us","retryCount":1,"id":"WnpEhbUVtjK5gGe"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/politics","retryCount":1,"id":"dI0IU0HYw3Gcx95"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/privacy","retryCount":1,"id":"o2n9SB22zRsKw0R"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/health","retryCount":1,"id":"cUKovVHdt86Tez1"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business","retryCount":1,"id":"AU4TDPPeAGfa8kP"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/world","retryCount":1,"id":"AP3HDPYR9gzXtDy"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/opinions","retryCount":1,"id":"8b7hXhwXW2QDvBI"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/terms","retryCount":1,"id":"BS21kYNunM67XKs"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style","retryCount":1,"id":"neLTf14Jd716Kgs"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/us/crime-and-justice","retryCount":1,"id":"MbqSvW7OzhteZTh"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/entertainment","retryCount":1,"id":"T9iaS7ujAUkT9on"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://edition.cnn.com/?hpt=header_edition-picker","retryCount":1,"id":"uz1534tWJFXAPCA"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://us.cnn.com/?hpt=header_edition-picker","retryCount":1,"id":"mluulZO0Zip1ruJ"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"http://cnn.it/go2","retryCount":1,"id":"L9GDwV0WCpgRvUp"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://cnnespanol.cnn.com/?hpt=header_edition-picker","retryCount":1,"id":"sZAhCCNr3NY9Gop"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://arabic.cnn.com/?hpt=header_edition-picker","retryCount":1,"id":"dWLvbKogja7Z269"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/travel","retryCount":1,"id":"murenVhXS8gDSii"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/us/energy-and-environment","retryCount":1,"id":"cIqWzyM3EQGqWle"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/us/extreme-weather","retryCount":1,"id":"RhfTke29xhrWljV"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+Call to "https://www.cnn.com/videos" took 9.306432864069933 seconds.
+INFO: Crawler request statistics: {"avgDurationMillis":48076,"perMinute":2,"finished":4,"failed":0,"retryHistogram":[4]}
+INFO: AutoscaledPool state {"currentConcurrency":20,"desiredConcurrency":20,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.887},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.183},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/europe","retryCount":1,"id":"6QuJtyLdWXfNf7M"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/china","retryCount":1,"id":"MKlSGRibW9xbSXe"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/asia","retryCount":1,"id":"FF8tcNIZevBLGAn"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/election/2020/results/president","retryCount":1,"id":"bxZSIeLoDEsMP6f"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/middle-east","retryCount":1,"id":"LOC6heaIIxjeeq5"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/politics/fact-check-politics","retryCount":1,"id":"AgmYau1L9qWlU6L"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business/tech","retryCount":1,"id":"8VgwhIuHJYgghdl"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/australia","retryCount":1,"id":"uHESpVMNFXAMftz"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business/media","retryCount":1,"id":"CBoBPwOZDDzlxEN"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business/perspectives","retryCount":1,"id":"CjSaDWcx8l2j6Dd"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business/success","retryCount":1,"id":"RBV1eJMpA6CojNx"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/africa","retryCount":1,"id":"4zb1tlFi2agUg3B"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/americas","retryCount":1,"id":"cNwOdUvlJWsu4h6"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/india","retryCount":1,"id":"gaJ0fJFa9fQmlwi"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://money.cnn.com/data/markets/","retryCount":1,"id":"lE7lBE11x3liEzP"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/politics/joe-biden-news","retryCount":1,"id":"pbIS6JthsAhYypE"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/business/videos","retryCount":1,"id":"tzuYUVOJfoXs2Kg"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/space-science","retryCount":1,"id":"r6Vmu7dByjMKUFG"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/uk","retryCount":1,"id":"nMhEzXguEyYFfJH"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/opinion/opinion-politics","retryCount":1,"id":"u67lGPo8H9xvORL"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+INFO: Crawler request statistics: {"avgDurationMillis":48076,"perMinute":1,"finished":4,"failed":0,"retryHistogram":[4]}
+INFO: AutoscaledPool state {"currentConcurrency":20,"desiredConcurrency":20,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.872},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.084},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+Title of "https://www.cnn.com/specials/health/life-but-better" is "Life, But Better - CNN.com"
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/opinion/opinion-social-issues","retryCount":1,"id":"U2cJpEWh64JT3Lt"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/health/fitness-life-but-better","retryCount":1,"id":"CvkQaBUk1IKV3wv"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/health/sleep-life-but-better","retryCount":1,"id":"xl7chXihsgDo4Vm"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/health/food-life-but-better","retryCount":1,"id":"kkURq30Fq3Wsl12"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/health/mindfulness-life-but-better","retryCount":1,"id":"brxcZYkyVrIWsRT"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/entertainment/movies","retryCount":1,"id":"cdTSDzwBeJiqsPN"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/entertainment/tv-shows","retryCount":1,"id":"SOqik5SlTj9GmWd"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/entertainment/culture","retryCount":1,"id":"hucLEyxdTxq663s"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/gadget","retryCount":1,"id":"yEDtq5HrqKYy0YG"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/foreseeable-future","retryCount":1,"id":"nInFODQhArOkQaw"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/mission-ahead","retryCount":1,"id":"nj7mpjV7e8wguEj"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/work-transformed","retryCount":1,"id":"yTzDCtZ5KoELUHj"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/design","retryCount":1,"id":"laNJnRS9EqvP4qx"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/upstarts","retryCount":1,"id":"4SV8GMzvEKQOrXb"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/arts","retryCount":1,"id":"HRgDg3IQIRKCbnP"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/innovative-cities","retryCount":1,"id":"LUjTTYc58SBbrrx"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/health/relationships-life-but-better","retryCount":1,"id":"wimgjBVxGdrI5WD"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/entertainment/celebrities","retryCount":1,"id":"TMjG5pLsrsF13Ij"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tech/innovate","retryCount":1,"id":"QcmIxDb2Nbz34E6"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+Call to "https://www.cnn.com/specials/health/life-but-better" took 10.01513392806055 seconds.
 INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 5 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 0.05967848600074621 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 5 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://7days.ru/ 0.04835256700031465 milliseconds.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 10 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 10 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 0.04508995399996607 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 10 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 10 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://7days.ru/ 0.051621081998572294 milliseconds.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 15 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 15 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 18 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 0.046493503000587744 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 15 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 15 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 16 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":null,"perMinute":0,"finished":0,"failed":0,"retryHistogram":[]}
-Finished crawling https://7days.ru/ 0.043583487998694714 milliseconds.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001" is "History beckons for Kiwi cyclist George Bennett with shot at Giro d'Italia glory | 1 NEWS | TVNZ"
-Title of "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1" is "History beckons for Kiwi cyclist George Bennett with shot at Giro d'Italia glory | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1
-Call to "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1?auto=6252257778001" took 1.4571816850006591 seconds.
-Call to "https://www.tvnz.co.nz/one-news/sport/other/history-beckons-kiwi-cyclist-george-bennett-shot-giro-ditalia-glory-v1" took 1.4914948180001222 seconds.
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-Title of "https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club" is "Phoenix captain Ulises Davila in contract talks to stay at Wellington club | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club
-Call to "https://www.tvnz.co.nz/one-news/sport/football/phoenix-captain-ulises-davila-in-contract-talks-stay-wellington-club" took 0.6487046019993734 seconds.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 21 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":4659,"perMinute":21,"finished":3,"failed":0,"retryHistogram":[3]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 8.47549640900083 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://7days.ru/news/sports/" is "Новости - Спорт - 7Дней.ру"
-Saving PDF of https://7days.ru/news/sports/
-Call to "https://7days.ru/news/sports/" took 1.036468795999884 seconds.
-Title of "https://7days.ru/news/politics/" is "Политики - новости о политиках, политических деятелях России и мира - 7Дней.ру"
-Saving PDF of https://7days.ru/news/politics/
-Call to "https://7days.ru/news/politics/" took 1.091152865000069 seconds.
-Title of "https://7days.ru/stars/" is "Все о звездах, знаменитости, знаменитые люди - фото, видео, биография - 7Дней.ру"
-Saving PDF of https://7days.ru/stars/
-Title of "https://7days.ru/news/world/" is "В мире - новости о важных событиях в России и в мире - 7Дней.ру"
-Title of "https://7days.ru/stars/chronic/" is "Светская хроника и новости светской жизни 2020 - 7Дней.ру"
-Saving PDF of https://7days.ru/news/world/
-Saving PDF of https://7days.ru/stars/chronic/
-Call to "https://7days.ru/stars/" took 2.732267424000426 seconds.
-Call to "https://7days.ru/news/world/" took 1.881381539000202 seconds.
-Call to "https://7days.ru/stars/chronic/" took 2.245438967999071 seconds.
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 20 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 20 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 21 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":9344,"perMinute":16,"finished":5,"failed":0,"retryHistogram":[5]}
-Finished crawling https://7days.ru/ 19.279916337998586 milliseconds.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue" is "Highlanders to host trans-Tasman Super Rugby match at picturesque Queenstown venue | 1 NEWS | TVNZ"
-Title of "https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney" is "Ex-NRL star Sam Burgess back in court after admitting to drug driving in Sydney | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney
-Call to "https://www.tvnz.co.nz/one-news/sport/rugby/highlanders-host-trans-tasman-super-rugby-match-picturesque-queenstown-venue" took 0.6326975360009826 seconds.
-Call to "https://www.tvnz.co.nz/one-news/sport/league/ex-nrl-star-sam-burgess-back-in-court-after-admitting-drug-driving-sydney" took 0.6051520229987801 seconds.
-Title of "https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl" is "Kiwi cricketers not looking to get out of India after Covid-19 reaches IPL | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl
-Title of "https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi" is "From warehouse night shifts to an NRL debut: The rapid rise of new Warrior Ed Kosi | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi
-Call to "https://www.tvnz.co.nz/one-news/sport/cricket/kiwi-cricketers-not-looking-get-india-after-covid-19-reaches-ipl" took 0.8000630829986193 seconds.
-Call to "https://www.tvnz.co.nz/one-news/sport/league/warehouse-night-shifts-nrl-debut-rapid-rise-new-warrior-ed-kosi" took 0.6040030290000118 seconds.
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 25 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-Title of "https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59" is "Silver Ferns great Margaret Forsyth dies aged 59 | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59
-Call to "https://www.tvnz.co.nz/one-news/sport/netball/silver-ferns-great-margaret-forsyth-dies-aged-59" took 0.585598037000743 seconds.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 25 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 26 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":3472,"perMinute":30,"finished":5,"failed":0,"retryHistogram":[5]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 9.972347200000662 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://7days.ru/stars/ratings/" is "Топы и подборки фактов о звездах и знаменитостях - 7Дней.ру"
-Saving PDF of https://7days.ru/stars/ratings/
-Title of "https://7days.ru/stars/privatelife/" is "Частная и личная жизнь звезд, актеров, знаменитостей, фото, обсуждение - 7Дней.ру"
-Saving PDF of https://7days.ru/stars/privatelife/
-Call to "https://7days.ru/stars/ratings/" took 2.030894915999845 seconds.
-Call to "https://7days.ru/stars/privatelife/" took 1.2405233190003813 seconds.
-Title of "https://7days.ru/stars/bio/" is "Энциклопедия звезд - 7Дней.ру"
-Saving PDF of https://7days.ru/stars/bio/
-Call to "https://7days.ru/stars/bio/" took 1.0796611480005112 seconds.
-Title of "https://7days.ru/beauty/makeup/" is "Макияж - Красота - 7Дней.ру"
-Title of "https://7days.ru/beauty/novelty/" is "Новинки - Красота - 7Дней.ру"
-Title of "https://7days.ru/beauty/" is "Красота - 7Дней.ру"
-Saving PDF of https://7days.ru/beauty/makeup/
-Saving PDF of https://7days.ru/beauty/novelty/
-Saving PDF of https://7days.ru/beauty/
-Call to "https://7days.ru/beauty/makeup/" took 2.753903021000326 seconds.
-Call to "https://7days.ru/beauty/novelty/" took 2.1176066629998402 seconds.
-Call to "https://7days.ru/beauty/" took 1.6893694369997831 seconds.
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 25 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 25 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 27 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":6214,"perMinute":21,"finished":6,"failed":0,"retryHistogram":[6]}
-Finished crawling https://7days.ru/ 17.033608493000273 milliseconds.
-CRAWLING THROUGH https://www.tvnz.co.nz/one-news/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury" is "Black Caps breathe sigh of relief as Ross Taylor cleared of serious injury | 1 NEWS | TVNZ"
-Title of "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001" is "Black Caps breathe sigh of relief as Ross Taylor cleared of serious injury | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001
-Call to "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury" took 0.8926185710001775 seconds.
-Call to "https://www.tvnz.co.nz/one-news/sport/cricket/black-caps-breathe-sigh-relief-ross-taylor-cleared-serious-injury?auto=6251998144001" took 1.0047527229990791 seconds.
-Title of "https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland" is "Black Sox name 31-strong training squad as focus turns to next year's Softball World Cup in Auckland | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland
-Title of "https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban" is "Scott Morrison dismisses 'absurd' claims by Aussie cricketer he has blood on his hands for India travel ban | 1 NEWS | TVNZ"
-Call to "https://www.tvnz.co.nz/one-news/sport/other/black-sox-name-31-strong-training-squad-focus-turns-next-years-softball-world-cup-in-auckland" took 0.5456679679993641 seconds.
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban
-Call to "https://www.tvnz.co.nz/one-news/sport/cricket/scott-morrison-dismisses-absurd-claims-aussie-cricketer-he-has-blood-his-hands-india-travel-ban" took 0.5032060879990468 seconds.
-INFO: BasicCrawler: Crawler reached the maxRequestsPerCrawl limit of 30 requests and will shut down soon. Requests that are in progress will be allowed to finish.
-Title of "https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours" is "On a hat-trick: Black Caps add No.1 ODI rank to top Test team honours | 1 NEWS | TVNZ"
-Saving PDF of https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours
-Call to "https://www.tvnz.co.nz/one-news/sport/cricket/hat-trick-black-caps-add-no-1-odi-rank-top-test-team-honours" took 0.44183228099903715 seconds.
-INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 30 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 31 requests and will shut down.
-INFO: Crawler final request statistics: {"avgDurationMillis":3450,"perMinute":31,"finished":5,"failed":0,"retryHistogram":[5]}
-Finished crawling https://www.tvnz.co.nz/one-news/ 9.87594313799962 milliseconds.
-CRAWLING THROUGH https://7days.ru/
-INFO: AutoscaledPool: Setting max memory of this run to 2048 MB. Use the APIFY_MEMORY_MBYTES environment variable to override it.
-INFO: AutoscaledPool state {"currentConcurrency":0,"desiredConcurrency":2,"systemStatus":{"isSystemIdle":true,"memInfo":{"isOverloaded":false,"limitRatio":0.2,"actualRatio":null},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":null},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":null}}}
-INFO: Launching Puppeteer {"headless":true,"stealth":true,"useChrome":false,"args":["--no-sandbox","--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36"],"timeout":15000,"defaultViewport":{"width":1366,"height":768}}
-Title of "https://7days.ru/beauty/secrets/" is "Секреты красоты - Красота - 7Дней.ру"
-Saving PDF of https://7days.ru/beauty/secrets/
-Title of "https://7days.ru/beauty/hairstyles/" is "Причёски - Красота - 7Дней.ру"
+INFO: Crawler request statistics: {"avgDurationMillis":52158,"perMinute":1,"finished":5,"failed":0,"retryHistogram":[5]}
+INFO: AutoscaledPool state {"currentConcurrency":19,"desiredConcurrency":20,"systemStatus":{"isSystemIdle":false,"memInfo":{"isOverloaded":true,"limitRatio":0.2,"actualRatio":0.844},"eventLoopInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0.181},"cpuInfo":{"isOverloaded":false,"limitRatio":0.4,"actualRatio":0},"clientInfo":{"isOverloaded":false,"limitRatio":0.3,"actualRatio":0}}}
+Title of "https://www.cnn.com/audio" is "CNN Audio - Podcasts and News Briefs"
+Call to "https://www.cnn.com/audio" took 8.402717041015649 seconds.
+Title of "https://cnn.it/go2" is "CNNgo – Watch CNN TV live"
+Call to "https://cnn.it/go2" took 2.8874307060241904 seconds.
+Title of "https://www.cnn.com/travel/stay" is "Places to Stay | CNN Travel"
+Title of "https://www.cnn.com/style/architecture" is "Architecture news and features from around the world - CNN Style"
+Title of "https://www.cnn.com/specials/digital-studios" is "Digital Studios - CNN"
+Title of "https://www.cnn.com/specials/videos/hln" is "HLN - CNN"
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/beauty","retryCount":1,"id":"5qTMk1QcKLSzUTl"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/luxury","retryCount":1,"id":"ddi8JCjVwcFJkBl"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/travel/videos","retryCount":1,"id":"ZZ3nEfHr6NkaWW5"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/fashion","retryCount":1,"id":"mdZSftIXXKlCIW7"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/tv/all-shows","retryCount":1,"id":"yFpjQO2iuhKoHWL"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/sport/olympics","retryCount":1,"id":"jFj1O5IT3L5Kfbx"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/specials/videos/digital-shorts","retryCount":1,"id":"dso4Sd6ytPi3nWD"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/tv/schedule/cnn","retryCount":1,"id":"Thg0yTmPXa9Qj2H"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/travel/food-and-drink","retryCount":1,"id":"GnsQwuQFsPFtrqU"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/travel/destinations","retryCount":1,"id":"dIgEONyqJpGHhU3"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/travel/news","retryCount":1,"id":"yeR9ozT75ogL95h"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/vr","retryCount":1,"id":"Dym7lJQB4859URF"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:523:9)
+    at processTimers (internal/timers.js:497:7)
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+ERROR: BasicCrawler: handleRequestFunction failed, reclaiming failed request back to the list or queue {"url":"https://www.cnn.com/style/videos","retryCount":1,"id":"1kJ01NBSBacZLfq"}
+  TimeoutError: Navigation timeout of 60000 ms exceeded
+    at /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/LifecycleWatcher.js:142:21
+  -- ASYNC --
+    at Frame.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:111:15)
+    at Page.goto (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/Page.js:675:49)
+    at Page.<anonymous> (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/node_modules/puppeteer/lib/helper.js:112:23)
+    at gotoExtended (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/puppeteer_utils.js:473:15)
+    at PuppeteerCrawler._defaultGotoFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:365:46)
+    at PuppeteerCrawler._handleRequestFunction (/Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/crawlers/puppeteer_crawler.js:325:35)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /Users/john/Development/mediacat-domain-crawler/newCrawler/node_modules/apify/build/utils.js:409:20
+Call to "https://www.cnn.com/specials/videos/hln" took 8.78898809909822 seconds.
+Call to "https://www.cnn.com/specials/digital-studios" took 8.795600620031337 seconds.
+INFO: Crawler request statistics: {"avgDurationMillis":52624,"perMinute":2,"finished":9,"failed":0,"retryHistogram":[9]}
+Call to "https://www.cnn.com/travel/stay" took 19.86257382893558 seconds.
+Call to "https://www.cnn.com/style/architecture" took 20.64973784899712 seconds.
+INFO: BasicCrawler: Earlier, the crawler reached the maxRequestsPerCrawl limit of 5 requests and all requests that were in progress at that time have now finished. In total, the crawler processed 11 requests and will shut down.
+INFO: Crawler final request statistics: {"avgDurationMillis":55659,"perMinute":2,"finished":11,"failed":0,"retryHistogram":[11]}

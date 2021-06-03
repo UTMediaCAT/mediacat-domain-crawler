@@ -1,0 +1,6 @@
+{
+    "host": "206.12.91.146",
+    "port": 22,
+    "username": "root",
+    "privateKeyFile": "/Users/john/Desktop/id_ecdsa.pub"
+}

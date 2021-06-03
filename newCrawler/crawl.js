@@ -39,7 +39,7 @@ console.log = function(d) {
 
 
 // Email set up.
-let nodemailer = require('nodemailer');
+/*let nodemailer = require('nodemailer');
 let {mailOptions, mailError} = require('./email')
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -47,19 +47,19 @@ let transporter = nodemailer.createTransport({
       user: 'mediacatut@gmail.com',
       pass: "DO NOT COMMIT THIS password"
     }
-});
+});*/
 
 
 // Database set up.
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 // let db = require('./database.js')
-let db = "";
-let memInfo = require('./monitor/memoryInfo')
-mongoose.connection
+//let db = "";
+//let memInfo = require('./monitor/memoryInfo')
+/*mongoose.connection
   .once('open', () => console.log('Connected to DB'))
   .on('error', (error) => { 
       console.log("Your Error", error);
-  });
+  });*/
 
 
 // Args set up.
@@ -132,11 +132,11 @@ Apify.main(async () => {
         }
     }
     // Configure the database.
-    if ("t" in argv) {
+   /* if ("t" in argv) {
         db = require('./test/crawl-test/database.js');
     } else {{
         db = require('./database.js');
-    }}
+    }}*/
     // Configure the batch scope.
     if ("b" in argv) {
         batchScopeFile = parseHelper.parseCSV(argv.b);
@@ -302,12 +302,12 @@ Apify.main(async () => {
 
             //Write into a database
 
-            let metaObj = new db.metaModel(elem);
+        /*   let metaObj = new db.metaModel(elem);
 
             await metaObj.save();
 
-            // print memory stats about process
-            memInfo.getMemoryInfo(process.memoryUsage())
+            print memory stats about process
+            memInfo.getMemoryInfo(process.memoryUsage())*/
 
             // Add this list to the dict.
             output_dict[request.url] = elem;
@@ -339,11 +339,11 @@ Apify.main(async () => {
     try {
         console.log('running the crawler...\n')
         await crawler.run();
-        await sendMail(mailOptions);
+       // await sendMail(mailOptions);
 
     } catch(e){
         console.log(e)
-        await sendMail(mailOptions);
+       // await sendMail(mailOptions);
     }
 
     const t1 = performance.now();
@@ -359,7 +359,7 @@ Apify.main(async () => {
 });
 
 
-function sendMail (mailOptions){
+/*function sendMail (mailOptions){
     return new Promise(function (resolve, reject){
        transporter.sendMail(mailOptions, (err, info) => {
           if (err) {
@@ -373,4 +373,4 @@ function sendMail (mailOptions){
        });
     });
 
- }
+ }*/

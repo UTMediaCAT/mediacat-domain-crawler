@@ -3,7 +3,7 @@
 
 This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
-At the end of the crawl, it can notify by email whether the crawl stopped or not. OThe email aspect must be set up first before the crawl. (or ignored if not desired)
+At the end of the crawl, it can notify by email whether the crawl stopped or not. The email aspect must be set up first (see [here](#using-email) for more) before the crawl (or ignored if not desired).
 
 Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
 
@@ -16,7 +16,24 @@ npm install
 
 `cd newCrawler` to get to the crawl.js script
 
+using email
+== 
+
+To setup email notifications, uncomment the following segments in _crawl.js_:
+- lines 42-50
+- line 342
+- line 346
+- lines 362-376 <br/>
+
+using a database
+================
+To setup and use a database, uncomment the following segments in _crawl.js_:
+- lines 54-62
+- lines 135-139
+- lines 305-310
+
 # run the puppeteer crawler 
+
 node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf
 
 # run the cheerio crawler 
