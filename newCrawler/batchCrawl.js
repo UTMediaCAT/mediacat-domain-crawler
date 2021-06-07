@@ -315,7 +315,8 @@ Apify.main(async () => {
                 fileOps.mkDir(folderName);
 
                 // Create a JSON for this link with a uuid.
-                let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
+                let timestamp = new Date().getTime();
+                let fileName = uuidv5(request.url, uuidv5.URL) + "_" + timestamp.toString() +  ".json";
                 fs.writeFileSync(folderName + fileName, JSON.stringify(elem), function(err) {
                     if (err) throw err;
                 });
@@ -324,7 +325,7 @@ Apify.main(async () => {
                 if (savePDF) {
                     console.log("Saving PDF of " + request.url);
                     const pdfBuffer = await page.pdf({ format: 'A4' });
-                    let pdfName = uuidv5(request.url, uuidv5.URL);
+                    let pdfName = uuidv5(request.url, uuidv5.URL) + "_" + timestamp.toString();
                     await store.setValue(pdfName, pdfBuffer, { contentType: 'application/pdf' });
                 }
 
