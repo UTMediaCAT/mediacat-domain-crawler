@@ -131,12 +131,12 @@ Apify.main(async () => {
             maxRequests = parseInt(number);
         }
     }
-    // Configure the database.
-    if ("t" in argv) {
-        db = require('./test/crawl-test/database.js');
-    } else {{
-        db = require('./database.js');
-    }}
+    // // Configure the database.
+    // if ("t" in argv) {
+    //     db = require('./test/crawl-test/database.js');
+    // } else {{
+    //     db = require('./database.js');
+    // }}
     // Configure the batch scope.
     if ("b" in argv) {
         batchScopeFile = parseHelper.parseCSV(argv.b);
