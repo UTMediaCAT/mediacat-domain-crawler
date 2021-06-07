@@ -38,28 +38,28 @@ console.log = function(d) {
 };
 
 
-// Email set up.
-let nodemailer = require('nodemailer');
-let {mailOptions, mailError} = require('./email')
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'mediacatut@gmail.com',
-      pass: "DO NOT COMMIT THIS password"
-    }
-});
+// // Email set up.
+// let nodemailer = require('nodemailer');
+// let {mailOptions, mailError} = require('./email')
+// let transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: 'mediacatut@gmail.com',
+//       pass: "DO NOT COMMIT THIS password"
+//     }
+// });
 
 
-// Database set up.
-const mongoose = require('mongoose');
-// let db = require('./database.js')
-let db = "";
-let memInfo = require('./monitor/memoryInfo')
-mongoose.connection
-  .once('open', () => console.log('Connected to DB'))
-  .on('error', (error) => { 
-      console.log("Your Error", error);
-  });
+// // Database set up.
+// const mongoose = require('mongoose');
+// // let db = require('./database.js')
+// let db = "";
+// let memInfo = require('./monitor/memoryInfo')
+// mongoose.connection
+//   .once('open', () => console.log('Connected to DB'))
+//   .on('error', (error) => { 
+//       console.log("Your Error", error);
+//   });
 
 
 // Args set up.
@@ -294,20 +294,21 @@ Apify.main(async () => {
             }
 
             // Create a JSON for this link with a uuid.
-            let fileName = uuidv5(request.url, uuidv5.URL) + ".json";
+            let timestamp = new Date().getTime();
+            let fileName = uuidv5(request.url, uuidv5.URL) + "_" + timestamp.toString() + ".json";
             fs.writeFileSync(path.join(__dirname, 'results', fileName), JSON.stringify(elem), function(err) {
                 if (err) throw err;
                 console.log('complete');
             });
 
-            //Write into a database
+            // //Write into a database
 
-            let metaObj = new db.metaModel(elem);
+            // let metaObj = new db.metaModel(elem);
 
-            await metaObj.save();
+            // await metaObj.save();
 
-            // print memory stats about process
-            memInfo.getMemoryInfo(process.memoryUsage())
+            // // print memory stats about process
+            // memInfo.getMemoryInfo(process.memoryUsage())
 
             // Add this list to the dict.
             output_dict[request.url] = elem;
@@ -339,11 +340,11 @@ Apify.main(async () => {
     try {
         console.log('running the crawler...\n')
         await crawler.run();
-        await sendMail(mailOptions);
+        // await sendMail(mailOptions);
 
     } catch(e){
         console.log(e)
-        await sendMail(mailOptions);
+        // await sendMail(mailOptions);
     }
 
     const t1 = performance.now();
@@ -359,18 +360,18 @@ Apify.main(async () => {
 });
 
 
-function sendMail (mailOptions){
-    return new Promise(function (resolve, reject){
-       transporter.sendMail(mailOptions, (err, info) => {
-          if (err) {
-             console.log("error: ", err);
-             console.log("email could not be sent");
-             reject(err);
-          } else {
-             console.log(`Mail sent successfully!`);
-             resolve(info);
-          }
-       });
-    });
+// function sendMail (mailOptions){
+//     return new Promise(function (resolve, reject){
+//        transporter.sendMail(mailOptions, (err, info) => {
+//           if (err) {
+//              console.log("error: ", err);
+//              console.log("email could not be sent");
+//              reject(err);
+//           } else {
+//              console.log(`Mail sent successfully!`);
+//              resolve(info);
+//           }
+//        });
+//     });
 
- }
+//  }
