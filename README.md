@@ -20,17 +20,17 @@ using email
 == 
 
 To setup email notifications, uncomment the following segments in _crawl.js_:
-- lines 42-50
-- line 342
-- line 346
-- lines 362-376 <br/>
+- lines 41-50
+- line 343
+- line 347
+- lines 363-377 <br/>
 
 using a database
 ================
 To setup and use a database, uncomment the following segments in _crawl.js_:
-- lines 54-62
-- lines 135-139
-- lines 305-310
+- lines 53-62
+- lines 134-139
+- lines 304-311
 
 # run the puppeteer crawler 
 
