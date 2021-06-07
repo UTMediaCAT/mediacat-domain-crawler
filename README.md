@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler.svg?branch=master)](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler)
 # mediacat-domain-crawler
 
-This README pertains to the crawling aspect of the application. THe crawl script(s) would be located in the folder `/newCrawler/ `
+This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
 At the end of the crawl, it can notify by email whether the crawl stopped or not. OThe email aspect must be set up first before the crawl. (or ignored if not desired)
 
@@ -22,14 +22,16 @@ node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -
 # run the cheerio crawler 
 node --max-old-space-size=7168 crawlCheerio.js -f ../../../mediacat-hidden/domain.csv -n inf
 
-# flags
+# run the batch crawler
+node batchCrawl.js -f ../../../mediacat-hidden/domain.csv
+
+# flags (puppeteer and cheerio)
 - f (string) indicates the scope file
 - n (integer) indicates the maxrequests you would like to crawl, inf is infinity else give it an integer, default is 20
 - t () if the flag is present, use the test database
 - b (string) if b is present use the batch scope file to run a subset of the full scope. MUST appear with the -f flag
 - m () if the flag is present, manually crawl instead of using apify's automatic queue (to be implemented)
-- 
---max-old-space-size is a node process flag that sets the process to mb amount of ram
+- max-old-space-size is a node process flag that sets the process to mb amount of ram
 
 altogether it might look something like this
 
@@ -38,6 +40,21 @@ altogether it might look something like this
 or if you are just feeding single urls one by one 
 
 `node --max-old-space-size=7168 crawl.js -n 5 https://www.nytimes.com/ https://www.aljazeera.com/ https://www.cnn.com`
+
+# flags (batch)
+- l : links separated by spaces
+- f : csv file containing the scope
+- n : number of pages to crawl per round for each domain (default is 5)
+- r : the maximum number of rounds
+- pdf : use this parameter if PDFs are to be saved
+
+Some example usages are given below:
+
+node batchCrawl.js -f ../../../mediacat-hidden/domain.csv  
+node batchCrawl.js -n 10 -f ../../../mediacat-hidden/domain.csv  
+node batchCrawl.js -r 5 -f ../../../mediacat-hidden/domain.csv  
+node batchCrawl.js -pdf -f ../../../mediacat-hidden/domain.csv  
+node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/  
 
 # monitoring the results
 Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)
