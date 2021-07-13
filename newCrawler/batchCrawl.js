@@ -155,9 +155,9 @@ Apify.main(async () => {
         // Add the domain to the pseudoURLs.
         let pseudoDomain = domainURL;
         if (domainURL[domainURL.length - 1] !== "/") {
-            pseudoDomain += "/[.*]";
+            pseudoDomain += "/[.*]";    // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
         } else {
-            pseudoDomain += "[.*]";
+            pseudoDomain += "[.*]";     // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
 
