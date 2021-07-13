@@ -3,27 +3,34 @@
 
 This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
-At the end of the crawl, it can notify by email whether the crawl stopped or not. OThe email aspect must be set up first before the crawl. (or ignored if not desired)
+At the end of the crawl, it can notify by email whether the crawl stopped or not. The email aspect must be set up first before the crawl. (or ignored if not desired, it is commented out by default)
 
 Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
 
 PLEASE do not EVER commit your password. As a future issue, we should probably make a seperate constant file that is git ignored.
 
 ## prereqs
-node v14.15.3 (make sure to have this installed, or switch to it if needed `nvm use v14.15.3`)
+- Python 3
 
-npm install
+- node v14.15.3 (make sure to have this installed, or switch to it if needed `nvm use v14.15.3`)
 
-`cd newCrawler` to get to the crawl.js script
+`cd newCrawler` to get to the masterCrawler.py script
+
+`npm install` to install node dependencies
+
+# run the master crawler
+This script is run in a similar fashion as the other crawlers but receives an extra flag corresponding to the time period for which the crawler should be run after which the script will restart the crawler. This is to avoid browser timeouts and stack memory issues that are encountered on running the crawler for too long (> 30 hours). Here, the `-t` flag takes time in minutes.
+
+`python3 masterCrawler.py batchCrawl.js -l https://www.nytimes.com/ -t 300`
 
 # run the puppeteer crawler 
-node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf
+`node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf`
 
 # run the cheerio crawler 
-node --max-old-space-size=7168 crawlCheerio.js -f ../../../mediacat-hidden/domain.csv -n inf
+`node --max-old-space-size=7168 crawlCheerio.js -f ../../../mediacat-hidden/domain.csv -n inf`
 
 # run the batch crawler
-node batchCrawl.js -f ../../../mediacat-hidden/domain.csv
+`node batchCrawl.js -f ../../../mediacat-hidden/domain.csv`
 
 # flags (puppeteer and cheerio)
 - f (string) indicates the scope file
