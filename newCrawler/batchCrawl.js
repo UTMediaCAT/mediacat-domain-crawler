@@ -17,11 +17,11 @@
 // Imports.
 const fs = require('fs');
 const util = require('util');
-const path = require('path');
+// const path = require('path');
 const Apify = require('apify');
-const { exit } = require('process');
-const { transform } = require('csv');
-const JSDOM = require('jsdom').JSDOM;
+// const { exit } = require('process');
+// const { transform } = require('csv');
+// const JSDOM = require('jsdom').JSDOM;
 // const mongoose = require('mongoose');
 // let appmetrics = require('appmetrics');
 const { v5: uuidv5 } = require('uuid');
@@ -35,7 +35,7 @@ const parseHelper = require('./parseHelper');
 // Database set up.
 // let db = require('./database.js')
 // let memInfo = require('./monitor/memoryInfo');
-const { url } = require('inspector');
+// const { url } = require('inspector');
 // Open a connection to the database.
 // mongoose.connection
 //   .once('open', () => console.log('Connected to DB'))
@@ -119,12 +119,15 @@ Apify.main(async () => {
     }
 
 
-    // Create the JSON object to store the tuples of links and titles for each url.
-    var output_dict = {};
-    var incorrect_dict = {};
+    // // Create the JSON object to store the tuples of links and titles for each url. Uses up a lot of memory when used.
+    // var output_dict = {};
+    // var incorrect_dict = {};
+
     // Create a directory to hold all the individual JSON files.
     fileOps.mkDir('Results');
 
+    // Timestamp for the beginning of the crawl.
+    let startTime = Date.now();
 
     // Keep track of the number of passes across the domains.
     let round = 1;
@@ -133,10 +136,12 @@ Apify.main(async () => {
     while (infiniteRounds || round <= maxRounds) {
         // Get the domain url.
         domainURL = url_list[i];
+        // Get the time.
+        let currTime = Math.floor((Date.now() - startTime) / 1000);
         // Print out the domain that is currently being crawled.
-        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
-        console.log("ROUND " + round + ", CRAWLING URL " + (i + 1) + " of " + url_list.length + ": " + domainURL);
-        console.log('//////////////////////////////////////////////////////////////////////////////////////////////');
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////////////////////');
+        console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] ROUND ${round}, CRAWLING URL ${(i + 1)} of ${url_list.length}: ${domainURL}`);
+        console.log('//////////////////////////////////////////////////////////////////////////////////////////////////////////////');
         // Convert the domain URL to be safe to be used as a folder name.
         safeDomain = domainURL.replace(/[^a-z0-9]/gi, '_').toLowerCase()
         // Open the key-value store for this domain.
@@ -150,9 +155,9 @@ Apify.main(async () => {
         // Add the domain to the pseudoURLs.
         let pseudoDomain = domainURL;
         if (domainURL[domainURL.length - 1] !== "/") {
-            pseudoDomain += "/[.*]";
+            pseudoDomain += "/[.*]";    // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
         } else {
-            pseudoDomain += "[.*]";
+            pseudoDomain += "[.*]";     // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
 
@@ -263,13 +268,14 @@ Apify.main(async () => {
                         out_of_scope_match = hrefLink.match(general_regex)
                         if (out_of_scope_match != null) {
                             out_of_scope_domain = out_of_scope_match[domainNameIndex];
-                        
-                            if (out_of_scope_domain in incorrect_dict) {
-                                incorrect_dict[out_of_scope_domain].push(hrefLink);
-                            }
-                            else {
-                                incorrect_dict[out_of_scope_domain] = [hrefLink];
-                            }
+                            
+                            // Keep track of all out of scope links. Uses up a lot of memory when used.
+                            // if (out_of_scope_domain in incorrect_dict) {
+                            //     incorrect_dict[out_of_scope_domain].push(hrefLink);
+                            // }
+                            // else {
+                            //     incorrect_dict[out_of_scope_domain] = [hrefLink];
+                            // }
                         }
                         // Check if this domain name already exists inside.
                         local_out_of_scope.push(hrefLink);
@@ -338,8 +344,8 @@ Apify.main(async () => {
                 // print memory stats about process
                 // memInfo.getMemoryInfo(process.memoryUsage())
 
-                // Add this list to the dict.
-                output_dict[request.url] = elem;
+                // // Add this list to the dict. Uses up a lot of memory when used.
+                // output_dict[request.url] = elem;
 
                 const t3 = performance.now();
                 // Log the time for this request.
@@ -347,6 +353,7 @@ Apify.main(async () => {
 
                 // Enqueue the deeper URLs to crawl.
                 await Apify.utils.enqueueLinks({ page, selector: 'a', pseudoUrls, requestQueue });
+            
             },
             // The max concurrency and max requests to crawl through.
             // maxRequestsPerCrawl: Infinity,
@@ -363,7 +370,8 @@ Apify.main(async () => {
         // End time.
         const t1 = performance.now();
         // Log the time to run the crawler.
-        console.log(`Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} milliseconds.`);
+        currTime = Math.floor((Date.now() - startTime) / 1000);
+        console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} seconds.`);
         // Increment the index of the current url.
         i++;
         // If all urls are complete, begin the next round.

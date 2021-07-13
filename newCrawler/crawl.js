@@ -131,12 +131,12 @@ Apify.main(async () => {
             maxRequests = parseInt(number);
         }
     }
-    // Configure the database.
-    if ("t" in argv) {
-        db = require('./test/crawl-test/database.js');
-    } else {{
-        db = require('./database.js');
-    }}
+    // // Configure the database.
+    // if ("t" in argv) {
+    //     db = require('./test/crawl-test/database.js');
+    // } else {{
+    //     db = require('./database.js');
+    // }}
     // Configure the batch scope.
     if ("b" in argv) {
         batchScopeFile = parseHelper.parseCSV(argv.b);
@@ -147,9 +147,10 @@ Apify.main(async () => {
     console.log(url_list);  // Ouput the links provided.
 
 
-    // Create the JSON object to store the tuples of links and titles for each url.
-    var output_dict = {};
-    var incorrect_dict = {};
+    // // Create the JSON object to store the tuples of links and titles for each url. Uses up a lot of memory when used.
+    // var output_dict = {};
+    // var incorrect_dict = {};
+
     const requestQueue = await Apify.openRequestQueue();
     
     // Crawl the deeper URLs recursively.
@@ -171,11 +172,14 @@ Apify.main(async () => {
     // Create a directory to hold all the individual JSON files.
     fileOps.mkDir("Results");
 
+    // Timestamp for the beginning of the crawl.
+    let startTime = Date.now();
+
     // Initialize the crawler.
     const crawler = new Apify.PuppeteerCrawler({
         requestQueue,
         launchPuppeteerOptions: {
-            headless: true,
+            headless: true, // false
             stealth: true,
             useChrome: false,
         },
@@ -247,12 +251,13 @@ Apify.main(async () => {
                     if (out_of_scope_match != null) {
                         out_of_scope_domain = out_of_scope_match[domainNameIndex];
                     
-                        if (out_of_scope_domain in incorrect_dict) {
-                            incorrect_dict[out_of_scope_domain].push(hrefLink);
-                        }
-                        else {
-                            incorrect_dict[out_of_scope_domain] = [hrefLink];
-                        }
+                        // Keep track of all out of scope links. Uses up a lot of memory when used.
+                        // if (out_of_scope_domain in incorrect_dict) {
+                        //     incorrect_dict[out_of_scope_domain].push(hrefLink);
+                        // }
+                        // else {
+                        //     incorrect_dict[out_of_scope_domain] = [hrefLink];
+                        // }
                     }
                     // Check if this domain name already exists inside.
                     local_out_of_scope.push(hrefLink);
@@ -311,11 +316,12 @@ Apify.main(async () => {
             // memInfo.getMemoryInfo(process.memoryUsage())
 
             // Add this list to the dict.
-            output_dict[request.url] = elem;
+            // output_dict[request.url] = elem;
 
             const t3 = performance.now();
             // Log the time for this request.
-            console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
+            let currTime = Math.floor((Date.now() - startTime) / 1000);
+            console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
 
             // Enqueue the deeper URLs to crawl manually
@@ -338,7 +344,7 @@ Apify.main(async () => {
     // Run the crawler.
 
     try {
-        console.log('running the crawler...\n')
+        console.log('Running the crawler...\n')
         await crawler.run();
         // await sendMail(mailOptions);
 
@@ -349,7 +355,8 @@ Apify.main(async () => {
 
     const t1 = performance.now();
     // Log the time to run the crawler.
-    console.log(`Call to run Crawler took ${t1/1000.0 - t0/1000.0} milliseconds.`);
+    currTime = Math.floor((Date.now() - startTime) / 1000);
+    console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} seconds.`);
     
     // Delete the apify storage.
     // Note: If the apify_storage file is not removed, it doesn't crawl
