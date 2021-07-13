@@ -5,7 +5,7 @@
 #   the specified time intervals.
 #   Parameters: -l : links separated by spaces
 #               -f : csv file containing the scope
-#               -n : number of pages to crawl per round for each domain (default is 5)
+#               -n : number of pages per round for each domain (default is 5)
 #               -r : the maximum number of rounds
 #               -pdf : use this parameter if PDFs are to be saved
 #               -t : the amount of time to wait in minutes
@@ -13,7 +13,7 @@
 #          "python3 masterCrawler.py batchCrawl.js -n 10 -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -r 5 -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -pdf -f full_scope.csv"
-#          "python3 masterCrawler.py batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/"
+#          "python3 masterCrawler.py batchCrawl.js -l https://www.nytimes.com/"
 
 import os
 import time
@@ -49,6 +49,7 @@ else:
     command += f'-f {args.f}'
 print(f'Command constructed: {command}')
 
+
 def refreshLogs() -> None:
     """
     Move the debug log to a directory named logs and rename it to a timestamp.
@@ -60,6 +61,7 @@ def refreshLogs() -> None:
     # Rename and move the debug log to the logs directory.
     os.rename('debug.log', f'logs/{timestamp}.log')
     return
+
 
 # Infinite loop.
 while True:
