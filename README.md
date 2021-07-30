@@ -54,6 +54,7 @@ or if you are just feeding single urls one by one
 - n : number of pages to crawl per round for each domain (default is 5)
 - r : the maximum number of rounds
 - pdf : use this parameter if PDFs are to be saved
+- log : custom name for the log file (default is debug.log)
 
 Some example usages are given below:
 
@@ -62,6 +63,7 @@ node batchCrawl.js -n 10 -f ../../../mediacat-hidden/domain.csv
 node batchCrawl.js -r 5 -f ../../../mediacat-hidden/domain.csv  
 node batchCrawl.js -pdf -f ../../../mediacat-hidden/domain.csv  
 node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/  
+node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/ -log logging.log
 
 # monitoring the results
 Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)

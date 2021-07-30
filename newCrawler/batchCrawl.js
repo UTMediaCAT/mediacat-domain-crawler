@@ -7,6 +7,7 @@
                -n : number of pages to crawl per round for each domain (default is 5)
                -r : the maximum number of rounds
                -pdf : use this parameter if PDFs are to be saved
+               -log : custom filename for the log file (default is debug.log)
    Usage: "node batchCrawl.js -f full_scope.csv"
           "node batchCrawl.js -n 10 -f full_scope.csv"
           "node batchCrawl.js -r 5 -f full_scope.csv"
@@ -45,13 +46,19 @@ const parseHelper = require('./parseHelper');
 
 
 // Logging set up.
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
-// Overwrite the console.log method.
-console.log = function(d) {
-  log_file.write(util.format(d) + '\n');
-  log_stdout.write(util.format(d) + '\n');
-};
+function logSetUp(filename) {
+    // Check if the filename starts with a forward slash. Add one if not present.
+    if (filename[0] !== '/') {
+        filename = '/' + filename;
+    }
+    var log_file = fs.createWriteStream(__dirname + filename, {flags : 'w'});
+    var log_stdout = process.stdout;
+    // Overwrite the console.log method.
+    console.log = function(d) {
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+    };
+}
 
 // Filter function.
 function Filter(url, domain_url, valid_links) {
@@ -118,6 +125,14 @@ Apify.main(async () => {
         savePDF = true;
     }
 
+    // Check for a custom log filename.
+    var debugLogFilename = '/debug.log';
+    var logFilename_index = process.argv.indexOf("-log");
+    if (logFilename_index != -1) {
+        debugLogFilename = process.argv[logFilename_index + 1];
+    }
+    // Set up the logging.
+    logSetUp(debugLogFilename);
 
     // // Create the JSON object to store the tuples of links and titles for each url. Uses up a lot of memory when used.
     // var output_dict = {};
@@ -150,16 +165,23 @@ Apify.main(async () => {
         const requestQueue = await Apify.openRequestQueue(safeDomain);
         // Add the url to the request queue.
         await requestQueue.addRequest({ url: domainURL });
+
+
         // Create the list to store pseudourls.
         const pseudoUrls = [];
-        // Add the domain to the pseudoURLs.
-        let pseudoDomain = domainURL;
-        if (domainURL[domainURL.length - 1] !== "/") {
-            pseudoDomain += "/[.*]";    // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
-        } else {
-            pseudoDomain += "[.*]";     // https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)
-        }
-        pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
+        
+        // Add the domain to the pseudoURLs. These automatically created pseudo URLs will match all pages within the domain.
+        // let pseudoDomain = domainURL;
+        // if (domainURL[domainURL.length - 1] !== "/") {
+        //     pseudoDomain += "/[.*]/world/middleeast[.*]";
+        // } else {
+        //     pseudoDomain += "[.*]/world/middleeast[.*]";
+        // }
+        // pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
+        
+        // For only specific parts of the domain to be crawled, custom REGEX expressions can be added here.
+        // Make sure that the automatically generated pseudo URL is not in the list in this case or it will still match all URLs from the domain.
+        pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Middle East Section REGEX
 
 
         /** CRAWLER CODE START */
