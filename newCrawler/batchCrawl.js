@@ -188,10 +188,12 @@ Apify.main(async () => {
         // Initialize the crawler.
         const crawler = new Apify.PuppeteerCrawler({
             requestQueue,
-            launchPuppeteerOptions: {
-                headless: true,
-                stealth: true,
+            launchContext: {
                 useChrome: false,
+                stealth: true,
+                launchOptions: {
+                    headless: true
+                },
             },
             gotoFunction: async ({request, page}) => {
                 // Blacklisted domains.
@@ -213,9 +215,9 @@ Apify.main(async () => {
                     page.on('request', request => {
                         // If the request is a blocked resource, abort. Load otherwise.
                         if (blockedResources.includes(request.resourceType()))
-                        request.abort();
+                            request.abort();
                         else
-                        request.continue();
+                            request.continue();
                     });
                 }
                 // Navigate to the page.
