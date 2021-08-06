@@ -173,9 +173,9 @@ Apify.main(async () => {
         // Add the domain to the pseudoURLs. These automatically created pseudo URLs will match all pages within the domain.
         let pseudoDomain = domainURL;
         if (domainURL[domainURL.length - 1] !== "/") {
-            pseudoDomain += "/[.*]/world/middleeast[.*]";
+            pseudoDomain += "/[.*]";
         } else {
-            pseudoDomain += "[.*]/world/middleeast[.*]";
+            pseudoDomain += "[.*]";
         }
         pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
         
