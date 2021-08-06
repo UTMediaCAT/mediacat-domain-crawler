@@ -171,17 +171,18 @@ Apify.main(async () => {
         const pseudoUrls = [];
         
         // Add the domain to the pseudoURLs. These automatically created pseudo URLs will match all pages within the domain.
-        // let pseudoDomain = domainURL;
-        // if (domainURL[domainURL.length - 1] !== "/") {
-        //     pseudoDomain += "/[.*]/world/middleeast[.*]";
-        // } else {
-        //     pseudoDomain += "[.*]/world/middleeast[.*]";
-        // }
-        // pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
+        let pseudoDomain = domainURL;
+        if (domainURL[domainURL.length - 1] !== "/") {
+            pseudoDomain += "/[.*]/world/middleeast[.*]";
+        } else {
+            pseudoDomain += "[.*]/world/middleeast[.*]";
+        }
+        pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
         
         // For only specific parts of the domain to be crawled, custom REGEX expressions can be added here.
         // Make sure that the automatically generated pseudo URL is not in the list in this case or it will still match all URLs from the domain.
-        pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Middle East Section REGEX
+        // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Middle East Section REGEX
+        // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/politics\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Politics Section REGEX
 
 
         /** CRAWLER CODE START */
@@ -190,7 +191,7 @@ Apify.main(async () => {
             requestQueue,
             launchContext: {
                 useChrome: false,
-                stealth: true,
+                // stealth: true,
                 launchOptions: {
                     headless: true
                 },
