@@ -193,7 +193,8 @@ Apify.main(async () => {
                 useChrome: false,
                 // stealth: true,
                 launchOptions: {
-                    headless: true
+                    headless: true,
+                    args: ['--no-sandbox']
                 },
             },
             gotoFunction: async ({request, page}) => {
