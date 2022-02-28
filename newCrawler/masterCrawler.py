@@ -10,6 +10,7 @@
 #               -pdf : use this parameter if PDFs are to be saved
 #               -t : the amount of time to wait in minutes
 #               -log : custom name for the log file (default is debug.log)
+#               -m : heap memory limit (default is 4096, 4GB)
 #   Usage: "python3 masterCrawler.py batchCrawl.js -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -n 10 -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -r 5 -f full_scope.csv"
@@ -40,11 +41,12 @@ def createCommand(log_filename: str) -> list:
     parser.add_argument('-log', type=pathlib.Path)
     parser.add_argument('-t', type=int, default=1440)
     parser.add_argument('crawlerFile', type=pathlib.Path)
+    parser.add_argument('-m', type=int, default=4096)
     # Args object now contains the args as properties.
     args = parser.parse_args()
 
     # Create the command to start the crawler with the given parameters.
-    command = f'node {args.crawlerFile} '
+    command = f'node --max-old-space-size={args.m} {args.crawlerFile} '
     # Add the arguments.
     if args.n != 5:
         command += f'-n {args.n} '
