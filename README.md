@@ -26,6 +26,8 @@ This script is run in a similar fashion as the other crawlers but receives an ex
 
 `python3 masterCrawler.py batchCrawl.js -l https://www.nytimes.com/ -t 300`
 
+For Graham Instance, run `python3 masterCrawler.py batchCrawl.js -n 25 -m 20000 -l https://example.com/ -t 240` should optimize the crawler speed
+
 # run the puppeteer crawler 
 `node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf`
 
