@@ -252,15 +252,17 @@ Apify.main(async () => {
                 let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*" + domainName + "\\.(.*)");
 
-                // get the html_content and plain_text from page using 'p' selctor, works for most domain
-                var html_content = await page.$$eval('p', (p) => p.map(p => p.innerHTML).join("\n\n"))
-                var Plain_text = ''
-                // if html selector 'p' return empty string, try span (ie: ynet.com use span instead)
-                if (html_content.length <= 1) {
-                    html_content = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.innerHTML).join("\n\n"))
-                    Plain_text = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
-                } else {
+                // try get the html_content and plain_text from page using 'p' and 'span' selctor
+                const html_content_p = await page.$$eval('p', (p) => p.map(p => p.innerHTML).join("\n\n"))
+                const html_content_sp = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.innerHTML).join("\n\n"))
+
+                // html_content is the longer one between 'p' and 'span'
+                if (html_content_p.length >= html_content_sp.length) {
+                    html_content = html_content_p
                     Plain_text = await page.$$eval('p', (p) => p.map(p => p.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
+                } else {
+                    html_content = html_content_sp
+                    Plain_text = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
                 }
 
                 const hrefs = await page.$$eval('a', as => as.map(a => a.href)); // Get all the hrefs with the links.
