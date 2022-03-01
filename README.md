@@ -58,6 +58,7 @@ or if you are just feeding single urls one by one
 - r : the maximum number of rounds
 - pdf : use this parameter if PDFs are to be saved
 - log : custom name for the log file (default is debug.log)
+- m: the heap memory limit for the crawler (default is 4096mb)
 
 Some example usages are given below:
 
