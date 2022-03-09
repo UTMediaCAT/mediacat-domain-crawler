@@ -3,6 +3,10 @@
 
 This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
+Domain crawler take crawl domains such as https://www.nytimes.com/ or an crawl_scope.csv that contains those domains. 
+
+**Filter**: Crawler will only crawl URL that match one domain from crawl_scope.csv or input domains. (ie: https://www.nytimes.com/some/page)
+
 At the end of the crawl, it can notify by email whether the crawl stopped or not. The email aspect must be set up first before the crawl. (or ignored if not desired, it is commented out by default)
 
 Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
