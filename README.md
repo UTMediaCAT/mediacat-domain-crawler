@@ -3,6 +3,10 @@
 
 This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
+Domain crawler take crawl domains such as https://www.nytimes.com/ or an crawl_scope.csv that contains those domains. 
+
+**Filter**: Crawler will only crawl URL that match one domain from crawl_scope.csv or input domains. (ie: https://www.nytimes.com/some/page)
+
 At the end of the crawl, it can notify by email whether the crawl stopped or not. The email aspect must be set up first before the crawl. (or ignored if not desired, it is commented out by default)
 
 Input credentials in the crawl.js script under the transporter constant [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/497081ad10cddc03d618fd34d020552cff36973a/newCrawler/crawl.js#L137)
@@ -18,13 +22,12 @@ PLEASE do not EVER commit your password. As a future issue, we should probably m
 
 `npm install` to install node dependencies
 
-# preventing storage issues
-When running multiple crawls simultaneously, it is possible that the `/tmp` directory will fill up and stop the crawls. The [cleanUpTmp script](https://github.com/UTMediaCAT/mediacat-domain-crawler/tree/master/newCrawler/utils) can be used to prevent this. Use with caution. See [here](https://github.com/UTMediaCAT/mediacat-domain-crawler/tree/master/newCrawler/utils#cleanuptmp) for more
-
 # run the master crawler
 This script is run in a similar fashion as the other crawlers but receives an extra flag corresponding to the time period for which the crawler should be run after which the script will restart the crawler. This is to avoid browser timeouts and stack memory issues that are encountered on running the crawler for too long (> 30 hours). Here, the `-t` flag takes time in minutes.
 
 `python3 masterCrawler.py batchCrawl.js -l https://www.nytimes.com/ -t 300`
+
+For Graham Instance, run `python3 masterCrawler.py batchCrawl.js -n 25 -m 20000 -l https://example.com/ -t 240` should optimize the crawler speed
 
 # run the puppeteer crawler 
 `node --max-old-space-size=7168 crawl.js -f ../../../mediacat-hidden/domain.csv -n inf`
@@ -58,6 +61,7 @@ or if you are just feeding single urls one by one
 - r : the maximum number of rounds
 - pdf : use this parameter if PDFs are to be saved
 - log : custom name for the log file (default is debug.log)
+- m: the heap memory limit for the crawler (default is 4096mb)
 
 Some example usages are given below:
 
@@ -67,6 +71,9 @@ node batchCrawl.js -r 5 -f ../../../mediacat-hidden/domain.csv
 node batchCrawl.js -pdf -f ../../../mediacat-hidden/domain.csv  
 node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/  
 node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/ -log logging.log
+
+# Ouput
+The output URL jsons will be stored under `/Results/https_example_com/`.
 
 # monitoring the results
 Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)
