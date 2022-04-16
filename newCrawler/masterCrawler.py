@@ -11,6 +11,7 @@
 #               -t : the amount of time to wait in minutes
 #               -log : custom name for the log file (default is debug.log)
 #               -m : heap memory limit (default is 4096, 4GB)
+#               -s : crawler will try to scroll down to the bottom of the page
 #   Usage: "python3 masterCrawler.py batchCrawl.js -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -n 10 -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -r 5 -f full_scope.csv"
@@ -42,6 +43,7 @@ def createCommand(log_filename: str) -> list:
     parser.add_argument('-t', type=int, default=1440)
     parser.add_argument('crawlerFile', type=pathlib.Path)
     parser.add_argument('-m', type=int, default=4096)
+    parser.add_agrument('-s', action='store_true')
     # Args object now contains the args as properties.
     args = parser.parse_args()
 
@@ -64,6 +66,9 @@ def createCommand(log_filename: str) -> list:
         command += f"-l {' '.join(args.l)}"
     else:
         command += f'-f {args.f}'
+    # Add scroll down option
+    if args.s:
+        command += '-s '
     return command, args.t
 
 

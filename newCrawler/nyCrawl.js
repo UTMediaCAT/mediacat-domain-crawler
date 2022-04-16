@@ -1,23 +1,22 @@
-/* batchCrawl.js
-   Author: Raiyan Rahman
-   Date: May 7th, 2021
-   Description: Crawl the given urls in batches.
-   Parameters: -l : links separated by spaces
-               -f : csv file containing the scope
-               -n : number of pages to crawl per round for each domain (default is 5)
+/* nyCrawl.js
+   Author: Shengsong Xu
+   Date: Apr 16th, 2022
+   Description: Crawl the NYTimes search archive here: https://www.nytimes.com/search?dropmab=true&query=&sort=newest
+   Parameters: -f : csv file containing the scope
+               -n : number of pages to crawl per round for each domain (default is 5000)
                -r : the maximum number of rounds
                -pdf : use this parameter if PDFs are to be saved
                -log : custom filename for the log file (default is debug.log)
-   Usage: "node batchCrawl.js -f full_scope.csv"
-          "node batchCrawl.js -n 10 -f full_scope.csv"
-          "node batchCrawl.js -r 5 -f full_scope.csv"
-          "node batchCrawl.js -pdf -f full_scope.csv"
-          "node batchCrawl.js -l https://www.nytimes.com/ https://cnn.com/"
+   Usage: "node nyCrawl.js -f full_scope.csv"
+          "node nyCrawl.js -n 10 -f full_scope.csv"
+          "node nyCrawl.js -r 5 -f full_scope.csv"
+          "node nyCrawl.js -pdf -f full_scope.csv"
 */
 
 // Imports.
 const fs = require('fs');
 const util = require('util');
+const parseHelper = require('./parseHelper')
 // const path = require('path');
 const Apify = require('apify');
 const {
@@ -37,7 +36,6 @@ const {
 
 // Local imports.
 const fileOps = require('./fileOps');
-const parseHelper = require('./parseHelper');
 
 
 // Database set up.
@@ -88,25 +86,6 @@ function Filter(url, domain_url, valid_links) {
 //     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
 // });
 
-async function autoScroll(page) {
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-
-                if (totalHeight >= scrollHeight - window.innerHeight) {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}
-
 Apify.main(async () => {
 
     // Argument Parsing.
@@ -114,13 +93,6 @@ Apify.main(async () => {
     var is_url = false;
     var f_index = process.argv.indexOf("-f");
     var l_index = process.argv.indexOf("-l");
-    // Check if need scroll down for each page
-    var s_index = process.argv.indexOf("-s");
-    if (s_index != -1) {
-        var needScroll = true;
-    } else {
-        var needScroll = false;
-    }
     // If a CSV file is given, parse it.
     if (f_index != -1) {
         var url_list = parseHelper.parseCSV(process.argv[f_index + 1]);
@@ -138,7 +110,7 @@ Apify.main(async () => {
         });
     }
     // Check if there is a given number of pages to crawl in each round for each domain.
-    var pagesPerRound = 5;
+    var pagesPerRound = 5000;
     var n_index = process.argv.indexOf("-n");
     if (n_index != -1) {
         pagesPerRound = parseInt(process.argv[n_index + 1]);
@@ -192,6 +164,10 @@ Apify.main(async () => {
         console.log('//////////////////////////////////////////////////////////////////////////////////////////////////////////////');
         // Convert the domain URL to be safe to be used as a folder name.
         safeDomain = domainURL.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+        if (i == 0) {
+            var sreach_url = safeDomain
+            console.log("here:" + sreach_url)
+        }
         // Open the key-value store for this domain.
         const store = await Apify.openKeyValueStore(safeDomain);
         // Open the request queue associated with this domain.
@@ -212,13 +188,30 @@ Apify.main(async () => {
         } else {
             pseudoDomain += "[.*]";
         }
-        pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
+        pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[0-9]{4}\/[-a-zA-Z0-9()@:%_\+.~#?&//=]*/));
 
         // For only specific parts of the domain to be crawled, custom REGEX expressions can be added here.
         // Make sure that the automatically generated pseudo URL is not in the list in this case or it will still match all URLs from the domain.
         // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Middle East Section REGEX
         // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/politics\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Politics Section REGEX
 
+        // get current date for end_date //
+        var endDate = new Date()
+        const year = endDate.getFullYear().toString()
+        let month = 0;
+        if (endDate.getMonth() >= 9) {
+            month = (1 + endDate.getMonth()).toString()
+        } else {
+            month = '0' + (1 + endDate.getMonth()).toString()
+        }
+        let date = 0;
+        if (endDate.getDate() >= 10) {
+            date = endDate.getDate().toString()
+        } else {
+            date = '0' + endDate.getDate().toString()
+        }
+        var endDateStr = year + month + date
+        console.log(endDateStr)
 
         /** CRAWLER CODE START */
         // Initialize the crawler.
@@ -229,7 +222,7 @@ Apify.main(async () => {
                 // stealth: true,
                 launchOptions: {
                     headless: true,
-                    args: ['--no-sandbox']
+                    args: ['--no-sandbox', "--disable-dev-shm-usage"]
                 },
             },
             // gotoFunction: async ({
@@ -272,12 +265,73 @@ Apify.main(async () => {
                 }
                 const t2 = performance.now();
 
-                // scroll down the page if needed
-                if (needScroll) {
-                    await autoScroll(page);
+                // await page.click("#search-clear-button")
+
+                // await autoScroll(page);
+
+                // await page.waitForSelector('input[id="searchTextField"]')
+                // await page.$eval('input[id="searchTextField"]', el => el.value = 'Middle East')
+                // await page.click('#site-content > div > div.css-1npexfx > div.css-nhmgdh > form > div.css-aoqhyj > button', {
+                //     delay: 10,
+                //     clickCount: 2
+                // })
+
+                // await page.click('[data-testid="search-date-dropdown-a"]')
+                // await page.click('[value=\'Past Month\']')
+                // await page.click('#site-content > div > div.css-1npexfx > div.css-1az02az > div > div > div:nth-child(2) > div > div > button')
+                // await page.click('[value="World|nyt://section/70e865b6-cc70-5181-84c9-8368b3a5c34b"]')
+                // await page.click("#site-content > div > div.css-1npexfx > div.css-1az02az > div > div > div:nth-child(3) > div > div > button")
+                // await page.click('[value="article"]')
+
+                // const number = await page.$eval('#site-content > div > div.css-1npexfx > div.css-nhmgdh > p', el => el.textContent)
+                // console.log(number)
+
+
+                if (request.url.includes('https://www.nytimes.com/search?')) {
+                    const ti0 = performance.now();
+                    var j = 0
+                    while (j < 20) {
+
+                        // await Apify.utils.enqueueLinks({
+                        //     page,
+                        //     selector: 'a',
+                        //     pseudoUrls,
+                        //     requestQueue
+                        // });
+
+                        const button = await page.$("[data-testid='search-show-more-button']");
+                        await page.waitForTimeout(500)
+                        if (!button) {
+                            // add double check here
+                            var currNum = await page.$eval('[data-testid="SearchForm-status"]', el => el.textContent)
+                            currNum = currNum.match(/Showing ([0-9]+) results[\s\S]*/)[1]
+                            console.log(`amount is : ${currNum} and j is ${j}`)
+                            if (j == 0 && parseInt(currNum) > 10) {
+                                throw 'not finished yet'
+                            }
+                            break
+                        }
+                        await button.click()
+                        await puppeteer.infiniteScroll(page)
+                        // await autoScroll(page)
+
+                        console.log(j)
+                        j++
+                    }
+
+                    const ti1 = performance.now();
+
+                    console.log(`scroll down took ${ti1/1000.0 - ti0/1000.0} seconds`)
                 }
 
-                // await puppeteer.infiniteScroll(page)
+                // await puppeteer.infiniteScroll(page, {
+                //     buttonSelector: '[data-testid="search-show-more-button"]'
+                // })
+
+
+                // if (page.$$eval('[data-testid=\'search-show-more-button\']')) {
+                //     console.log('true')
+                // }
 
                 const title = await page.title(); // Get the title of the page.
                 let domainNameIndex = 5;
@@ -286,20 +340,7 @@ Apify.main(async () => {
                 domainName = match[4] + "";
                 let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*" + domainName + "\\.(.*)");
-                
-                // // try get the html_content and plain_text from page using 'p' and 'span' selctor
-                // const html_content_p = await page.$$eval('p', (p) => p.map(p => p.innerHTML).join("\n\n"))
-                // const html_content_sp = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.innerHTML).join("\n\n"))
 
-                // // html_content is the longer one between 'p' and 'span'
-                // if (html_content_p.length >= html_content_sp.length) {
-                //     html_content = html_content_p
-                //     Plain_text = await page.$$eval('p', (p) => p.map(p => p.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
-                // } else {
-                //     html_content = html_content_sp
-                //     Plain_text = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
-                // }
-                
                 const hrefs = await page.$$eval('a', as => as.map(a => a.href)); // Get all the hrefs with the links.
                 const titles = await page.$$eval('a', as => as.map(a => a.title)); // Get the titles of all the links.
                 const texts = await page.$$eval('a', as => as.map(a => a.text)); // Get the text content of all the a tags.
@@ -312,6 +353,17 @@ Apify.main(async () => {
                 // Set the title of the link to be the text content if the title is not present.
                 for (let i = 0; i < hrefs.length; i++) {
                     hrefLink = hrefs[i];
+
+                    // check if need to update endDate
+                    var re = hrefLink.match(/https:\/\/www\.nytimes\.com\/([0-9]{4})\/([0-9]{2})\/([0-9]{2})*/)
+                    if (re != null && request.url.includes('https://www.nytimes.com/search?')) {
+                        console.log(re[1] + re[2] + re[3])
+                        var articleDate = new Date(re[1], (parseInt(re[2]) - 1).toString(), re[3])
+                        if (articleDate.getTime() < endDate.getTime()) {
+                            endDate = articleDate
+                            endDateStr = re[1] + re[2] + re[3]
+                        }
+                    }
                     // Checks that the link is a part of domain.
                     let inscope = false;
 
@@ -381,14 +433,36 @@ Apify.main(async () => {
                     }
                 }
 
+                // get domain
+                var href = new URL(url_list[i])
+                domain = href.origin
+
+                // reset end_date to fetch more articles if there is 'show more' button
+                if (request.url.includes('https://www.nytimes.com/search?')) {
+                    const button = await page.$('[data-testid=\'search-show-more-button\']');
+                    if (button) {
+                        href.searchParams.set('endDate', endDateStr);
+                        console.log('new page: ' + href.toString());
+                        await requestQueue.addRequest({
+                            url: href.toString()
+                        });
+                    }
+                }
+
+                // remove position, ie. https://www.nytimes.com/2022/04/13/world/europe/finland-sweden-nato-russia-ukraine.html?searchResultPosition=1
+                var origin_url = request.url
+                if (!request.url.includes('https://www.nytimes.com/search?')){
+                    origin_url = request.url.split('?')[0]
+                }
+
                 let elem = {
                     title_metascraper: '',
-                    url: request.url,
+                    url: origin_url,
                     author_metascraper: '',
                     date: '',
-                    html_content: "",
-                    article_text: "",
-                    domain: url_list[listIndex],
+                    html_content: '',
+                    article_text: '',
+                    domain: domain,
                     updated: false,
                     found_urls: tuple_list
                 }
@@ -400,7 +474,8 @@ Apify.main(async () => {
 
                 // Create a JSON for this link with a uuid.
                 let timestamp = new Date().getTime();
-                let fileName = uuidv5(request.url, uuidv5.URL) + "_" + timestamp.toString() + ".json";
+                
+                let fileName = uuidv5(origin_url, uuidv5.URL) + ".json";
                 fs.writeFileSync(folderName + fileName, JSON.stringify(elem), function (err) {
                     if (err) throw err;
                 });
@@ -431,22 +506,23 @@ Apify.main(async () => {
 
                 const t3 = performance.now();
                 // Log the time for this request.
-                console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
+                // console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
                 // Enqueue the deeper URLs to crawl.
-                await Apify.utils.enqueueLinks({
-                    page,
-                    selector: 'a',
-                    pseudoUrls,
-                    requestQueue
-                });
+                if (request.url.includes('https://www.nytimes.com/search?')) {
+                    await Apify.utils.enqueueLinks({
+                        page,
+                        selector: 'a',
+                        pseudoUrls,
+                        requestQueue
+                    });
+                }
 
             },
             // The max concurrency and max requests to crawl through.
-            // maxRequestsPerCrawl: Infinity,
             maxRequestsPerCrawl: pagesPerRound * round,
-            handlePageTimeoutSecs: 300,
             maxConcurrency: 50,
+            handlePageTimeoutSecs: 300
         });
         /** CRAWLER CODE END */
 
@@ -459,9 +535,9 @@ Apify.main(async () => {
         const t1 = performance.now();
         // Log the time to run the crawler.
         currTime = Math.floor((Date.now() - startTime) / 1000);
-        console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} seconds.`);
+        // console.log(`[Elapsed Time: ${new Date(currTime * 1000).toISOString().substr(11, 8)}] Finished crawling ${url_list[i]} ${t1/1000.0 - t0/1000.0} seconds.`);
         // Increment the index of the current url.
-        i++;
+        i++; 
         // If all urls are complete, begin the next round.
         if (i == url_list.length) {
             i = 0;
