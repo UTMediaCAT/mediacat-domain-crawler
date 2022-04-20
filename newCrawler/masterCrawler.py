@@ -43,7 +43,7 @@ def createCommand(log_filename: str) -> list:
     parser.add_argument('-t', type=int, default=1440)
     parser.add_argument('crawlerFile', type=pathlib.Path)
     parser.add_argument('-m', type=int, default=4096)
-    parser.add_agrument('-s', action='store_true')
+    parser.add_argument('-s', action='store_true')
     # Args object now contains the args as properties.
     args = parser.parse_args()
 

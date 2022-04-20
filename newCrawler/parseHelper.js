@@ -4,13 +4,11 @@
    Description: Contains helpers for parsing scope, and articles.
 */
 const fs = require('fs');
-const JSDOM = require('jsdom').JSDOM;
 const parse = require('csv-parse/lib/sync')
-const { Readability } = require('@mozilla/readability');
 
 
 // Parse the CSV file to get a list of domains.
-let parseCSV = function(file){
+let parseCSV = function (file) {
     var urls = [];
     // Read the file.
     var csv_file = fs.readFileSync(file, 'utf8');
@@ -24,9 +22,9 @@ let parseCSV = function(file){
         let domain = row["Source"];
         // If this row contains data.
         if (domain.length > 0) {
-            if (domain[domain.length - 1] !== '/') {
-                domain += '/';
-            }
+            // if (domain[domain.length - 1] !== '/') {
+            //     domain += '/';
+            // }
             // Push the domain to the list.
             urls.push(domain);
         }
@@ -36,14 +34,6 @@ let parseCSV = function(file){
     return urls;
 };
 
-// Get the parsed article using readability.
-let getParsedArticle = function(url, html) {
-    var doc = new JSDOM(html, {
-        url: url
-      });
-    let reader = new Readability(doc.window.document);
-    let article = reader.parse();
-    return article
+module.exports = {
+    parseCSV
 };
-
-module.exports = { parseCSV, getParsedArticle };
