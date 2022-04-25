@@ -38,6 +38,20 @@ For Graham Instance, run `python3 masterCrawler.py batchCrawl.js -n 25 -m 20000 
 # run the batch crawler
 `node batchCrawl.js -f ../../../mediacat-hidden/domain.csv`
 
+# run the NYTimes archive crawler
+`node nyCrawl.js -n 5000 -f full_scope.csv`
+
+NYTimes archive crawler will crawl the given search archive here: https://www.nytimes.com/search?dropmab=true&query=&sort=newest and repeatedly clicking `show more` buttom then scroll down untill there is no more `show more` bottom. 
+
+## falgs (NYTimes archive crawler)
+- f (string) indicates the scope file. Note that all the search URLs in the scope file must follow this format: 
+  
+  `https://www.nytimes.com/search?dropmab=true&endDate={}&query={}&[sections={}]&&sort=newest&startDate={}&types=article`
+  
+  [sections] is optional and {sort} must be neweast
+- n (integer) number of pages to crawl per round for each domain (default is 5000)
+- pdf : use this parameter if PDFs are to be saved
+- log : custom filename for the log file (default is debug.log)
 # flags (puppeteer and cheerio)
 - f (string) indicates the scope file
 - n (integer) indicates the maxrequests you would like to crawl, inf is infinity else give it an integer, default is 20
