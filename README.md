@@ -46,7 +46,7 @@ NYTimes archive crawler will crawl the given search archive here: https://www.ny
 ## falgs (NYTimes archive crawler)
 - f (string) indicates the scope file. Note that all the search URLs in the scope file must follow this format: 
   
-  `https://www.nytimes.com/search?dropmab=true&endDate={}&query={}&[sections={}]&&sort=newest&startDate={}&types=article`
+  `https://www.nytimes.com/search?dropmab=true&endDate={}&query={}[&sections={}]&sort=newest&startDate={}&types=article`
   
   [sections] is optional and {sort} must be neweast
 - n (integer) number of pages to crawl per round for each domain (default is 5000)
