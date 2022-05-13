@@ -5,6 +5,16 @@
 */
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync')
+const {
+    Readability,
+    isProbablyReaderable
+} = require('@mozilla/readability');
+const JSDOM = require('jsdom').JSDOM;
+const metascraper = require('metascraper')([
+    require('metascraper-author')(),
+    require('metascraper-date')(),
+    require('metascraper-title')()
+])
 
 
 // Parse the CSV file to get a list of domains.
@@ -34,6 +44,45 @@ let parseCSV = function (file) {
     return urls;
 };
 
+let parseHTML = async function (url, html) {
+    try {
+        const metadata = await metascraper({
+            html,
+            url
+        })
+        var doc = new JSDOM(html, {
+            url: url
+        });
+        if (isProbablyReaderable(doc.window.document)) {
+            let reader = new Readability(doc.window.document);
+            var html_content = reader.parse().content;
+            var article_text = reader.parse().textContent;
+        } else {
+            var html_content = 'not readable';
+            var article_text = 'not readable';
+        }
+
+        var parsed_dict = {
+            'html_content': html_content,
+            'article_text': article_text,
+            'author': (metadata['author'] != null) ? metadata['author'] : '',
+            'title': (metadata['title'] != null) ? metadata['title'] : '',
+            'date': (metadata['date'] != null) ? metadata['date'] : ''
+        }
+        return parsed_dict
+    } catch (error) {
+        console.log(error)
+        return {
+            'html_content': '',
+            'article_text': '',
+            'author': '',
+            'title': '',
+            'date': ''
+        }
+    }
+}
+
 module.exports = {
-    parseCSV
+    parseCSV,
+    parseHTML
 };

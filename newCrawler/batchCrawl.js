@@ -107,6 +107,12 @@ async function autoScroll(page) {
     });
 }
 
+function delay(time) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, time)
+    });
+}
+
 Apify.main(async () => {
 
     // Argument Parsing.
@@ -116,10 +122,18 @@ Apify.main(async () => {
     var l_index = process.argv.indexOf("-l");
     // Check if need scroll down for each page
     var s_index = process.argv.indexOf("-s");
+    var stealth_index = process.argv.indexOf('-stealth')
     if (s_index != -1) {
         var needScroll = true;
     } else {
         var needScroll = false;
+    }
+    if (stealth_index != -1) {
+        console.log('use stealth mode')
+        var maxConcurrency = 1
+        var waitRad = parseInt(process.argv[stealth_index + 1]);
+    } else {
+        var maxConcurrency = 50
     }
     // If a CSV file is given, parse it.
     if (f_index != -1) {
@@ -232,41 +246,50 @@ Apify.main(async () => {
                     args: ['--no-sandbox']
                 },
             },
-            // gotoFunction: async ({
-            //     request,
-            //     page
-            // }) => {
-            //     // Blacklisted domains.
-            //     blacklisted_domains = ["https://www.derstandard.at/"];
-            //     // Check if this domain is blacklisted.
-            //     let blacklist = false;
-            //     blacklisted_domains.forEach(function (domain) {
-            //         // Check if the current url belongs to the domain.
-            //         if (request.url.startsWith(domain)) {
-            //             blacklist = true;
-            //         }
-            //     });
-            //     if (!blacklist) {
-            //         // Set the request interception to true.
-            //         await page.setRequestInterception(true);
-            //         // Create the list of different resources that should be blocked.
-            //         let blockedResources = ['image', 'stylesheet', 'media'];
-            //         // On loading the request.
-            //         page.on('request', request => {
-            //             // If the request is a blocked resource, abort. Load otherwise.
-            //             if (blockedResources.includes(request.resourceType()))
-            //                 request.abort();
-            //             else
-            //                 request.continue();
-            //         });
-            //     }
-            //     // Navigate to the page.
-            //     await page.goto(request.url);
-            // },
+            browserPoolOptions: {
+                useFingerprints: true,
+            },
+            gotoFunction: async ({
+                request,
+                page
+            }) => {
+                // Blacklisted domains.
+                blacklisted_domains = ["https://www.derstandard.at/"];
+                // Check if this domain is blacklisted.
+                let blacklist = false;
+                blacklisted_domains.forEach(function (domain) {
+                    // Check if the current url belongs to the domain.
+                    if (request.url.startsWith(domain)) {
+                        blacklist = true;
+                    }
+                });
+                if (!blacklist) {
+                    // Set the request interception to true.
+                    await page.setRequestInterception(true);
+                    // Create the list of different resources that should be blocked.
+                    let blockedResources = ['image', 'stylesheet', 'media'];
+                    // On loading the request.
+                    page.on('request', request => {
+                        // If the request is a blocked resource, abort. Load otherwise.
+                        if (blockedResources.includes(request.resourceType()))
+                            request.abort();
+                        else
+                            request.continue();
+                    });
+                }
+                // Navigate to the page.
+                await page.goto(request.url);
+            },
             handlePageFunction: async ({
                 request,
                 page
             }) => {
+                // sleep random seconds before crawl to avoid 403 block in stealth mode
+                if (maxConcurrency == 1) {
+                    const waitTime = Math.floor(Math.random() * waitRad);
+                    await delay((waitTime + waitRad));
+                }
+
                 if (request.loadedUrl == 'https://apps.derstandard.at/privacywall/') {
                     await page.$eval('button.privacy-button-secondary-dark', el => el.click());
                 }
@@ -278,15 +301,17 @@ Apify.main(async () => {
                 }
 
                 // await puppeteer.infiniteScroll(page)
-
-                const title = await page.title(); // Get the title of the page.
                 let domainNameIndex = 5;
                 let general_regex = /(http(s)?:\/\/((w|W){3}\.)?)([^.]+)((\.[a-zA-Z]+)+)/;
                 let match = request.url.match(general_regex);
                 domainName = match[4] + "";
                 let twitter_url = /(^http(s)?:\/\/(www\.)?)twitter.com(.*)$/;
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*" + domainName + "\\.(.*)");
-                
+
+                // parsed metadata (title, author, date), plain text and html content
+                let bodyHTML = await page.evaluate(() => document.body.innerHTML);
+                parsed_dict = await parseHelper.parseHTML(request.url, bodyHTML)
+
                 // // try get the html_content and plain_text from page using 'p' and 'span' selctor
                 // const html_content_p = await page.$$eval('p', (p) => p.map(p => p.innerHTML).join("\n\n"))
                 // const html_content_sp = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.innerHTML).join("\n\n"))
@@ -294,12 +319,12 @@ Apify.main(async () => {
                 // // html_content is the longer one between 'p' and 'span'
                 // if (html_content_p.length >= html_content_sp.length) {
                 //     html_content = html_content_p
-                //     Plain_text = await page.$$eval('p', (p) => p.map(p => p.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
+                //     plain_text = await page.$$eval('p', (p) => p.map(p => p.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
                 // } else {
                 //     html_content = html_content_sp
-                //     Plain_text = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
+                //     plain_text = await page.$$eval('span[data-text=true]', (span) => span.map(span => span.textContent).filter(i => !(i.includes('>'))).join("\n\n"))
                 // }
-                
+
                 const hrefs = await page.$$eval('a', as => as.map(a => a.href)); // Get all the hrefs with the links.
                 const titles = await page.$$eval('a', as => as.map(a => a.title)); // Get the titles of all the links.
                 const texts = await page.$$eval('a', as => as.map(a => a.text)); // Get the text content of all the a tags.
@@ -382,12 +407,12 @@ Apify.main(async () => {
                 }
 
                 let elem = {
-                    title_metascraper: '',
+                    title: parsed_dict['title'],
                     url: request.url,
-                    author_metascraper: '',
-                    date: '',
-                    html_content: "",
-                    article_text: "",
+                    author: parsed_dict['author'],
+                    date: parsed_dict['date'],
+                    html_content: parsed_dict['html_content'],
+                    article_text: parsed_dict['article_text'],
                     domain: url_list[listIndex],
                     updated: false,
                     found_urls: tuple_list
@@ -446,7 +471,7 @@ Apify.main(async () => {
             // maxRequestsPerCrawl: Infinity,
             maxRequestsPerCrawl: pagesPerRound * round,
             handlePageTimeoutSecs: 300,
-            maxConcurrency: 50,
+            maxConcurrency: maxConcurrency,
         });
         /** CRAWLER CODE END */
 
