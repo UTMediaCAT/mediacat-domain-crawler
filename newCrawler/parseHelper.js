@@ -55,8 +55,9 @@ let parseHTML = async function (url, html) {
         });
         if (isProbablyReaderable(doc.window.document)) {
             let reader = new Readability(doc.window.document);
-            var html_content = reader.parse().content;
-            var article_text = reader.parse().textContent;
+            var parsed = reader.parse()
+            var html_content = parsed.content;
+            var article_text = parsed.textContent;
         } else {
             var html_content = 'not readable';
             var article_text = 'not readable';

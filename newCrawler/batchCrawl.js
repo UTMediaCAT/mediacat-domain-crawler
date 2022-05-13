@@ -20,9 +20,6 @@ const fs = require('fs');
 const util = require('util');
 // const path = require('path');
 const Apify = require('apify');
-const {
-    puppeteer
-} = Apify.utils;
 // const { exit } = require('process');
 // const { transform } = require('csv');
 // const JSDOM = require('jsdom').JSDOM;
@@ -309,7 +306,7 @@ Apify.main(async () => {
                 var domainRegex = new RegExp("(http(s)?:\/\/(www\\.)?)([a-zA-Z]+\\.)*" + domainName + "\\.(.*)");
 
                 // parsed metadata (title, author, date), plain text and html content
-                let bodyHTML = await page.evaluate(() => document.body.innerHTML);
+                var bodyHTML = await page.content()
                 parsed_dict = await parseHelper.parseHTML(request.url, bodyHTML)
 
                 // // try get the html_content and plain_text from page using 'p' and 'span' selctor
