@@ -307,7 +307,7 @@ Apify.main(async () => {
 
                 // parsed metadata (title, author, date), plain text and html content
                 var bodyHTML = await page.content()
-                parsed_dict = await parseHelper.parseHTML(request.url, bodyHTML)
+                // parsed_dict = await parseHelper.parseHTML(request.url, bodyHTML)
 
                 // // try get the html_content and plain_text from page using 'p' and 'span' selctor
                 // const html_content_p = await page.$$eval('p', (p) => p.map(p => p.innerHTML).join("\n\n"))
@@ -404,12 +404,13 @@ Apify.main(async () => {
                 }
 
                 let elem = {
-                    title: parsed_dict['title'],
+                    title: '',
                     url: request.url,
-                    author: parsed_dict['author'],
-                    date: parsed_dict['date'],
-                    html_content: parsed_dict['html_content'],
-                    article_text: parsed_dict['article_text'],
+                    bodyHTML: bodyHTML,
+                    author: '',
+                    date: '',
+                    html_content: '',
+                    article_text: '',
                     domain: url_list[listIndex],
                     updated: false,
                     found_urls: tuple_list
@@ -462,7 +463,11 @@ Apify.main(async () => {
                     pseudoUrls,
                     requestQueue
                 });
-
+                
+                // sleep for a short time
+                const waitTime = Math.floor(Math.random() * 100);
+                await delay((waitTime));
+                
             },
             // The max concurrency and max requests to crawl through.
             // maxRequestsPerCrawl: Infinity,
