@@ -1,41 +1,46 @@
+let nodemailer = require("nodemailer");
+require("dotenv").config();
 
-let nodemailer = require('nodemailer');
+function sendEmail(emailContent, transporter) {
+  return transporter.sendMail(emailContent);
+}
 
-let myemail = 'mediacatut@gmail.com'
-  
-let mailOptions = {
-    from: myemail,
-    to: myemail,
-    subject: 'The crawler has stopped',
-    text: 'Email to let you know that the crawler has stopped crawling'
+function initEmail() {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: "mediacatutsc@gmail.com",
+      pass: process.env.PASS,
+      clientId: process.env.OAUTH_CLIENTID,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    },
+  });
+
+  return transporter;
+}
+
+let mailCrawlEnd = function (recipients) {
+  const transporter = initEmail();
+  let crawlEnd = {
+    from: "mediacatutsc@gmail.com",
+    to: recipients,
+    subject: "The crawler has stopped with all request finished",
+    text: "Email to let you know that the crawler has stopped crawling",
   };
+  return sendEmail(crawlEnd, transporter);
+};
 
-
-let mailError = {
-    from: myemail,
-    to: myemail,
-    subject: 'The crawler has stopped with an error',
-    text: 'Email to let you know that the crawler has stopped crawling with an error'
+let mailCrawlError = function (recipients) {
+  const transporter = initEmail();
+  let crawlError = {
+    from: "mediacatutsc@gmail.com",
+    to: recipients,
+    subject: "The crawler has stopped due to too much error",
+    text: "Email to let you know that the crawler has stopped crawling due to too much error",
   };
-
-let mailOptionsCheerio = {
-  from: myemail,
-  to: myemail,
-  subject: 'The Cheerio crawler has stopped',
-  text: 'Email to let you know that the crawler has stopped crawling'
+  return sendEmail(crawlError, transporter);
 };
 
-
-let mailErrorCheerio = {
-  from: myemail,
-  to: myemail,
-  subject: 'The Cheerio crawler has stopped with an error',
-  text: 'Email to let you know that the crawler has stopped crawling with an error'
-};
-
-module.exports = {
-    mailOptions,
-    mailError, 
-    mailOptionsCheerio,
-    mailErrorCheerio
-};
+module.exports = { mailCrawlEnd, mailCrawlError };

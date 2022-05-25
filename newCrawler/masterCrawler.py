@@ -12,6 +12,8 @@
 #               -log : custom name for the log file (default is debug.log)
 #               -m : heap memory limit (default is 4096, 4GB)
 #               -s : crawler will try to scroll down to the bottom of the page
+#               -stealth: crawler will use stealth mode
+#               -e: crawler will send email to the recipients if get too many error or finished crawling
 #   Usage: "python3 masterCrawler.py batchCrawl.js -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -n 10 -f full_scope.csv"
 #          "python3 masterCrawler.py batchCrawl.js -r 5 -f full_scope.csv"
@@ -44,6 +46,9 @@ def createCommand(log_filename: str) -> list:
     parser.add_argument('crawlerFile', type=pathlib.Path)
     parser.add_argument('-m', type=int, default=4096)
     parser.add_argument('-s', action='store_true')
+    parser.add_argument('-stealth', type=int)
+    parser.add_argument('-e', type=str)
+
     # Args object now contains the args as properties.
     args = parser.parse_args()
 
@@ -61,14 +66,20 @@ def createCommand(log_filename: str) -> list:
         command += f'-log {args.log} '
     else:
         command += f'-log {log_filename} '
+    # Add scroll down option
+    if args.s:
+        command += '-s '
+    # Add stealth option
+    if args.stealth:
+        command += '-stealth {args.stealth} '
+    # Add email option
+    if args.e:
+        command += '-e {args.e} '
     # Add the domains to the command.
     if args.f is None:
         command += f"-l {' '.join(args.l)}"
     else:
         command += f'-f {args.f}'
-    # Add scroll down option
-    if args.s:
-        command += '-s '
     return command, args.t
 
 
