@@ -21,23 +21,23 @@ function initEmail() {
   return transporter;
 }
 
-let mailCrawlEnd = function (recipients) {
+let mailCrawlEnd = function (recipients, domain) {
   const transporter = initEmail();
   let crawlEnd = {
     from: "mediacatutsc@gmail.com",
     to: recipients,
-    subject: "The crawler has stopped with all request finished",
-    text: "Email to let you know that the crawler has stopped crawling",
+    subject: `The crawler has stopped for ${domain}`,
+    text: "Email to let you know that the crawler has stopped with all request finished",
   };
   return sendEmail(crawlEnd, transporter);
 };
 
-let mailCrawlError = function (recipients) {
+let mailCrawlError = function (recipients, domain) {
   const transporter = initEmail();
   let crawlError = {
     from: "mediacatutsc@gmail.com",
     to: recipients,
-    subject: "The crawler has stopped due to too much error",
+    subject: `The crawler has stopped due to too much error for ${domain}`,
     text: "Email to let you know that the crawler has stopped crawling due to too much error",
   };
   return sendEmail(crawlError, transporter);

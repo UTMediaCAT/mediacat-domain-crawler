@@ -71,10 +71,10 @@ def createCommand(log_filename: str) -> list:
         command += '-s '
     # Add stealth option
     if args.stealth:
-        command += '-stealth {args.stealth} '
+        command += f'-stealth {args.stealth} '
     # Add email option
     if args.e:
-        command += '-e {args.e} '
+        command += f'-e {args.e} '
     # Add the domains to the command.
     if args.f is None:
         command += f"-l {' '.join(args.l)}"

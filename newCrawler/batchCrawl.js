@@ -29,6 +29,7 @@ const { performance } = require("perf_hooks");
 const fileOps = require("./fileOps");
 const parseHelper = require("./parseHelper");
 const email = require("./email");
+const MAXIMUM_FAIL_TIME = 50;
 
 // Database set up.
 // let db = require('./database.js')
@@ -273,7 +274,9 @@ Apify.main(async () => {
         const t2 = performance.now();
 
         if (+response._status >= 400) {
-          console.log(`failed at ${request.url} with ${response._status}`);
+          console.log(
+            `failed at ${request.url} with ${response._status}, ${failed_request_count}/10`
+          );
           failed_request_count++;
           throw response._status;
         }
@@ -297,7 +300,9 @@ Apify.main(async () => {
         // parsed metadata (title, author, date), plain text and html content
         var bodyHTML = await page.content();
         if (bodyHTML.includes("429 Too Many Requests")) {
-          console.log(`429 Too Many Requests for ${request.url}`);
+          console.log(
+            `429 Too Many Requests for ${request.url}, ${failed_request_count}/10`
+          );
           failed_request_count++;
           await delay(10000);
           throw str;
@@ -510,17 +515,6 @@ Apify.main(async () => {
       //         console.log(crawlingContext.request.resourceType);
       //     },
       // ],
-      postNavigationHooks: [
-        async () => {
-          if (failed_request_count >= 10) {
-            console.log("encounter too much failed request, send an email");
-            if (sendEmail) {
-              await email.mailCrawlError(recipients);
-            }
-            process.exit(1);
-          }
-        },
-      ],
       // The max concurrency and max requests to crawl through.
       // maxRequestsPerCrawl: Infinity,
       maxRequestsPerCrawl: pagesPerRound * round,
@@ -547,13 +541,21 @@ Apify.main(async () => {
     );
     // Increment the index of the current url.
     i++;
+    // If fail too many time exit
+    if (failed_request_count >= MAXIMUM_FAIL_TIME) {
+      console.log("encounter too much failed request, send an email");
+      if (sendEmail) {
+        await email.mailCrawlError(recipients, safeDomain);
+      }
+      process.exit(1);
+    }
     // If all urls are complete, exit
     const requestQueue_fin = await Apify.openRequestQueue(safeDomain);
     const crawl_finished = await requestQueue_fin.isFinished();
     if (crawl_finished) {
       console.log("crawl has finished all the request");
       if (sendEmail) {
-        await email.mailCrawlEnd(recipients);
+        await email.mailCrawlEnd(recipients, safeDomain);
       }
       process.exit(0);
     }
