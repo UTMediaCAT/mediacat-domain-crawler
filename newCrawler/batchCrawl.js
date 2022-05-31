@@ -237,7 +237,7 @@ Apify.main(async () => {
     }
     pseudoUrls.push(new Apify.PseudoUrl(pseudoDomain));
     // open a dataset
-    await Apify.openDataset();
+    await Apify.openDataset(safeDomain);
 
     // For only specific parts of the domain to be crawled, custom REGEX expressions can be added here.
     // Make sure that the automatically generated pseudo URL is not in the list in this case or it will still match all URLs from the domain.
@@ -273,11 +273,11 @@ Apify.main(async () => {
         }
         const t2 = performance.now();
 
-        if (+response._status >= 400) {
+        if (+response._status >= 400 && +response._status !== 404) {
           console.log(
             `failed at ${request.url} with ${response._status}, ${failed_request_count}/10`
           );
-          failed_request_count++;
+          // failed_request_count++;
           throw response._status;
         }
 
@@ -303,9 +303,8 @@ Apify.main(async () => {
           console.log(
             `429 Too Many Requests for ${request.url}, ${failed_request_count}/10`
           );
-          failed_request_count++;
           await delay(10000);
-          throw str;
+          throw "429 Too Many Requests";
         }
         // parsed_dict = await parseHelper.parseHTML(request.url, bodyHTML)
 
@@ -502,8 +501,30 @@ Apify.main(async () => {
         //         break;
         //     }
         // }
-        console.log(`add fail request ${request.url}`);
-        const dataset = await Apify.openDataset("default");
+        const error_code = request.errorMessages[0].substring(
+          0,
+          request.errorMessages[0].indexOf("\n") === -1
+            ? request.errorMessages[0].length
+            : request.errorMessages[0].indexOf("\n")
+        );
+        console.log(
+          `--failed at ${request.url} with ${error_code} -- ${failed_request_count}`
+        );
+
+        const err_arr = ["429", "403", "401", "451"];
+        var needWait = false;
+        err_arr.forEach((e) => {
+          if (error_code.includes(e)) {
+            needWait = true;
+          }
+        });
+        if (needWait) {
+          failed_request_count++;
+          await delay(180000);
+        }
+        // console.log(`add fail request ${request.url}`);
+        // push failed data to the datasets
+        const dataset = await Apify.openDataset(safeDomain);
         await dataset.pushData({
           url: request.url,
           succeeded: false,
@@ -520,7 +541,7 @@ Apify.main(async () => {
       maxRequestsPerCrawl: pagesPerRound * round,
       handlePageTimeoutSecs: 100,
       maxConcurrency: maxConcurrency,
-      maxRequestRetries: 1,
+      maxRequestRetries: 0,
     });
     /** CRAWLER CODE END */
 
@@ -528,6 +549,7 @@ Apify.main(async () => {
     const t0 = performance.now();
     // Run the crawler.
     await crawler.run();
+
     // End time.
     const t1 = performance.now();
     // Log the time to run the crawler.

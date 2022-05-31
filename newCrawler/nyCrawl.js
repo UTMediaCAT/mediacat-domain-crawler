@@ -7,6 +7,7 @@
                -r : the maximum number of rounds
                -pdf : use this parameter if PDFs are to be saved
                -log : custom filename for the log file (default is debug.log)
+               -e : crawler will send email to the recipients if get too many error or finished crawling
    Usage: "node nyCrawl.js -f full_scope.csv"
           "node nyCrawl.js -n 10 -f full_scope.csv"
           "node nyCrawl.js -r 5 -f full_scope.csv"
@@ -174,7 +175,7 @@ Apify.main(async () => {
     );
     // Convert the domain URL to be safe to be used as a folder name.
     safeDomain = domainURL.replace(/[^a-z0-9]/gi, "_").toLowerCase();
-    if (i == 0) {
+    if (i === 0) {
       var sreach_url = safeDomain;
       console.log("here:" + sreach_url);
     }
@@ -226,7 +227,6 @@ Apify.main(async () => {
       date = "0" + endDate.getDate().toString();
     }
     var endDateStr = year + month + date;
-    console.log(endDateStr);
 
     /** CRAWLER CODE START */
     // Initialize the crawler.
@@ -272,7 +272,7 @@ Apify.main(async () => {
       //     await page.goto(request.url);
       // },
       handlePageFunction: async ({ request, page }) => {
-        if (request.loadedUrl == "https://apps.derstandard.at/privacywall/") {
+        if (request.loadedUrl === "https://apps.derstandard.at/privacywall/") {
           await page.$eval("button.privacy-button-secondary-dark", (el) =>
             el.click()
           );
@@ -282,7 +282,7 @@ Apify.main(async () => {
         if (request.url.includes("https://www.nytimes.com/search?")) {
           const ti0 = performance.now();
           var j = 0;
-          while (j < 20) {
+          while (j < 35) {
             // await Apify.utils.enqueueLinks({
             //     page,
             //     selector: 'a',
@@ -295,6 +295,8 @@ Apify.main(async () => {
             );
             await page.waitForTimeout(500);
             if (!button) {
+              console.log("we have a problem here");
+              await email.mailCrawlError(recipients, safeDomain);
               // add double check here
               var currNum = await page.$eval(
                 '[data-testid="SearchForm-status"]',
@@ -302,7 +304,7 @@ Apify.main(async () => {
               );
               currNum = currNum.match(/Showing ([0-9]+) results[\s\S]*/)[1];
               console.log(`amount is : ${currNum} and j is ${j}`);
-              if (j == 0 && parseInt(currNum) > 10) {
+              if (j === 0 && parseInt(currNum) > 10) {
                 throw "not finished yet";
               }
               break;
@@ -342,7 +344,6 @@ Apify.main(async () => {
         );
 
         const bodyHTML = await page.content();
-
         const hrefs = await page.$$eval("a", (as) => as.map((a) => a.href)); // Get all the hrefs with the links.
         const titles = await page.$$eval("a", (as) => as.map((a) => a.title)); // Get the titles of all the links.
         const texts = await page.$$eval("a", (as) => as.map((a) => a.text)); // Get the text content of all the a tags.
@@ -453,15 +454,20 @@ Apify.main(async () => {
 
         // reset end_date to fetch more articles if there is 'show more' button
         if (request.url.includes("https://www.nytimes.com/search?")) {
+          // Enqueue the deeper URLs to crawl.
+          await Apify.utils.enqueueLinks({
+            page,
+            selector: "a",
+            pseudoUrls,
+            requestQueue,
+          });
           const button = await page.$(
             "[data-testid='search-show-more-button']"
           );
           if (button) {
             href.searchParams.set("endDate", endDateStr);
             console.log("new page: " + href.toString());
-            await requestQueue.addRequest({
-              url: href.toString(),
-            });
+            await requestQueue.addRequest({ url: href.toString() });
           }
         }
 
@@ -532,16 +538,6 @@ Apify.main(async () => {
         const t3 = performance.now();
         // Log the time for this request.
         // console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
-
-        // Enqueue the deeper URLs to crawl.
-        if (request.url.includes("https://www.nytimes.com/search?")) {
-          await Apify.utils.enqueueLinks({
-            page,
-            selector: "a",
-            pseudoUrls,
-            requestQueue,
-          });
-        }
       },
       handleFailedRequestFunction: async ({ request }) => {
         // This function is called when the crawling of a request failed too many times
@@ -573,7 +569,7 @@ Apify.main(async () => {
       // The max concurrency and max requests to crawl through.
       maxRequestsPerCrawl: pagesPerRound * round,
       maxConcurrency: 50,
-      handlePageTimeoutSecs: 500,
+      handlePageTimeoutSecs: 3000,
     });
     /** CRAWLER CODE END */
 
@@ -589,6 +585,8 @@ Apify.main(async () => {
     // Increment the index of the current url.
     i++;
     // If all urls are complete, begin the next round.
+    const requestQueue_fin = await Apify.openRequestQueue(safeDomain);
+    const crawl_finished = await requestQueue_fin.isFinished();
     if (crawl_finished) {
       console.log("crawl has finished all the request");
       if (sendEmail) {
@@ -596,7 +594,7 @@ Apify.main(async () => {
       }
       process.exit(0);
     }
-    if (i == url_list.length) {
+    if (i === url_list.length) {
       i = 0;
       round++;
     }
