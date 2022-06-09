@@ -110,12 +110,16 @@ You might get error like `403 Forbidden` or `429 too many requests` during the c
 It is very likely that you crawl too fast so the domain blcok you. There are few strategies you can use to avoid this problem.
 
  - ## always do a testing crawl first
+    Always run a small test crawl (about 2000 URLs) before crawl the whole domain. If you get errors in the test crawl, slow the crawler down.
 
  - ## use stealth flags
+    Use `-stealth 2000` [flag](https://github.com/UTMediaCAT/mediacat-domain-crawler/edit/master/README.md#flags), increase the sleepTime if still getting error.
  
  - ## crawl in round
+    Crawl multiple domains in one crawl. The crawler will loop through the domains to crawl n [`(-n flag)`](https://github.com/UTMediaCAT/mediacat-domain-crawler/edit/master/README.md#flags) pages from each domain in each round. You should keep `n` small (-n 200) for this to work.
 
  - ## the crawl break
+    To avoid being completely blocked by the domain. The crawler will stop and send an email (if enable -e flag) when encouter too many errors. Default is 10. You can change this number by changing the variable `MAXIMUM_FAIL_TIME` in `/newCrawler/batchCrawl.js/`.
   
 
 # testing
