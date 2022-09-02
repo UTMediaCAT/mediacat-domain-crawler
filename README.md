@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler.svg?branch=master)](https://travis-ci.org/UTMediaCAT/mediacat-domain-crawler)
-# mediacat-domain-crawler
 
 This README pertains to the crawling aspect of the application. The crawl script(s) would be located in the folder `/newCrawler/ `
 
