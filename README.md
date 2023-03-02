@@ -130,6 +130,11 @@ similiarily, for testTime1Cheerio and nytimesCheerio
 # monitoring the results
 Instructions to monitor the results of the crawl are in the readme in the directory [monitor](https://github.com/UTMediaCAT/mediacat-domain-crawler/blob/master/newCrawler/monitor/README.md)
 
+# Restarting the Crawl
+A stopped or failed crawl can be restarted from where it left off by running the crawler again in the same directory. The apify crawler will use the requests stored in `newCrawler/apify_storage/request_queues` to restart the crawl.  
+
+If you want to restart a crawl from scratch, delete the `newCrawler/apify_storage/` directory.
+
 # forever.js
 
 a script that helps restart the crawl if needed
