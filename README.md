@@ -20,6 +20,8 @@ PLEASE do not EVER commit your password. As a future issue, we should probably m
 
 `npm install` to install node dependencies
 
+If on Arbutus server: `npm i puppeteer@13` to install puppeteer version 13.7.0
+
 # run the master crawler
 This script is run in a similar fashion as the other crawlers but receives an extra flag corresponding to the time period for which the crawler should be run after which the script will restart the crawler. This is to avoid browser timeouts and stack memory issues that are encountered on running the crawler for too long (> 30 hours). Here, the `-t` flag takes time in minutes.
 
