@@ -4,7 +4,7 @@
    Description: Contains helpers for parsing scope, and articles.
 */
 const fs = require("fs");
-const parse = require("csv-parse/lib/sync");
+const { parse } = require("csv-parse/lib/sync");
 const { Readability, isProbablyReaderable } = require("@mozilla/readability");
 const JSDOM = require("jsdom").JSDOM;
 const metascraper = require("metascraper")([
