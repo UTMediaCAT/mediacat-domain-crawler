@@ -5,6 +5,7 @@
    Parameters: -f : csv file containing the scope
                -n : number of pages to crawl per round for each domain (default is 5000)
                -r : the maximum number of rounds
+               -stealth : sleeps for `sleepTime` microseconds after each request
                -pdf : use this parameter if PDFs are to be saved
                -log : custom filename for the log file (default is debug.log)
                -e : crawler will send email to the recipients if get too many error or finished crawling
@@ -18,14 +19,8 @@
 const fs = require("fs");
 const util = require("util");
 const parseHelper = require("./parseHelper");
-// const path = require('path');
 const Apify = require("apify");
 const { puppeteer } = Apify.utils;
-// const { exit } = require('process');
-// const { transform } = require('csv');
-// const JSDOM = require('jsdom').JSDOM;
-// const mongoose = require('mongoose');
-// let appmetrics = require('appmetrics');
 const { v5: uuidv5 } = require("uuid");
 const { performance } = require("perf_hooks");
 
@@ -33,18 +28,7 @@ const { performance } = require("perf_hooks");
 const fileOps = require("./fileOps");
 const email = require("./email");
 
-const MAXIMUM_FAIL_TIME = 50;
-
-// Database set up.
-// let db = require('./database.js')
-// let memInfo = require('./monitor/memoryInfo');
-// const { url } = require('inspector');
-// Open a connection to the database.
-// mongoose.connection
-//   .once('open', () => console.log('Connected to DB'))
-//   .on('error', (error) => {
-//       console.log("Your Error", error);
-//   });
+const MAXIMUM_FAIL_TIME = 8;
 
 // Logging set up.
 function logSetUp(filename) {
@@ -68,19 +52,6 @@ function Filter(url, domain_url, valid_links) {
   // Checks that the url has the domain name, it is not a repetition or it is not the same as the original url
   return !valid_links.includes(url) && url != domain_url;
 }
-
-// Monitor the environment.
-// process.env.APIFY_MEMORY_MBYTES = 2048 // 30720
-// var monitoring = appmetrics.monitor();
-// monitoring.on('initialized', function (env) {
-//     env = monitoring.getEnvironment();
-//     for (var entry in env) {
-//         console.log(entry + ':' + env[entry]);
-//     };
-// });
-// monitoring.on('cpu', function (cpu) {
-//     console.log('[' + new Date(cpu.time) + '] CPU: ' + cpu.process);
-// });
 
 async function autoScroll(page) {
   await page.evaluate(async () => {
@@ -180,10 +151,6 @@ Apify.main(async () => {
   // Set up the logging.
   logSetUp(debugLogFilename);
 
-  // // Create the JSON object to store the tuples of links and titles for each url. Uses up a lot of memory when used.
-  // var output_dict = {};
-  // var incorrect_dict = {};
-
   // Create a directory to hold all the individual JSON files.
   fileOps.mkDir("Results");
 
@@ -248,11 +215,6 @@ Apify.main(async () => {
     // open a dataset
     await Apify.openDataset();
 
-    // For only specific parts of the domain to be crawled, custom REGEX expressions can be added here.
-    // Make sure that the automatically generated pseudo URL is not in the list in this case or it will still match all URLs from the domain.
-    // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/world\/middleeast\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Middle East Section REGEX
-    // pseudoUrls.push(new Apify.PseudoUrl(/https:\/\/www\.nytimes\.com\/[a-zA-Z0-9\/]*\/politics\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/));    // NYTimes Politics Section REGEX
-
     // get current date for end_date //
     var endDate = new Date();
     const year = endDate.getFullYear().toString();
@@ -282,37 +244,6 @@ Apify.main(async () => {
           args: ["--no-sandbox", "--disable-dev-shm-usage"],
         },
       },
-      // gotoFunction: async ({
-      //     request,
-      //     page
-      // }) => {
-      //     // Blacklisted domains.
-      //     blacklisted_domains = ["https://www.derstandard.at/"];
-      //     // Check if this domain is blacklisted.
-      //     let blacklist = false;
-      //     blacklisted_domains.forEach(function (domain) {
-      //         // Check if the current url belongs to the domain.
-      //         if (request.url.startsWith(domain)) {
-      //             blacklist = true;
-      //         }
-      //     });
-      //     if (!blacklist) {
-      //         // Set the request interception to true.
-      //         await page.setRequestInterception(true);
-      //         // Create the list of different resources that should be blocked.
-      //         let blockedResources = ['image', 'stylesheet', 'media'];
-      //         // On loading the request.
-      //         page.on('request', request => {
-      //             // If the request is a blocked resource, abort. Load otherwise.
-      //             if (blockedResources.includes(request.resourceType()))
-      //                 request.abort();
-      //             else
-      //                 request.continue();
-      //         });
-      //     }
-      //     // Navigate to the page.
-      //     await page.goto(request.url);
-      // },
       browserPoolOptions: {
         useFingerprints: true,
       },
@@ -347,13 +278,6 @@ Apify.main(async () => {
           const ti0 = performance.now();
           var j = 0;
           while (j < 35) {
-            // await Apify.utils.enqueueLinks({
-            //     page,
-            //     selector: 'a',
-            //     pseudoUrls,
-            //     requestQueue
-            // });
-
             const button = await page.$(
               "[data-testid='search-show-more-button']"
             );
@@ -387,14 +311,6 @@ Apify.main(async () => {
             `scroll down took ${ti1 / 1000.0 - ti0 / 1000.0} seconds`
           );
         }
-
-        // await puppeteer.infiniteScroll(page, {
-        //     buttonSelector: '[data-testid="search-show-more-button"]'
-        // })
-
-        // if (page.$$eval('[data-testid=\'search-show-more-button\']')) {
-        //     console.log('true')
-        // }
 
         const title = await page.title(); // Get the title of the page.
         let domainNameIndex = 5;
@@ -488,14 +404,6 @@ Apify.main(async () => {
             out_of_scope_match = hrefLink.match(general_regex);
             if (out_of_scope_match != null) {
               out_of_scope_domain = out_of_scope_match[domainNameIndex];
-
-              // Keep track of all out of scope links. Uses up a lot of memory when used.
-              // if (out_of_scope_domain in incorrect_dict) {
-              //     incorrect_dict[out_of_scope_domain].push(hrefLink);
-              // }
-              // else {
-              //     incorrect_dict[out_of_scope_domain] = [hrefLink];
-              // }
             }
             // Check if this domain name already exists inside.
             local_out_of_scope.push(hrefLink);
@@ -597,46 +505,13 @@ Apify.main(async () => {
           });
         }
 
-        //Write into a database
-
-        // let metaObj = new db.metaModel(elem);
-
-        // await metaObj.save();
-
-        // print memory stats about process
-        // memInfo.getMemoryInfo(process.memoryUsage())
-
-        // // Add this list to the dict. Uses up a lot of memory when used.
-        // output_dict[request.url] = elem;
-
         const t3 = performance.now();
-        // Log the time for this request.
-        // console.log(`Call to "${request.url}" took ${t3/1000.0 - t2/1000.0} seconds.`);
 
         // sleep for a short time
         const waitTime = Math.floor(Math.random() * 1000);
         await delay(waitTime + 500);
       },
       handleFailedRequestFunction: async ({ request }) => {
-        // This function is called when the crawling of a request failed too many times
-        // console.log(`crawl ${request.url} caused ${request.errorMessages}`);
-        // for (const [url, fail_count] of Object.entries(err_dict)) {
-        //     if (url === request.url) {
-        //         needAdd = false;
-        //         if (fail_count < 3) {
-        //             // add url back to the queue
-        //             console.log(`recrawl ${request.url} the ${fail_count} times`);
-        //             const requestQueue = await Apify.openRequestQueue(safeDomain);
-        //             await requestQueue.addRequest({
-        //                 url: url,
-        //             });
-        //             err_dict.url++;
-        //             break;
-        //         }
-        //         break;
-        //     }
-        // }
-        // console.log(`add fail request ${request.url}`);
         const error_code = request.errorMessages[0].substring(
           0,
           request.errorMessages[0].indexOf("\n") === -1
