@@ -59,7 +59,10 @@ For Graham Instance, run `python3 masterCrawler.py batchCrawl.js -n 1000 -m 2000
 
 NYTimes archive crawler will crawl the given search archive here: https://www.nytimes.com/search?dropmab=true&query=&sort=newest and repeatedly clicking `show more` buttom then scroll down untill there is no more `show more` bottom. 
 
-- ## falgs
+Cautious version (has stealth option to crawl slower, sleeps for a short time after each request, stops if too many failed requests):
+`node nyCrawlcautious.js -n 200 -stealth 5000 -f full_scope.csv`
+
+- ## flags
   - f (string) indicates the scope file. Note that all the search URLs in the scope file must follow this format: 
 
     `https://www.nytimes.com/search?dropmab=true&endDate={}&query={}[&sections={}]&sort=newest&startDate={}&types=article`
