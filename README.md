@@ -60,6 +60,7 @@ For Graham Instance, run `python3 masterCrawler.py batchCrawl.js -n 1000 -m 2000
 NYTimes archive crawler will crawl the given search archive here: https://www.nytimes.com/search?dropmab=true&query=&sort=newest and repeatedly clicking `show more` buttom then scroll down untill there is no more `show more` bottom. 
 
 Cautious version (has stealth option to crawl slower, sleeps for a short time after each request, stops if too many failed requests):
+
 `node nyCrawlcautious.js -n 200 -stealth 5000 -f full_scope.csv`
 
 - ## flags
@@ -69,6 +70,7 @@ Cautious version (has stealth option to crawl slower, sleeps for a short time af
 
     [sections] is optional and {sort} must be neweast
   - n (integer) number of pages to crawl per round for each domain (default is 5000)
+  - stealth (`sleepTime`: integer): will set maxConcurrency to 2, ie: at most 2 tasks running in parallel. Crawler will also sleep for `sleepTime` ms       after each request. More about this can be found in **Crawl in Stealth** section.
   - pdf : use this parameter if PDFs are to be saved
   - log : custom filename for the log file (default is debug.log)
   - e (`email`: string): enable crawler to send a email to `email` to when crawler finished
