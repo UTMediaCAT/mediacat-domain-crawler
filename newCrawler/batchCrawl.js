@@ -29,7 +29,7 @@ const { performance } = require("perf_hooks");
 const fileOps = require("./fileOps");
 const parseHelper = require("./parseHelper");
 const email = require("./email");
-const MAXIMUM_FAIL_TIME = 50;
+const MAXIMUM_FAIL_TIME = 8;
 
 // Database set up.
 // let db = require('./database.js')
