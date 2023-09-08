@@ -84,8 +84,10 @@ Apify.main(async () => {
   var is_url = false;
   var f_index = process.argv.indexOf("-f");
   var l_index = process.argv.indexOf("-l");
-  var e_index = process.argv.indexOf("-e");
+  // Check if need scroll down for each page
+  var s_index = process.argv.indexOf("-s");
   var stealth_index = process.argv.indexOf("-stealth");
+  var e_index = process.argv.indexOf("-e");
   if (s_index != -1) {
     var needScroll = true;
   } else {
@@ -518,7 +520,7 @@ Apify.main(async () => {
         const t3 = performance.now();
 
         // sleep for a short time
-        const waitTime = Math.floor(Math.random() * 1000);
+        var waitTime = Math.floor(Math.random() * 1000);
         await delay(waitTime + 500);
       },
       handleFailedRequestFunction: async ({ request }) => {
