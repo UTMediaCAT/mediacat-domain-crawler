@@ -157,6 +157,8 @@ Apify.main(async () => {
   // Timestamp for the beginning of the crawl.
   let startTime = Date.now();
 
+  var curr_page = 0;
+
   // Keep track of the number of passes across the domains.
   let round = 1;
   let i = 0;
@@ -250,8 +252,16 @@ Apify.main(async () => {
       handlePageFunction: async ({ request, page, response }) => {
         // sleep random seconds before crawl to avoid 403 block in stealth mode
         if (maxConcurrency === 1) {
-          const waitTime = Math.floor(Math.random() * waitRad);
+          var waitTime = Math.floor(Math.random() * waitRad);
           await delay(waitTime + waitRad);
+        }
+
+        // Take a break for 2-9 min after crawling n pages.
+        curr_page++;
+        if (curr_page >= pagesPerRound) {
+          var waitTime = Math.floor(Math.random() * 421111);
+          await delay(waitTime + 121111);
+          curr_page = 0;
         }
 
         if (request.loadedUrl === "https://apps.derstandard.at/privacywall/") {
