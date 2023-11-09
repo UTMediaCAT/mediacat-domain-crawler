@@ -223,7 +223,7 @@ async function iaCrawler() {
             index++;
             successful_so_far++;
 
-            await delay(100); 
+            await delay(200); 
         }
     };
 
