@@ -13,14 +13,18 @@
     "apify": "^2.2.2",
     "csv": "^6.0.5",
     "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "get-title-at-url": "^2.0.0",
     "got": "^11.8.3",
     "jsdom": "^19.0.0",
     "metascraper": "^5.29.3",
     "metascraper-author": "^5.29.3",
     "metascraper-date": "^5.29.3",
     "metascraper-title": "^5.29.3",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^6.7.5",
-    "puppeteer": "^10.4.0",
+    "path": "^0.12.7",
+    "puppeteer": "^13.7.0",
     "uuid": "^8.3.2"
   }
 }
