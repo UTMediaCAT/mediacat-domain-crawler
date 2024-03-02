@@ -148,4 +148,5 @@ a script that helps restart the crawl if needed
 
 # Combining results
 rsync -a ./path_to_individual_source_folder/ ./path_to_destination_combined_folder/
+
 The above command automatically keeps the version with the latest modified time for two files with the same name.
